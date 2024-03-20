@@ -1,0 +1,9 @@
+Name              Staff Login ID   Role   Gender Age      Branch
+kumar Blackmore   kumarB           S      M            32NTU
+Alexei            Alexei           M      M            25NTU
+Tom Chan          TomC             M      M            56JP
+Alica Ang         AlicaA           M      F            27JE
+Mary lee          MaryL            S      F            44JE
+Justin Loh        JustinL          S      M            49JP
+Boss              boss             A      F            62
+Name   Staff Login ID   Role   Gender Age   Branch
