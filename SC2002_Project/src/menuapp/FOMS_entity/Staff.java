@@ -1,6 +1,3 @@
-package sc2002;
-
-
 public class Staff {
         
     private int staffID;
