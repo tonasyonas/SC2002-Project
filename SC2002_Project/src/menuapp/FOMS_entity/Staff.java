@@ -1,3 +1,6 @@
+
+
+
 public class Staff {
         
     private int staffID;
@@ -116,6 +119,11 @@ public class Staff {
 
 	}
 
+	/*
+	 * 
+	 * basic information may need to include more methods that staff can do
+	 *
+	 */
     public static void main (String[] args){
     	 Staff Donovan = new Staff("Don", Role.Staff, Gender.MALE, 12, 0005);
          Donovan.print();
@@ -123,4 +131,6 @@ public class Staff {
     }
 
 }
+
+
 
