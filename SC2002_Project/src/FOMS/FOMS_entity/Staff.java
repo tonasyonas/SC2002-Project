@@ -3,14 +3,15 @@
 public class Staff {
     
     private int staffID;
+	private String staffLoginID;
     private String staffName;
     private String branchName;
     private Role staffRole;
     private Gender staffGender;
     private int staffAge;
 	private String staffPassword;
-    private static int runningCount=1;
 	private static String default_password = "password";
+	public static int runningCount=1;
 
 	/**
 	 * Declare constants for enum Gender. MALE or FEMALE.
@@ -41,6 +42,7 @@ public class Staff {
 		this.staffGender = staffGender;
         this.staffAge = staffAge;
 		this.staffRole = Role.S;
+		this.staffLoginID = generateLoginId (this.staffName);
 	}
 	
 	public int getStaffID() {
@@ -104,12 +106,12 @@ public class Staff {
         this.staffAge = staffAge;
     }
 
-    public int getBranchID(){
-        return branch_ID;
+    public int getBranchName(){
+        return branchName;
     }
 
-    public void setBranchID (int branch_ID){
-        this.branch_ID = branch_ID;
+    public void setBranchName (String branchName){
+        this.branchName = branchName;
     }
 
 	public String getstaffPassword (){
@@ -127,7 +129,28 @@ public class Staff {
 		System.out.println("Age: " +this.staffAge);
 		System.out.println("Branch: " +this.branchName);
 		System.out.println("Password: "+this.staffPassword);
+		System.out.println("LoginID: "+this.staffLoginID);
 	}
+
+	public static String generateLoginId(String staffName) {
+        // Split the full name into first name and last name (if applicable)
+        String[] nameParts = staffName.split(" ");
+
+        // Initialize variables for first name and last name
+        String firstName = nameParts[0];
+        String lastName = "";
+
+        // If there are more than one part, assume the last part as the last name
+        if (nameParts.length > 1) {
+            lastName = nameParts[nameParts.length - 1];
+        }
+
+        // Get the first letter of the last name and capitalize it
+        char lastNameInitial = lastName.isEmpty() ? '\0' : Character.toUpperCase(lastName.charAt(0));
+
+        // Concatenate the first name with the capitalized first letter of the last name
+        return firstName + (lastName.isEmpty() ? "" : lastNameInitial);
+    }
 
 	/*
 	 * 
@@ -141,6 +164,7 @@ public class Staff {
     }
 
 }
+
 
 
 

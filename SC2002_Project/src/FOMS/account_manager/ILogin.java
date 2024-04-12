@@ -8,7 +8,7 @@ public interface ILogin {
      * @param password the user's password
      * @return true if the login was successful, false otherwise
      */
-    public boolean login(String userID, String password);
+    public boolean login(String us, String password);
 
     /**
      * Logs out the currently logged in user.
