@@ -16,8 +16,6 @@ public class Admin extends Staff {
         Admin D = new Admin("Don", Role.Staff, Gender.MALE, 12, 0000); /* branch 0 means admin */
         D.print();
    
-
-   
    }
 
     

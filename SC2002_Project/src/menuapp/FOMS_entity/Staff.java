@@ -1,15 +1,14 @@
-
-
-
 public class Staff {
-        
+    
     private int staffID;
     private String staffName;
     private int branch_ID;
     private Role staffRole;
     private Gender staffGender;
     private int staffAge;
+	private String staffPassword;
     private static int runningCount=1;
+	private static String default_password = "password";
 
 	/**
 	 * Declare constants for enum Gender. MALE or FEMALE.
@@ -34,6 +33,7 @@ public class Staff {
 	public Staff(String staffName, Role staffRole, Gender staffGender, int staffAge,  int branch_ID) {
 		this.staffID = runningCount;
 		runningCount++;
+		this.staffPassword = default_password;
 		this.staffName = staffName;
 		this.staffRole = staffRole;
         this.branch_ID = branch_ID;
@@ -109,6 +109,14 @@ public class Staff {
     public void setBranchID (int branch_ID){
         this.branch_ID = branch_ID;
     }
+
+	public String getstaffPassword (){
+		return staffPassword;
+	}
+
+	public void setstaffPassword(String staffPassword){
+		this.staffPassword = staffPassword;
+	}
 	public void print() {
 		System.out.println("Staff ID: "+this.staffID);
 		System.out.println("Name: "+this.staffName);
@@ -116,7 +124,7 @@ public class Staff {
 		System.out.println("Gender: "+this.staffGender);
 		System.out.println("Age: " +this.staffAge);
 		System.out.println("Branch: " +this.branch_ID);
-
+		System.out.println("Password: "+this.staffPassword);
 	}
 
 	/*
@@ -131,6 +139,7 @@ public class Staff {
     }
 
 }
+
 
 
 
