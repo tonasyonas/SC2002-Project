@@ -1,4 +1,4 @@
-public class Account_management {
+public class account_manager {
 
     boolean login(String username, String password);
     void logout();
