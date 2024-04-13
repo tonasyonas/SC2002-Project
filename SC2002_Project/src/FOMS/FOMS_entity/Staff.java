@@ -1,4 +1,6 @@
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Staff {
     
@@ -43,6 +45,7 @@ public class Staff {
         this.staffAge = staffAge;
 		this.staffRole = Role.S;
 		this.staffLoginID = generateLoginId (this.staffName);
+		
 	}
 	
 	public int getStaffID() {
@@ -158,6 +161,8 @@ public class Staff {
         // Concatenate the first name with the capitalized first letter of the last name
         return firstName + (lastName.isEmpty() ? "" : lastNameInitial);
     }
+
+	
 
 	/*
 	 * 

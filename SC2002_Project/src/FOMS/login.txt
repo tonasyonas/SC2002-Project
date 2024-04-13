@@ -1,7 +1,0 @@
-kumarB;password
-Alexei;password
-TomC;password
-AliciaA;password
-MaryL;password
-JustinL;password
-boss;password
