@@ -106,7 +106,7 @@ public class Staff {
         this.staffAge = staffAge;
     }
 
-    public int getBranchName(){
+    public String getBranchName(){
         return branchName;
     }
 
@@ -114,11 +114,18 @@ public class Staff {
         this.branchName = branchName;
     }
 
-	public String getstaffPassword (){
+	public String getStaffLoginID(){
+		return staffLoginID;
+	}
+
+	public void setStaffLoginID(String staffLoginID){
+		this.staffLoginID = staffLoginID;
+	}
+	public String getStaffPassword (){
 		return staffPassword;
 	}
 
-	public void setstaffPassword(String staffPassword){
+	public void setStaffPassword(String staffPassword){
 		this.staffPassword = staffPassword;
 	}
 	public void print() {
@@ -132,7 +139,7 @@ public class Staff {
 		System.out.println("LoginID: "+this.staffLoginID);
 	}
 
-	public static String generateLoginId(String staffName) {
+	public String generateLoginId(String staffName) {
         // Split the full name into first name and last name (if applicable)
         String[] nameParts = staffName.split(" ");
 
@@ -158,7 +165,7 @@ public class Staff {
 	 *
 	 */
     public static void main (String[] args){
-    	 Staff Donovan = new Staff("Don", Gender.M, 12, "NTU");
+    	 Staff Donovan = new Staff("Don go", Gender.M, 12, "NTU");
          Donovan.print();
     
     }

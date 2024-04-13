@@ -5,6 +5,7 @@ public class BranchManager extends Staff {
         // Call the superclass constructor using super()
         super(staffName, staffGender, staffAge,  branchName);
         setStaffRole(Role.M);
+        
 
     }
 
