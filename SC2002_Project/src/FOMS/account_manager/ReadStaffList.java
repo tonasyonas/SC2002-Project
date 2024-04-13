@@ -6,7 +6,7 @@ import java.io.IOException;
 public class ReadStaffList {
 
     public static void main(String[] args) throws FileNotFoundException {
-        String filename = "/Users/donovango/Documents/GitHub/SC2002-Project/SC2002_Project/src/FOMS/account_manager/staff_list.txt"; // Name of your text file
+        String filename = "SC2002_Project/src/FOMS/account_manager/staff_list.txt"; // Name of your text file
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String line;
