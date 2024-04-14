@@ -19,11 +19,11 @@ public class ReadStaffList {
                     String gender = parts[3];
                     int age = Integer.parseInt(parts[4]);
                     String branch = parts[5];
+                    String salt = parts[6];
+                    String hashedPassword = parts[7];
+                    boolean needsPasswordReset = Boolean.parseBoolean(parts[8]); // Read needsPasswordReset from file
     
-                    String salt = PasswordUtils.getSalt();
-                    String hashedPassword = PasswordUtils.hashPassword("password", salt);
-    
-                    credentials.put(loginID, new UserCredentials(name, role, gender, age, branch, salt, hashedPassword, true));
+                    credentials.put(loginID, new UserCredentials(name, role, gender, age, branch, salt, hashedPassword, needsPasswordReset));
                 }
             }
         } catch (IOException e) {
@@ -32,3 +32,4 @@ public class ReadStaffList {
         return credentials;
     }
 }
+
