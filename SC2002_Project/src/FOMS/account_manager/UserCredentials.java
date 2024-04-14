@@ -1,3 +1,4 @@
+package FOMS.account_manager;
 public class UserCredentials {
     String name;
     String role;

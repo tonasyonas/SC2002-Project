@@ -1,43 +1,59 @@
+package FOMS.account_manager;
 import java.util.Map;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Scanner;
-
 public class LoginController {
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
 
     public static void main(String[] args) {
         Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
         Scanner scanner = new Scanner(System.in);
-
+    
         try {
-            System.out.print("Enter your login ID: ");
-            String loginID = scanner.nextLine().trim();
-            System.out.print("Enter your password: ");
-            String password = scanner.nextLine();
-
-            if (login(staffCredentials, loginID, password, scanner)) {
-                System.out.println("Login successful. Welcome, " + loginID + "!");
-                // Check if password needs to be reset
+            System.out.println("Are you a customer or a staff member?");
+            System.out.print("Enter 'customer' or 'staff': ");
+            String userType = scanner.nextLine().trim().toLowerCase();
+    
+            if (userType.equals("customer")) {
+                // Allow customers to proceed to the ordering system without logging in
+                System.out.println("Welcome to the ordering system!");
+                // Proceed to the ordering system
+            } else if (userType.equals("staff")) {
+                System.out.print("Enter your login ID: ");
+                String loginID = scanner.nextLine().trim();
                 UserCredentials credentials = staffCredentials.get(loginID);
-                if (credentials != null && credentials.needsPasswordReset) {
-                    System.out.println("Would you like to change your password now? (yes/no)");
-                    String response = scanner.nextLine().trim();
-                    if ("yes".equalsIgnoreCase(response)) {
-                        promptPasswordChange(scanner, loginID, staffCredentials);
+                
+                if (credentials != null) {
+                    // Prompt staff members to log in
+                    System.out.print("Enter your password: ");
+                    String password = scanner.nextLine();
+                    if (login(staffCredentials, loginID, password, scanner)) {
+                        System.out.println("Login successful. Welcome, " + loginID + "!");
+                        // Check if password needs to be reset
+                        if (credentials.needsPasswordReset) {
+                            System.out.println("Would you like to change your password now? (yes/no)");
+                            String response = scanner.nextLine().trim();
+                            if ("yes".equalsIgnoreCase(response)) {
+                                promptPasswordChange(scanner, loginID, staffCredentials);
+                            }
+                        }
+                        // Proceed to the ordering system
+                    } else {
+                        System.out.println("Login failed. Incorrect login ID or password.");
                     }
+                } else {
+                    System.out.println("Staff member not found. Please try again.");
                 }
             } else {
-                System.out.println("Login failed. Incorrect login ID or password.");
+                System.out.println("Invalid user type. Please enter 'customer' or 'staff'.");
             }
         } finally {
             scanner.close();
         }
     }
-
+    
     private static boolean login(Map<String, UserCredentials> credentialsMap, String loginID, String password, Scanner scanner) {
         UserCredentials credentials = credentialsMap.get(loginID);
         if (credentials != null && PasswordUtils.verifyPassword(password, credentials.salt, credentials.hashedPassword)) {
