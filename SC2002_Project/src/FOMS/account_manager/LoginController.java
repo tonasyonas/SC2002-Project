@@ -1,35 +1,39 @@
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class LoginController {
+    private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
+
     public static void main(String[] args) {
-        // Create a HashMap to store staff ID-password pairs
-        Map<String, String> staffCredentials = new HashMap<>();
-        staffCredentials.put("staff123", "password123");
-        staffCredentials.put("johnDoe", "test456");
-        // Add more staff IDs and passwords as needed
-
-        // Create a Scanner object for user input
-        Scanner scanner = new Scanner(System.in);
-
-        // Prompt the user to enter staff ID
-        System.out.print("Enter your login ID: ");
-        String staffId = scanner.nextLine();
-
-        // Prompt the user to enter password
-        System.out.print("Enter your password: ");
-        String password = scanner.nextLine();
-
-        // Check if staff ID exists in the HashMap and if the corresponding password matches
-        if (staffCredentials.containsKey(staffId) && staffCredentials.get(staffId).equals(password)) {
-            System.out.println("Login successful. Welcome, " + staffId + "!");
-        } else {
-            System.out.println("Incorrect staff ID or password. Please try again.");
+        Map<String, String[]> staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+        if (staffCredentials == null || staffCredentials.isEmpty()) {
+            System.out.println("Failed to load credentials or no credentials available. Please check the file path and permissions.");
+            return;
         }
 
-        // Close the scanner
-        scanner.close();
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter your login ID: ");
+            String loginID = scanner.nextLine().trim();
+
+            System.out.print("Enter your password: ");
+            String password = scanner.nextLine();
+
+            if (authenticate(staffCredentials, loginID, password)) {
+                System.out.println("Login successful. Welcome, " + loginID + "!");
+            } else {
+                System.out.println("Login failed. Incorrect login ID or password.");
+            }
+        } finally {
+            scanner.close(); // Always ensure resources are closed in a finally block
+        }
+    }
+
+    private static boolean authenticate(Map<String, String[]> credentials, String loginID, String password) {
+        if (credentials.containsKey(loginID)) {
+            String[] saltAndHash = credentials.get(loginID);
+            return PasswordUtils.verifyPassword(password, saltAndHash[0], saltAndHash[1]);
+        }
+        return false;
     }
 }
