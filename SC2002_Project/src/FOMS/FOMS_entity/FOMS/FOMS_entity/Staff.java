@@ -6,14 +6,19 @@ public abstract class Staff {
     private String name;
     private String loginID;
 
-    private String gender;
+    public Gender gender;
+    
+    public enum Gender{
+        F,
+        M
+    };
     private int age;
 
     private String salt;
     private String hashedPassword;
     private boolean needsPasswordReset;
 
-    public Staff(String name, String loginID, String gender, int age,
+    public Staff(String name, String loginID, Gender gender, int age,
                            String salt, String hashedPassword, boolean needsPasswordReset) {
         this.name = name;
         this.loginID = loginID;

@@ -1,15 +1,16 @@
 package FOMS.account_manager;
+import FOMS.FOMS_entity.Staff;
 public class UserCredentials {
     String name;
     String role;
-    String gender;
+    Staff.Gender gender;
     int age;
     String branch;
     String salt;
     String hashedPassword;
     boolean needsPasswordReset;
 
-    public UserCredentials(String name, String role, String gender, int age, String branch,
+    public UserCredentials(String name, String role, Staff.Gender gender, int age, String branch,
                            String salt, String hashedPassword, boolean needsPasswordReset) {
         this.name = name;
         this.role = role;
