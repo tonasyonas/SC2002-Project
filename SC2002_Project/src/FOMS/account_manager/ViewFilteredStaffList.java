@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
+import FOMS.FOMS_entity.FOMS.FOMS_entity.*;
 
 public class ViewFilteredStaffList {
     private Map<String, UserCredentials> credentialsMap;
@@ -22,34 +23,31 @@ public class ViewFilteredStaffList {
         System.out.print("Choose an option: ");
         int choice = scanner.nextInt();
 
+        StaffFilter filter = null;
+
         switch (choice) {
             case 1:
                 System.out.print("Enter Branch: ");
                 String branch = scanner.next();
-                filteredList = StaffFilter.filterByBranch(credentialsList, branch);
+                filter = new BranchFilter(branch);
                 break;
             case 2:
-                System.out.print("Enter Role: ");
-                String role = scanner.next();
-                filteredList = StaffFilter.filterByRole(credentialsList, role);
-                break;
-            case 3:
-                System.out.print("Enter Gender (M/F): ");
-                String genderInput = scanner.next();
-                Staff.Gender gender = "M".equalsIgnoreCase(genderInput) ? Staff.Gender.M : Staff.Gender.F;
-                filteredList = StaffFilter.filterByGender(credentialsList, gender);
-                break;
-            case 4:
                 System.out.print("Enter age: ");
                 int age = scanner.nextInt();
-                filteredList = StaffFilter.filterByAge(credentialsList, age);
+                filter = new AgeFilter(age);
                 break;
             default:
-                System.out.println("No valid filter selected. Showing all staff.");
-                filteredList = credentialsList;
+                System.out.println("Invalid option. Displaying all staff.");
+                filter = staff -> staff;  // Lambda for no filtering
                 break;
         }
+        
 
+        if (filter != null) {
+            filteredList = filter.filter(credentialsList);
+        } else {
+            filteredList = credentialsList;
+        }
         displayStaff(filteredList);
         scanner.close();
     }

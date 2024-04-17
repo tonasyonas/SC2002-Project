@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import FOMS.FOMS_entity.*;
+import FOMS.FOMS_entity.FOMS.FOMS_entity.*;
 
 public class ReadStaffList {
     public static Map<String, UserCredentials> getStaffCredentials(String filename) {
