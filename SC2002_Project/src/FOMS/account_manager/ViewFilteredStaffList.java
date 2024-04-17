@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
-import FOMS.FOMS_entity.FOMS.FOMS_entity.*;
+
 
 public class ViewFilteredStaffList {
     private Map<String, UserCredentials> credentialsMap;
@@ -23,7 +23,7 @@ public class ViewFilteredStaffList {
         System.out.print("Choose an option: ");
         int choice = scanner.nextInt();
 
-        StaffFilter filter = null;
+        IStaffFilter filter = null;
 
         switch (choice) {
             case 1:

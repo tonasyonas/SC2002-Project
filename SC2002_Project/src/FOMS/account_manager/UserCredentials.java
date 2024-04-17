@@ -2,7 +2,7 @@ package FOMS.account_manager;
 
 import FOMS.FOMS_entity.Staff;
 
-import FOMS.FOMS_entity.FOMS.FOMS_entity.*;
+
 
 public class UserCredentials {
     String name;

@@ -21,7 +21,7 @@ public class ViewStaffList {
         System.out.print("Choose an option: ");
         int choice = scanner.nextInt();
 
-        StaffFilter filter;
+        IStaffFilter filter;
         switch (choice) {
             case 1:
                 System.out.print("Enter Branch: ");

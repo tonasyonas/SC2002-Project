@@ -1,10 +1,9 @@
 package FOMS.account_manager;
 
-import FOMS.FOMS_entity.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BranchFilter implements StaffFilter{
+public class BranchFilter implements IStaffFilter{
     private String branch;
 
     public BranchFilter(String branch) {

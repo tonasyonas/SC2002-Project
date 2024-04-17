@@ -4,7 +4,7 @@ import FOMS.FOMS_entity.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GenderFilter implements StaffFilter {
+public class GenderFilter implements IStaffFilter {
     private Staff.Gender gender;
 
     public GenderFilter(Staff.Gender gender) {

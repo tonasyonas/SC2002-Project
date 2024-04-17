@@ -1,10 +1,9 @@
 package FOMS.account_manager;
 
-import FOMS.FOMS_entity.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AgeFilter implements StaffFilter {
+public class AgeFilter implements IStaffFilter {
     private int age;
 
     public AgeFilter(int age) {

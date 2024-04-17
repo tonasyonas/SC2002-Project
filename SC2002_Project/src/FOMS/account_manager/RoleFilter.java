@@ -1,10 +1,9 @@
 package FOMS.account_manager;
 
-import FOMS.FOMS_entity.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RoleFilter implements StaffFilter {
+public class RoleFilter implements IStaffFilter {
     private String role;
 
     public RoleFilter(String role) {
