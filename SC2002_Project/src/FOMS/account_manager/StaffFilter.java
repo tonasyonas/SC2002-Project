@@ -24,9 +24,9 @@ public class StaffFilter {
                     .collect(Collectors.toList());
     }
 
-    public static List<UserCredentials> filterByAge(List<UserCredentials> staff, int minAge, int maxAge) {
+    public static List<UserCredentials> filterByAge(List<UserCredentials> staff, int age) {
         return staff.stream()
-                    .filter(s -> s.getAge() >= minAge && s.getAge() <= maxAge)
+                    .filter(s -> s.getAge() == age)
                     .collect(Collectors.toList());
     }
 }
