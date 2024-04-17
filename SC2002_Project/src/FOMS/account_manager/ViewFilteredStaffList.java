@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 
+
 public class ViewFilteredStaffList {
     private Map<String, UserCredentials> credentialsMap;
 
@@ -53,12 +54,7 @@ public class ViewFilteredStaffList {
                 break;
         }
         
-
-        if (filter != null) {
             filteredList = filter.filter(credentialsList);
-        } else {
-            filteredList = credentialsList;
-        }
         displayStaff(filteredList);
         scanner.close();
     }

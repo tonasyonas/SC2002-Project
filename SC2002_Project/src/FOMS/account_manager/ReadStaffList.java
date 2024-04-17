@@ -31,6 +31,7 @@ public class ReadStaffList {
                         // Handle invalid or unknown gender values
                         throw new IllegalArgumentException("Invalid gender value: " + genderStr);
                     }
+
                     int age = Integer.parseInt(parts[4]);
                     String branch = parts[5];
                     String salt = parts[6];

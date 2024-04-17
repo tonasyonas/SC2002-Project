@@ -1,8 +1,9 @@
 package FOMS.account_manager;
 
-import FOMS.FOMS_entity.*;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import FOMS.FOMS_entity.*;
 
 public class GenderFilter implements IStaffFilter {
     private Staff.Gender gender;
