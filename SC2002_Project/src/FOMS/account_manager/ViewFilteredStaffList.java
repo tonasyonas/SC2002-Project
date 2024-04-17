@@ -15,8 +15,7 @@ public class ViewFilteredStaffList {
         this.credentialsMap = credentialsMap;
     }
 
-    public void filterStaff() {
-        Scanner scanner = new Scanner(System.in);
+    public void filterStaff(Scanner scanner) {  // Accept Scanner as parameter
         List<UserCredentials> credentialsList = new ArrayList<>(credentialsMap.values());
         List<UserCredentials> filteredList;
 
@@ -25,7 +24,6 @@ public class ViewFilteredStaffList {
         int choice = scanner.nextInt();
 
         IStaffFilter filter = null;
-
         switch (choice) {
             case 1:
                 System.out.print("Enter Branch: ");
@@ -54,9 +52,8 @@ public class ViewFilteredStaffList {
                 break;
         }
         
-            filteredList = filter.filter(credentialsList);
+        filteredList = filter.filter(credentialsList);
         displayStaff(filteredList);
-        scanner.close();
     }
 
     private void displayStaff(List<UserCredentials> staffList) {
@@ -78,6 +75,7 @@ public class ViewFilteredStaffList {
         // Assume a method exists that retrieves the staff credentials
         Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
         ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
-        viewer.filterStaff();
+        Scanner scanner = new Scanner(System.in);
+        viewer.filterStaff(scanner);
     }
 }

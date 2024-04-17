@@ -2,8 +2,8 @@ package FOMS.account_manager;
 
 import java.util.Map;
 import java.util.Scanner;
-// import FOMS.FOMS_entity.*;
-// import java.util.List;
+//import FOMS.FOMS_entity.*;
+//import java.util.List;
 // import java.util.ArrayList;
 
 public class ChooseOption {
@@ -27,7 +27,8 @@ public class ChooseOption {
                 case 2:
                     Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
                     ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
-                    viewer.filterStaff();
+                    viewer.filterStaff(sc);
+                    break;
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;
