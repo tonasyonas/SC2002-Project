@@ -20,13 +20,14 @@ public class ViewStaffList {
         System.out.println("Filter by:\n1. Branch\n2. Role\n3. Gender\n4. Age");
         System.out.print("Choose an option: ");
         int choice = scanner.nextInt();
-        List<UserCredentials> filteredList;
+        
+        StaffFilter filter;
 
         switch (choice) {
             case 1:
                 System.out.print("Enter Branch: ");
                 String branch = scanner.next();
-                filteredList = StaffFilter.filterByBranch(credentialsList, branch);
+                filter = new BranchFilter(branch);
                 break;
             case 2:
                 System.out.print("Enter Role: ");
@@ -52,6 +53,7 @@ public class ViewStaffList {
                 break;
         }
 
+        List<UserCredentials> filteredList = filter.filter(credentialsList);
         displayStaff(filteredList);
         scanner.close();
     }
