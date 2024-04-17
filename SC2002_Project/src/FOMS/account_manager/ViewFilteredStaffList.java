@@ -32,6 +32,17 @@ public class ViewFilteredStaffList {
                 filter = new BranchFilter(branch);
                 break;
             case 2:
+                System.out.print("Enter role: ");
+                String role = scanner.next();
+                filter = new RoleFilter(role);
+                break;
+            case 3:
+                System.out.print("Enter gender (M/F): ");
+                String genderInput = scanner.next();
+                Staff.Gender gender = "M".equalsIgnoreCase(genderInput) ? Staff.Gender.M : Staff.Gender.F;
+                filter = new GenderFilter(gender);
+                break;        
+            case 4:
                 System.out.print("Enter age: ");
                 int age = scanner.nextInt();
                 filter = new AgeFilter(age);
