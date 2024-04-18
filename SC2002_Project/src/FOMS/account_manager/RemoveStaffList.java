@@ -1,9 +1,14 @@
+package FOMS.account_manager;
 import java.util.Map;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-public class RemoveStaffList implements IStaffListEditor {
+public class RemoveStaffList extends AStaffListEditor {
     private Scanner scanner;
+
+    public RemoveStaffList (Scanner scanner){
+        this.scanner = scanner;
+    }
 
     @Override
     public void EditStaffList(String filename, Map<String, UserCredentials> credentials) {
