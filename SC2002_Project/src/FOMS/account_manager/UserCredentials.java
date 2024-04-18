@@ -55,7 +55,7 @@ public class UserCredentials {
         return hashedPassword;
     }
 
-    public boolean isNeedsPasswordReset() {
+    public boolean getNeedsPasswordReset() {
         return needsPasswordReset;
     }
 
