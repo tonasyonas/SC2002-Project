@@ -6,7 +6,7 @@ import FOMS.FOMS_entity.*;
 
 
 public class StaffListController {
-    public static void main(String[] args) {
+    public void displayStaffListController (){
         Scanner scanner = new Scanner(System.in);
         String filename = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
         Map<String, UserCredentials> credentials = ReadStaffList.getStaffCredentials(filename);

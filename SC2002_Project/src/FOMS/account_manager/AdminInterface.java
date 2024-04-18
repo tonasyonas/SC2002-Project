@@ -6,7 +6,7 @@ import java.util.Scanner;
 //import java.util.List;
 // import java.util.ArrayList;
 
-public class ChooseOption {
+public class AdminInterface {
     public static void main(String[] args) {
         int choice;
         Scanner sc = new Scanner(System.in);
@@ -14,6 +14,7 @@ public class ChooseOption {
             System.out.println("Choose an option:");
             System.out.println("1. View full staff list");
             System.out.println("2. View filtered staff list");
+            System.out.println("3. Edit Staff List:");
             System.out.print("Enter your choice (1/2): ");
             choice = sc.nextInt();
             sc.nextLine(); // Consume newline
@@ -29,6 +30,13 @@ public class ChooseOption {
                     ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
                     viewer.filterStaff(sc);
                     break;
+                
+                    case 3:
+                    StaffListController displayController = new StaffListController();
+                    displayController.displayStaffListController();
+                    break;
+
+                
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;
