@@ -39,6 +39,7 @@ public class LoginController {
                                 promptPasswordChange(scanner, loginID, staffCredentials);
                             }
                         }
+                       
                         // Proceed to the ordering system
                     } else {
                         System.out.println("Login failed. Incorrect login ID or password.");
@@ -85,7 +86,7 @@ public class LoginController {
                 oldCredentials.branch,
                 newSalt,
                 newHashedPassword,
-                oldCredentials.needsPasswordReset
+                oldCredentials.needsPasswordReset = false
             );
             credentialsMap.put(loginID, newCredentials); // Replace old credentials with new ones
             return saveCredentialsToFile(credentialsMap);
