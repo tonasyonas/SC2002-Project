@@ -25,37 +25,6 @@ Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredential
     //             System.out.print("Enter your login ID: ");
     //             String loginID = scanner.nextLine().trim();
     //             UserCredentials credentials = staffCredentials.get(loginID);
-                
-                if (credentials != null) {
-                    // Prompt staff members to log in
-                    System.out.print("Enter your password: ");
-                    String password = scanner.nextLine();
-                    if (login(staffCredentials, loginID, password, scanner)) {
-                        System.out.println("Login successful. Welcome, " + loginID + "!");
-                        // Check if password needs to be reset
-                        if (credentials.needsPasswordReset) {
-                            System.out.println("Would you like to change your password now? (yes/no)");
-                            String response = scanner.nextLine().trim();
-                            if ("yes".equalsIgnoreCase(response)) {
-                                promptPasswordChange(scanner, loginID, staffCredentials);
-                            }
-                        }
-                       
-                        // Proceed to the ordering system
-                    } else {
-                        System.out.println("Login failed. Incorrect login ID or password.");
-                    }
-                } else {
-                    System.out.println("Staff member not found. Please try again.");
-                }
-            } else {
-                System.out.println("Invalid user type. Please enter 'customer' or 'staff'.");
-            }
-        } finally {
-            scanner.close();
-        }
-    }
-=======
     //             if (credentials != null) {
     //                 // Prompt staff members to log in
     //                 System.out.print("Enter your password: ");
