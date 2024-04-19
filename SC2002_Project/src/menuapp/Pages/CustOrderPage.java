@@ -6,7 +6,7 @@ public class CustOrderPage {
         System.out.println("Welcome to the ordering system!");
     }
 
-    // private DisplayMenu() {
+    // public void DisplayMenu() {
 
     // }
 }

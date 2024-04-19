@@ -8,4 +8,20 @@ public abstract class MenuItem {
         this.item = item;
         this.cost = cost;
     }
+
+    public String getItem() {
+        return item;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 }

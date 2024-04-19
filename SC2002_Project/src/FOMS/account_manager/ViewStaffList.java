@@ -34,4 +34,3 @@ public class ViewStaffList {
         viewStaffList.displayAllStaff();
     }
 }
-

@@ -1,7 +1,7 @@
 package FOMS.account_manager;
 import java.util.Map;
 import java.util.Scanner;
-import java.io.FileWriter;
+// import java.io.FileWriter;
 
 public class RemoveStaffList extends AStaffListEditor {
     private Scanner scanner;
