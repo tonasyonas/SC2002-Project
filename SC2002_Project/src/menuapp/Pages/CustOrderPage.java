@@ -1,4 +1,4 @@
-package FOMS.Pages;
+package menuapp.Pages;
 
 public class CustOrderPage {
 
