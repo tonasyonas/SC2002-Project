@@ -1,10 +1,11 @@
 package FOMS.branch_manager;
 
-import FOMS.menu_manager.Menu;
 import FOMS.FOMS_entity.Staff;
+import FOMS.menu_manager.Menu;
 import FOMS.menu_manager.MenuItem;
 
 import java.util.ArrayList;
+
 public class Branch {
 
     private final String branchName;

@@ -1,8 +1,16 @@
 package FOMS.Pages;
 
 import java.util.Scanner;
+// import FOMS.account_manager.*;
 
 public class StartUpPage implements Page {
+
+    @Override
+    public void display() {
+        System.out.println("Welcome to the restaurant");
+        System.out.println("Are you a customer or a staff member?");
+        System.out.print("Enter 'customer' or 'staff': ");
+    }
 
     @Override
     public void startPage() {
@@ -10,25 +18,19 @@ public class StartUpPage implements Page {
         Scanner scanner = new Scanner(System.in);
         String userType = scanner.nextLine().trim().toLowerCase();
         if (userType.equals("customer")) {
-            //go to customer page
-            System.out.println("Yay cuistomer");
+            // Allow customers to proceed to the ordering system without logging in
+            // Proceed to the CustOrderPage
         } else if (userType.equals("staff")) {
-            //go to login page
-            System.out.println("Yay staff");
-        }
-        else {
+            // Proceed to StaffLoginPage
+        } else {
             startPage();
         }
-    }
-    
-    @Override
-    public void display() {
-        System.out.println("Welcome to restaurant");
-        System.out.println("Are you a customer or a staff");
+        scanner.close();
     }
 
     @Override
     public void getInput() {
-
+        Scanner scanner = new Scanner(System.in);
+        String userType = scanner.nextLine().trim().toLowerCase();
     }
 }

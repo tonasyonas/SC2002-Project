@@ -12,10 +12,10 @@ public class AdminInterface {
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("Choose an option:");
-            System.out.println("1. View full staff list");
-            System.out.println("2. View filtered staff list");
-            System.out.println("3. Edit Staff List:");
-            System.out.print("Enter your choice (1/2): ");
+            System.out.println("1. View Full Staff List");
+            System.out.println("2. View Filtered Staff List");
+            System.out.println("3. Edit Staff List");
+            System.out.print("Enter your choice (1/2/3): ");
             choice = sc.nextInt();
             sc.nextLine(); // Consume newline
 
@@ -26,6 +26,7 @@ public class AdminInterface {
                     viewStaffList.displayAllStaff();
                     break;
                 case 2:
+                    System.out.println("Filtered Staff List:");
                     Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
                     ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
                     viewer.filterStaff(sc);
@@ -42,5 +43,7 @@ public class AdminInterface {
                     break;
             }
         } while (choice > 0 && choice <= 2);
+        
+        sc.close();
     }
 }
