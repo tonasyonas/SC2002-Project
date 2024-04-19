@@ -21,22 +21,26 @@ public class StaffLoginPage {
         
         if (credentials != null) {
             // Prompt staff members to log in
-            System.out.print("Enter your password: ");
-            String password = scanner.nextLine();
-            if (LoginController.login(staffCredentials, loginID, password, scanner)) {
-                System.out.println("Login successful. Welcome, " + loginID + "!");
-                // Check if password needs to be reset
-                if (credentials.getNeedsPasswordReset()) {
-                    System.out.println("Would you like to change your password now? (yes/no)");
-                    String response = scanner.nextLine().trim();
-                    if ("yes".equalsIgnoreCase(response)) {
-                        LoginController.promptPasswordChange(scanner, loginID, staffCredentials);
+            String password;
+            do {
+                System.out.print("Enter your password: ");
+                password = scanner.nextLine();
+                if (LoginController.login(staffCredentials, loginID, password, scanner)) {
+                    System.out.println("Login successful. Welcome, " + loginID + "!");
+                    // Check if password needs to be reset
+                    if (credentials.getNeedsPasswordReset()) {
+                        System.out.println("Would you like to change your password now? (yes/no)");
+                        String response = scanner.nextLine().trim();
+                        if ("yes".equalsIgnoreCase(response)) {
+                            LoginController.promptPasswordChange(scanner, loginID, staffCredentials);
+                        }
                     }
+                    break;
+                    // Proceed to the ordering system
+                } else {
+                    System.out.println("Login failed. Incorrect login ID or password.");
                 }
-                // Proceed to the ordering system
-            } else {
-                System.out.println("Login failed. Incorrect login ID or password.");
-            }
+        } while (!LoginController.login(staffCredentials, loginID, password, scanner));
         } else {
             System.out.println("Staff member not found. Please try again.");
         }
@@ -44,10 +48,7 @@ public class StaffLoginPage {
     }
 
     public static void main(String[] args) {
-        // Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
         StaffLoginPage staff = new StaffLoginPage();
         staff.StaffLogin();
-        // Scanner scanner = new Scanner(System.in);
-        // viewer.filterStaff(scanner);
     }
 }
