@@ -29,8 +29,9 @@ public class StartUpPage implements Page {
     }
 
     @Override
-    public void getInput() {
+    public String getInput() {
         Scanner scanner = new Scanner(System.in);
         String userType = scanner.nextLine().trim().toLowerCase();
+        return userType;
     }
 }

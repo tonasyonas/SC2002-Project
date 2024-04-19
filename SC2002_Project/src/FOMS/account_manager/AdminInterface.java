@@ -32,17 +32,16 @@ public class AdminInterface {
                     viewer.filterStaff(sc);
                     break;
                 
-                    case 3:
+                case 3:
                     StaffListController displayController = new StaffListController();
                     displayController.displayStaffListController();
                     break;
-
                 
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;
             }
-        } while (choice > 0 && choice <= 2);
+        } while (choice > 0 && choice <= 3);
         
         sc.close();
     }
