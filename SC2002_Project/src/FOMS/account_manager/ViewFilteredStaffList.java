@@ -56,7 +56,7 @@ public class ViewFilteredStaffList {
         displayStaff(filteredList);
     }
 
-    private void displayStaff(List<UserCredentials> staffList) {
+    public void displayStaff(List<UserCredentials> staffList) {
         if (staffList.isEmpty()) {
             System.out.println("No staff members match the criteria.");
         } else {
