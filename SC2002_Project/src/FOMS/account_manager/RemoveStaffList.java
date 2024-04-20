@@ -20,12 +20,12 @@ public class RemoveStaffList extends AStaffListEditor {
         if (credentials.containsKey(loginIDToRemove)) {
             // Remove the staff member with the specified login ID
             credentials.remove(loginIDToRemove);
+            writeToFile(filename, credentials);
             System.out.println("Staff member removed successfully.");
         } else {
             System.out.println("Staff member with the provided login ID does not exist.");
         }
 
         // Write the updated credentials back to the file
-        writeToFile(filename, credentials);
     }
 }
