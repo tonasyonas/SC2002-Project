@@ -1,6 +1,6 @@
 package FOMS.Pages;
 
-public interface Page {
+public interface IPage {
     
     void display();
 

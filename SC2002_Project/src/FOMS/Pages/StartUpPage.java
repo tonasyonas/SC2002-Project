@@ -7,7 +7,7 @@ import java.util.Scanner;
 import menuapp.Pages.CustOrderPage;
 import menuapp.Pages.StaffLoginPage;
 
-public class StartUpPage implements Page {
+public class StartUpPage implements IPage {
 
     @Override
     public void display() {
