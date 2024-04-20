@@ -17,6 +17,7 @@ public class AdminPage {
             System.out.println("3. Add Staff");
             System.out.println("4. Remove Staff");
             System.out.println("5. Promote Staff");
+            System.out.println("6. Transfer Staff");
             System.out.print("Enter your choice: ");
             // Check if the input is an integer
             while (!sc.hasNextInt()) {
@@ -55,6 +56,11 @@ public class AdminPage {
                     PromoteStaff promoteStaff = new PromoteStaff(sc);
                     // Pass the filename and credentials map to EditStaffList method
                     promoteStaff.EditStaffList(filename, credentialsMap);
+                    break;
+                case 6:
+                    TransferStaff transferStaff = new TransferStaff(sc);
+                    // Pass the filename and credentials map to EditStaffList method
+                    transferStaff.EditStaffList(filename, credentialsMap);
                     break;
                 
                 default:
