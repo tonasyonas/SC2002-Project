@@ -8,6 +8,6 @@ public class App {
         Restaurant myRestaurant = new Restaurant();
         StartUpPage startUpPage = new StartUpPage();
         startUpPage.startPage();
-        //LoginController.main(args);
+        
     }
 }

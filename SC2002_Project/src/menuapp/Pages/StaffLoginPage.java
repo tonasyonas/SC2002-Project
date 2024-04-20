@@ -3,6 +3,7 @@ package menuapp.Pages;
 import FOMS.account_manager.*;
 import java.util.Map;
 import java.util.Scanner;
+import FOMS.FOMS_entity.*;
 
 public class StaffLoginPage {
 
@@ -33,6 +34,14 @@ public class StaffLoginPage {
                         String response = scanner.nextLine().trim();
                         if ("yes".equalsIgnoreCase(response)) {
                             LoginController.promptPasswordChange(scanner, loginID, staffCredentials);
+                        }
+                        switch (credentials.getRole()){
+                            case "A": 
+                                Admin admin = new Admin(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
+                            case "S": 
+                                BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
+                            case "M":
+                                BranchManager bmanagement = new BranchManager(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                         }
                     }
                     break;

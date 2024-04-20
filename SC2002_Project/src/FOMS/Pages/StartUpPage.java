@@ -1,7 +1,11 @@
 package FOMS.Pages;
 
 import java.util.Scanner;
+
 // import FOMS.account_manager.*;
+
+import menuapp.Pages.CustOrderPage;
+import menuapp.Pages.StaffLoginPage;
 
 public class StartUpPage implements Page {
 
@@ -18,10 +22,10 @@ public class StartUpPage implements Page {
         Scanner scanner = new Scanner(System.in);
         String userType = scanner.nextLine().trim().toLowerCase();
         if (userType.equals("customer")) {
-            // Allow customers to proceed to the ordering system without logging in
-            // Proceed to the CustOrderPage
+            CustOrderPage custOrderPage = new CustOrderPage();
         } else if (userType.equals("staff")) {
-            // Proceed to StaffLoginPage
+            StaffLoginPage staffLoginPage = new StaffLoginPage(); 
+            staffLoginPage.StaffLogin();
         } else {
             startPage();
         }
