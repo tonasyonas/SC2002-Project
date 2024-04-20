@@ -1,34 +1,39 @@
 package FOMS.menu_manager;
 
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class ViewMenu {
     private Map<String, MenuItem> menuMap;
-    
-    public ViewMenu() {
+
+    // Constructor that accepts a Map of menu items.
+    public ViewMenu(Map<String, MenuItem> menuMap) {
         this.menuMap = menuMap;
     }
-    
-        public void displayMenu() {
-        //     // Convert the map values to a list for easier iteration
-        //     List<UserCredentials> allStaff = new ArrayList<>(credentialsMap.values());
-    
-        //     // Display all staff details
-        //     if (allStaff.isEmpty()) {
-        //         System.out.println("No staff members are currently registered.");
-        //     } else {
-        //         for (UserCredentials staff : allStaff) {
-        //             System.out.println("Name: " + staff.getName() +
-        //                                ", Role: " + staff.getRole() +
-        //                                ", Gender: " + staff.getGender() +
-        //                                ", Age: " + staff.getAge() +
-        //                                ", Branch: " + staff.getBranch());
-        //         }
-        //     }
+
+    // Method to display all menu items.
+    public void displayMenu() {
+        if (menuMap.isEmpty()) {
+            System.out.println("The menu is currently empty.");
+        } else {
+            System.out.println("Menu Items:");
+            for (Map.Entry<String, MenuItem> entry : menuMap.entrySet()) {
+                String key = entry.getKey();
+                MenuItem item = entry.getValue();
+                System.out.printf("Name: %-20s Price: $%.2f\n", item.getItem(), item.getCost());
+            }
         }
-    
-        // public static void main(String[] args) {
-        //     ViewMenu viewMenu = new ViewMenu();
-        //     viewMenu.displayMenu();
-        // }
+    }
+
+
+
+    public static void main(String[] args) {
+        String filename = "SC2002_Project\\src\\FOMS\\menu_manager\\menu_list.txt"; 
+        Map<String, MenuItem> menuItems = ReadMenu.readMenuItems(filename);
+        
+        ViewMenu viewMenu = new ViewMenu(menuItems);
+        viewMenu.displayMenu();
+    }
 }
+
