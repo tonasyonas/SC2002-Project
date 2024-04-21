@@ -6,29 +6,18 @@ import FOMS.account_manager.*;
 import FOMS.Pages.IPage;
 
 public class AdminPage implements IPage{
-    
-    @Override
-    public void display() {
-        System.out.println("Welcome, admin!");
-    }
-
-    @Override
-    public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        String userType = scanner.nextLine().trim().toLowerCase();
-        return userType;
-    }
 
     @Override
     public void startPage() {
         display();
-        int choice = Integer.parseInt(getInput());
+        int choice;
 
         String filename = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
         Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials(filename);
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("Choose an option:");
+            System.out.println("0. Exit");
             System.out.println("1. View Full Staff List");
             System.out.println("2. View Filtered Staff List");
             System.out.println("3. Add Staff");
@@ -87,6 +76,18 @@ public class AdminPage implements IPage{
         } while (choice != 0);
         
         sc.close();
+    }
+    
+    @Override
+    public void display() {
+        System.out.println("Welcome, admin!");
+    }
+
+    @Override
+    public String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        String userType = scanner.nextLine().trim().toLowerCase();
+        return userType;
     }
 
 }
