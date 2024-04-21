@@ -1,12 +1,25 @@
 package menuapp.Pages;
 
-public class CustOrderPage {
+import FOMS.Pages.IPage;
+import java.util.Scanner;
 
-    public CustOrderPage() {
+public class CustOrderPage implements IPage{
+
+    @Override
+    public void startPage() {
+        display();
+    }
+    
+    @Override
+    public void display() {
         System.out.println("Welcome to the ordering system!");
     }
 
-    // public void DisplayMenu() {
+    @Override
+    public String getInput() {   
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine().trim().toLowerCase();
+        return choice;
+    }
 
-    // }
 }

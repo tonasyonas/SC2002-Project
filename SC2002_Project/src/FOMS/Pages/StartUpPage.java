@@ -17,7 +17,7 @@ public class StartUpPage implements IPage {
             CustOrderPage custOrderPage = new CustOrderPage();
         } else if (userType.equals("staff")) {
             StaffLoginPage staffLoginPage = new StaffLoginPage(); 
-            staffLoginPage.StaffLogin();
+            staffLoginPage.startPage();
         } else {
             startPage();
         }

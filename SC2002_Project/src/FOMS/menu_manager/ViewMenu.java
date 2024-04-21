@@ -26,8 +26,6 @@ public class ViewMenu {
         }
     }
 
-
-
     public static void main(String[] args) {
         String filename = "SC2002_Project\\src\\FOMS\\menu_manager\\menu_list.txt"; 
         Map<String, MenuItem> menuItems = ReadMenu.readMenuItems(filename);

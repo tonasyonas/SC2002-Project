@@ -1,12 +1,29 @@
-package FOMS.account_manager;
+package menuapp.Pages;
 
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.account_manager.*;
+import FOMS.Pages.IPage;
 
-public class AdminPage {
-    public static void main(String[] args) {
-        int choice;
+public class AdminPage implements IPage{
+    
+    @Override
+    public void display() {
+        System.out.println("Welcome, admin!");
+    }
+
+    @Override
+    public String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        String userType = scanner.nextLine().trim().toLowerCase();
+        return userType;
+    }
+
+    @Override
+    public void startPage() {
+        display();
+        int choice = Integer.parseInt(getInput());
+
         String filename = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
         Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials(filename);
         Scanner sc = new Scanner(System.in);
@@ -71,4 +88,5 @@ public class AdminPage {
         
         sc.close();
     }
+
 }
