@@ -15,6 +15,7 @@ public class StartUpPage implements IPage {
         String userType = getInput();
         if (userType.equals("customer")) {
             CustOrderPage custOrderPage = new CustOrderPage();
+            custOrderPage.startPage();
         } else if (userType.equals("staff")) {
             StaffLoginPage staffLoginPage = new StaffLoginPage(); 
             staffLoginPage.startPage();
