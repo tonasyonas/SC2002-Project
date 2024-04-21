@@ -41,13 +41,13 @@ public class StaffLoginPage implements IPage {
                 }
             } while (true); // Infinite loop until successful login
     
-            System.err.println(credentials.getRole());
     
             // Switch case to create objects based on role after successful login
             switch (credentials.getRole()) {
                 case "A": 
                     Admin admin = new Admin(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
-                    // Proceed with admin actions
+                    AdminPage adminpage = new AdminPage();
+                    adminpage.startPage();
                     break;
                 case "S": 
                     BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
