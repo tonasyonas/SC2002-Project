@@ -10,17 +10,9 @@ import menuapp.Pages.StaffLoginPage;
 public class StartUpPage implements IPage {
 
     @Override
-    public void display() {
-        System.out.println("Welcome to the restaurant");
-        System.out.println("Are you a customer or a staff member?");
-        System.out.print("Enter 'customer' or 'staff': ");
-    }
-
-    @Override
     public void startPage() {
         this.display();
-        Scanner scanner = new Scanner(System.in);
-        String userType = scanner.nextLine().trim().toLowerCase();
+        String userType = getInput();
         if (userType.equals("customer")) {
             CustOrderPage custOrderPage = new CustOrderPage();
         } else if (userType.equals("staff")) {
@@ -29,7 +21,13 @@ public class StartUpPage implements IPage {
         } else {
             startPage();
         }
-        scanner.close();
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Welcome to the restaurant");
+        System.out.println("Are you a customer or a staff member?");
+        System.out.print("Enter 'customer' or 'staff': ");
     }
 
     @Override
@@ -38,4 +36,5 @@ public class StartUpPage implements IPage {
         String userType = scanner.nextLine().trim().toLowerCase();
         return userType;
     }
+
 }

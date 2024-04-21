@@ -7,4 +7,6 @@ public interface IPage {
     String getInput();
 
     void startPage();
+
+    // void Login();
 }
