@@ -15,13 +15,21 @@ public class ViewMenu {
         this.menuOrganizer = menuOrganizer;
     }
 
-    public void displayMenuForBranch() {
-        String branch = branchSelector.selectBranch();
-        Map<String, MenuItem> menu = menuOrganizer.getMenuForBranch(branch);
+    public void displayMenuForBranch(String selectedBranch) {
+        Map<String, MenuItem> menu = menuOrganizer.getMenuForBranch(selectedBranch);
         if (menu != null) {
-            menuDisplay.displayMenu(branch, menu);
+            menuDisplay.displayMenu(selectedBranch, menu);
         } else {
             System.out.println("No menu available for this branch.");
         }
     }
+
+    public MenuItem getMenuItem(String item, String branch) {
+        Map<String, MenuItem> menu = menuOrganizer.getMenuForBranch(branch);
+        if (menu != null) {
+            return menu.get(item);
+        }
+        return null;
+    }
+
 }

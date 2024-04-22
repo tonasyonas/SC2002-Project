@@ -8,6 +8,11 @@ import menuapp.Pages.CustOrderPage;
 import menuapp.Pages.StaffLoginPage;
 
 public class StartUpPage implements IPage {
+    private Scanner scanner;
+
+    public StartUpPage() {
+        this.scanner = new Scanner(System.in); // Initialize it once here
+    }
 
     @Override
     public void startPage() {
