@@ -2,14 +2,16 @@ package FOMS.menu_manager;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 import java.util.Scanner;
 // import java.util.Map.Entry;
+
+import FOMS.branch_manager.ReadBranchList;
 
 public class ViewMenu {
     private Map<String, MenuItem> menuMap;
     private Map<String, Map<String, MenuItem>> branchMenus;
-    private String[] branches = {"JE", "JP", "NTU"}; // The available branches.
+    private static final String BRANCH_FILE = "SC2002_Project/src/FOMS/branch_manager/branch_list.txt";
+    private String[] branches = ReadBranchList.getBranchIDs(BRANCH_FILE); // The available branches.
 
     // Constructor that accepts a Map of menu items.
     public ViewMenu(Map<String, MenuItem> menuMap) {

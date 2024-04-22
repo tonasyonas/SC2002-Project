@@ -1,11 +1,12 @@
 package menuapp.Pages;
 
 import FOMS.account_manager.*;
+import FOMS.branch_manager.*;
+
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.FOMS_entity.*;
 import FOMS.Pages.IPage;
-import FOMS.branch_manager.*;
 
 public class StaffLoginPage implements IPage {
 

@@ -14,7 +14,7 @@ public class Branch {
     private Menu menu;
     private ArrayList<Staff> staffList;
 
-    public Branch(String name, String id, int noOfStaff) {
+    public Branch(String id, String name, int noOfStaff) {
         this.branchName = name;
         this.branchID = id;
         this.staffList = new ArrayList<>();
@@ -31,6 +31,10 @@ public class Branch {
 
     public String getBranchName() {
         return this.branchName;
+    }
+
+    public String getBranchID() {
+        return this.branchID;
     }
 
 }
