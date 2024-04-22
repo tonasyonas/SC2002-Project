@@ -7,14 +7,14 @@ public abstract class MenuItem {
     private String item;
     private double cost;
     private String branch; // Attribute to store branch information
-    private Map<String, Double> customizations;
+    private String customizations;  // Customizations as a simple string
+
 
     public MenuItem(String item, double cost, String branch) {
         this.item = item;
         this.cost = cost;
         this.branch = branch; // Initialize the branch
-        this.customizations = new HashMap<>(); // Initialize the customizations map
-
+        this.customizations = "";  // Initialize as empty string
     }
 
     public String getItem() {
@@ -22,11 +22,7 @@ public abstract class MenuItem {
     }
 
     public double getCost() {
-        double totalCost = cost;
-        for (double additionalCost : customizations.values()) {
-            totalCost += additionalCost;
-        }
-        return totalCost;
+        return cost;
     }
     public String getBranch() {
         return branch;
@@ -43,20 +39,25 @@ public abstract class MenuItem {
     public void setCost(double cost) {
         this.cost = cost;
     }
-
-    // Method to add a customization with its additional cost
-    public void addCustomization(String customization, double additionalCost) {
-        customizations.put(customization, additionalCost);
-    }
     
-    // Method to remove a customization
-    public void removeCustomization(String customization) {
-        customizations.remove(customization);
-    }
-    
-    // Method to get the customizations map
-    public Map<String, Double> getCustomizations() {
+    public String getCustomizations() {
         return customizations;
     }
+
+    public void setCustomizations(String customizations) {
+        this.customizations = customizations;
+    }
     
+    // You might also want to add methods to append or clear customizations
+    public void addCustomization(String customization) {
+        if (!this.customizations.isEmpty()) {
+            this.customizations += ", ";
+        }
+        this.customizations += customization;
+    }
+
+    public void clearCustomizations() {
+        this.customizations = "";
+    }
+
 }

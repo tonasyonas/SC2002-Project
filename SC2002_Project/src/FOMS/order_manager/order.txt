@@ -1,0 +1,5 @@
+1;New;6.4;FRIESx2@3.2
+2;New;12.5;chicken nuggetx1@6.9,CAJUN FISHx1@5.6
+3;New;9.9;3PC set mealx1@9.9
+4;New;5.6;CAJUN FISHx1@5.6
+9;New;3.2;FRIESx1@3.2,(ketchup)

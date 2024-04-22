@@ -4,11 +4,19 @@ import FOMS.menu_manager.*;
 public class OrderItem {
     private MenuItem menuItem;
     private int quantity;
+    private String customization;
     
-    // Constructor
-    public OrderItem(MenuItem menuItem, int quantity){
+    public OrderItem(MenuItem menuItem, int quantity) {
         this.menuItem = menuItem;
         this.quantity = quantity;
+        this.customization = customization;
+    }
+    
+    // Constructor
+    public OrderItem(MenuItem menuItem, int quantity, String customization){
+        this.menuItem = menuItem;
+        this.quantity = quantity;
+        this.customization = customization;
     }
 
     // getter for menuitem
@@ -31,6 +39,14 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    // Getter and setter for customization
+    public String getCustomization() {
+        return customization;
+    }
+
+    public void setCustomization(String customization) {
+        this.customization = customization;
+    }
 
 
 }

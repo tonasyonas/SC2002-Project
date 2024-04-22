@@ -104,32 +104,27 @@ public class CustOrderPage implements IPage{
     }
 
     private void addItemsToCart() {
-        
-        // Prompt user to select item number
         System.out.println("Enter the item number to add to cart or 'exit' to return:");
         String input = scanner.nextLine().trim().toLowerCase();
-        
-        // Check if the user wants to exit
+    
         if ("exit".equals(input)) {
             return;
         }
-        
+    
         try {
-            // Parse input as item number
             int itemNumber = Integer.parseInt(input);
-            
-            // Get the selected item from the menu
             MenuItem selectedItem = viewMenu.getMenuItemByNumber(itemNumber, selectedBranch);
-            
-            // Check if the selected item exists
+    
             if (selectedItem != null) {
-                // Prompt user for quantity
                 System.out.print("Enter quantity: ");
                 int quantity = Integer.parseInt(scanner.nextLine());
+                System.out.print("Enter any customizations (e.g., 'no onions', 'extra cheese'), or press Enter if none: ");
+                String customization = scanner.nextLine().trim();
                 
-                // Add item to cart
-                cartManager.addItem(selectedItem, quantity);
-                System.out.println("Item added to cart.");
+                selectedItem.setCustomizations(customization);
+    
+                cartManager.addItem(selectedItem, quantity, customization);
+                System.out.println("Item added to cart with the following customizations: " + customization);
             } else {
                 System.out.println("Invalid item number. Please try again.");
             }
@@ -137,58 +132,70 @@ public class CustOrderPage implements IPage{
             System.out.println("Invalid input. Please enter a number or 'exit'.");
         }
     }
-    
+        
     
 
 
     private void modifyCart() {
         int itemNumber = 1; // Initialize item number
-        
+    
         while (true) {
-            // Display cart items with item numbers
+            // Display cart items with item numbers and customizations
             System.out.println("Cart Items:");
             for (Map.Entry<MenuItem, Integer> entry : cartManager.getItems().entrySet()) {
                 MenuItem item = entry.getKey();
                 int quantity = entry.getValue();
-                System.out.println(itemNumber + ". " + item.getItem() + " - Quantity: " + quantity);
+                String customizations = item.getCustomizations(); // Retrieve customizations directly from MenuItem
+                String displayCustomization = customizations.isEmpty() ? "No customization" : customizations.toString();
+                System.out.println(itemNumber + ". " + item.getItem() + " - Quantity: " + quantity + " - Customization: " + displayCustomization);
                 itemNumber++; // Increment item number
             }
             
+            
+    
             // Prompt user for action
             System.out.println("\nEnter the item number to update, 'clear' to empty the cart, or 'back' to return:");
             String input = scanner.nextLine().trim().toLowerCase();
     
-            if ("clear".equals(input)) {
-                cartManager.clearCart();
-                break;
-            } else if ("back".equals(input)) {
-                break;
-            } else {
-                try {
-                    int selectedNumber = Integer.parseInt(input);
-                    if (selectedNumber >= 1 && selectedNumber <= cartManager.getItems().size()) {
-                        // Get the selected item based on item number
-                        MenuItem[] itemsArray = cartManager.getItems().keySet().toArray(new MenuItem[0]);
-                        MenuItem selectedMenuItem = itemsArray[selectedNumber - 1];
-                        
-                        System.out.print("Enter new quantity (0 to remove): ");
-                        int quantity = Integer.parseInt(scanner.nextLine());
-                        if (quantity == 0) {
-                            cartManager.removeItem(selectedMenuItem, quantity);
+            // Perform actions based on user input
+            switch (input) {
+                case "clear":
+                    cartManager.clearCart();
+                    return;
+                case "back":
+                    return;
+                default:
+                    try {
+                        int selectedNumber = Integer.parseInt(input);
+                        if (selectedNumber >= 1 && selectedNumber <= cartManager.getItems().size()) {
+                            // Get the selected item based on item number
+                            MenuItem[] itemsArray = cartManager.getItems().keySet().toArray(new MenuItem[0]);
+                            MenuItem selectedMenuItem = itemsArray[selectedNumber - 1];
+    
+                            // Prompt for new quantity
+                            System.out.print("Enter new quantity (0 to remove): ");
+                            int quantity = Integer.parseInt(scanner.nextLine());
+                            if (quantity == 0) {
+                                cartManager.removeItem(selectedMenuItem);
+                            } else {
+                                // Prompt for additional customizations
+                                System.out.print("Enter any additional customizations (e.g., 'no onions', 'extra cheese'), or press Enter if none: ");
+                                String additionalCustomization = scanner.nextLine().trim();
+                                String combinedCustomization = cartManager.getCustomizations(selectedMenuItem) + ", " + additionalCustomization;
+                                cartManager.updateItemQuantity(selectedMenuItem, quantity, combinedCustomization);
+                            }
                         } else {
-                            cartManager.updateItemQuantity(selectedMenuItem, quantity);
+                            System.out.println("Invalid item number. Please try again.");
                         }
-                    } else {
-                        System.out.println("Invalid item number. Please try again.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid number.");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a valid number.");
-                }
             }
         }
     }
     
     
+        
     
     
     private void checkoutCart() {
@@ -217,12 +224,21 @@ public class CustOrderPage implements IPage{
         if (payment >= total) {
             System.out.println("Payment successful!");
             String orderId = orderManager.placeOrder(cartManager, orderType); // This should clear the cart and create an order
+            // Retrieve the Order object using the orderId (you'll need to implement getOrderById in OrderManager)
+            Order order = orderManager.getOrderById(orderId);
             System.out.println("Receipt:");
             System.out.println("Total Paid: $" + payment);
             System.out.println("Change: $" + (payment - total));
             System.out.println("Order type: " + orderType);
             System.out.println("Order ID: " + orderId);
             System.out.println("Thank you for your purchase!");
+
+            // Now, save the order details to a file
+            if (order != null) {
+                orderManager.saveOrderToFile(order, "SC2002_Project/src/FOMS/order_manager/order.txt");
+            } else {
+                System.out.println("Error: Order not found after payment.");
+            }
         } else {
             System.out.println("Insufficient payment. Transaction cancelled.");
         }
