@@ -10,6 +10,7 @@ import FOMS.menu_manager.*;
 import FOMS.branch_manager.*;
 import FOMS.order_manager.*;
 
+
 public class CustOrderPage implements IPage{
     private Scanner scanner;
     private ViewMenu viewMenu; // handle menu display logic
@@ -28,7 +29,9 @@ public class CustOrderPage implements IPage{
 
     private void initializeDependencies() {
         MenuDisplay menuDisplay = new ConsoleMenuDisplay();
-        String[] branches = ReadBranchList.getBranchIDs("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
+        List<Branch> branchlist = ReadBranchList.getBranchList("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
+
+        String[] branches = AllBranch.getBranchIDs(branchlist);
         this.branchSelector = new ConsoleBranchSelector(scanner, branches);
         String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
         Map<String, MenuItem> menuMap = ReadMenu.readMenuItems(filename);

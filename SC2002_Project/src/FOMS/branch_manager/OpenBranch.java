@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class OpenBranch extends AOpenCloseBranch {
 
-    public static void main(String[] args) {
+    public static void OpeningBranch() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please enter the details of the branch:");
