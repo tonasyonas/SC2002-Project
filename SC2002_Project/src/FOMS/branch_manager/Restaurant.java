@@ -111,13 +111,13 @@ public class Restaurant {
                     String type = parts[3];
                     MenuItem newItem;
                     if (type.equals("burger")) {
-                        newItem = new Burger(item, price);
+                        newItem = new Burger(item, price, branch);
                     } else if (type.equals("drink")) {
-                        newItem = new Drink(item, price);
+                        newItem = new Drink(item, price, branch);
                     } else if (type.equals("side")) {
-                        newItem = new Side(item, price);
+                        newItem = new Side(item, price, branch);
                     } else if (type.equals("set meal")) {
-                        newItem = new SetMeal(item, price);
+                        newItem = new SetMeal(item, price, branch);
                     } else {
                         continue;
                     }

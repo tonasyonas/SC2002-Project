@@ -7,7 +7,6 @@ import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 
 public class CustOrderPage implements IPage{
-
     @Override
     public void startPage() {
         display();
@@ -30,9 +29,14 @@ public class CustOrderPage implements IPage{
 
             switch (choice) {
                 case 1:
-                    Map<String, MenuItem> menuMap = new HashMap<>();
-                    ViewMenu viewmenu = new ViewMenu(menuMap);
-                    viewmenu.displayMenu();
+                    String filename = "SC2002_Project\\src\\FOMS\\menu_manager\\menu_list.txt";
+                    Map<String, MenuItem> menuMap = ReadMenu.readMenuItems(filename);
+                    if (menuMap != null) {
+                        ViewMenu viewMenu = new ViewMenu(menuMap);
+                        viewMenu.displayMenuForBranch(sc); 
+                    } else {
+                        System.out.println("Error: Unable to read menu items from file.");
+                    }
                     break;
                 case 2:
                     break;
@@ -57,5 +61,4 @@ public class CustOrderPage implements IPage{
         String choice = scanner.nextLine().trim().toLowerCase();
         return choice;
     }
-
 }
