@@ -30,7 +30,7 @@ public class CustOrderPage implements IPage{
 
             switch (choice) {
                 case 1:
-                    String filename = "SC2002_Project\\src\\FOMS\\menu_manager\\menu_list.txt";
+                    String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
                     Map<String, MenuItem> menuMap = ReadMenu.readMenuItems(filename);
                     if (menuMap != null) {
                         ViewMenu viewMenu = new ViewMenu(menuMap);
