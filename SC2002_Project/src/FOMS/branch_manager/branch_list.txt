@@ -84,3 +84,8 @@ JE;Jurong east;11
 
 
 
+NUS;Utown;12
+NUS;U Town;12
+NUS;U TOwn;12
+NUS;UTown;12
+NUS;UTOWN;122
