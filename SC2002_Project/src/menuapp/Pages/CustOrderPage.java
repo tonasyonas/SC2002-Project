@@ -7,6 +7,7 @@ import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 
 public class CustOrderPage implements IPage{
+
     @Override
     public void startPage() {
         display();
@@ -39,8 +40,13 @@ public class CustOrderPage implements IPage{
                     }
                     break;
                 case 2:
+                // payment handling logic
                     break;
                 case 3:
+                // order status tracking logic
+                    break;
+                case 0: 
+                    System.out.println("Exiting the ordering system.");
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose again.");
@@ -55,10 +61,4 @@ public class CustOrderPage implements IPage{
         System.out.println("Welcome to the ordering system!");
     }
 
-    @Override
-    public String getInput() {   
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine().trim().toLowerCase();
-        return choice;
-    }
 }
