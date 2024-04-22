@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 public class CloseBranch extends AOpenCloseBranch {
 
-    public static void ClosingBranch() {
-        Scanner scanner = new Scanner(System.in);
-
+    public static void ClosingBranch(Scanner scanner) {
         System.out.println("Please enter the ID of the branch you want to close:");
 
         System.out.print("Branch ID: ");
@@ -18,7 +16,6 @@ public class CloseBranch extends AOpenCloseBranch {
         branchManager.editOpenclose(branchID, null, 0); // Pass null and 0 as placeholders for branchName and quota
 
         System.out.println("Branch has been closed successfully.");
-        scanner.close();
     }
 
     // Override the editOpenclose method
