@@ -101,52 +101,92 @@ public class CustOrderPage implements IPage{
     }
 
     private void addItemsToCart() {
-        System.out.println("Enter the item name to add to cart or 'exit' to return:");
-        String itemName = scanner.nextLine();
-        while (!itemName.equalsIgnoreCase("exit")) {
-            MenuItem item = viewMenu.getMenuItem(itemName, selectedBranch);
-            if (item != null) {
+        
+        // Prompt user to select item number
+        System.out.println("Enter the item number to add to cart or 'exit' to return:");
+        String input = scanner.nextLine().trim().toLowerCase();
+        
+        // Check if the user wants to exit
+        if ("exit".equals(input)) {
+            return;
+        }
+        
+        try {
+            // Parse input as item number
+            int itemNumber = Integer.parseInt(input);
+            
+            // Get the selected item from the menu
+            MenuItem selectedItem = viewMenu.getMenuItemByNumber(itemNumber, selectedBranch);
+            
+            // Check if the selected item exists
+            if (selectedItem != null) {
+                // Prompt user for quantity
                 System.out.print("Enter quantity: ");
-                try {
-                    int quantity = Integer.parseInt(scanner.nextLine());
-                    cartManager.addItem(item, quantity);
-                    System.out.println("Item added to cart.");
-                } catch (NumberFormatException e) {
-                    System.out.println("Please enter a valid number for the quantity.");
-                }
+                int quantity = Integer.parseInt(scanner.nextLine());
+                
+                // Add item to cart
+                cartManager.addItem(selectedItem, quantity);
+                System.out.println("Item added to cart.");
             } else {
-                System.out.println("Item not found. Please try again.");
+                System.out.println("Invalid item number. Please try again.");
             }
-            System.out.println("Enter the item name to add to cart or 'exit' to return:");
-            itemName = scanner.nextLine();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number or 'exit'.");
         }
     }
+    
     
 
 
     private void modifyCart() {
-        cartManager.displayItems();
-        System.out.println("Enter the item index to update or 'clear' to empty the cart:");
-        String input = scanner.nextLine();
-        if (input.equalsIgnoreCase("clear")) {
-            cartManager.clearCart();
-        } else {
-            try {
-                int itemIndex = Integer.parseInt(input) - 1; // user sees list starting at 1
-                List<MenuItem> itemsList = new ArrayList<>(cartManager.getItems().keySet());
-                if (itemIndex >= 0 && itemIndex < itemsList.size()) {
-                    MenuItem itemToUpdate = itemsList.get(itemIndex);
-                    System.out.print("Enter new quantity (0 to remove): ");
-                    int quantity = Integer.parseInt(scanner.nextLine());
-                    cartManager.updateItemQuantity(itemToUpdate, quantity);
-                } else {
-                    System.out.println("Invalid item index.");
+        int itemNumber = 1; // Initialize item number
+        
+        while (true) {
+            // Display cart items with item numbers
+            System.out.println("Cart Items:");
+            for (Map.Entry<MenuItem, Integer> entry : cartManager.getItems().entrySet()) {
+                MenuItem item = entry.getKey();
+                int quantity = entry.getValue();
+                System.out.println(itemNumber + ". " + item.getItem() + " - Quantity: " + quantity);
+                itemNumber++; // Increment item number
+            }
+            
+            // Prompt user for action
+            System.out.println("\nEnter the item number to update, 'clear' to empty the cart, or 'back' to return:");
+            String input = scanner.nextLine().trim().toLowerCase();
+    
+            if ("clear".equals(input)) {
+                cartManager.clearCart();
+                break;
+            } else if ("back".equals(input)) {
+                break;
+            } else {
+                try {
+                    int selectedNumber = Integer.parseInt(input);
+                    if (selectedNumber >= 1 && selectedNumber <= cartManager.getItems().size()) {
+                        // Get the selected item based on item number
+                        MenuItem[] itemsArray = cartManager.getItems().keySet().toArray(new MenuItem[0]);
+                        MenuItem selectedMenuItem = itemsArray[selectedNumber - 1];
+                        
+                        System.out.print("Enter new quantity (0 to remove): ");
+                        int quantity = Integer.parseInt(scanner.nextLine());
+                        if (quantity == 0) {
+                            cartManager.removeItem(selectedMenuItem, quantity);
+                        } else {
+                            cartManager.updateItemQuantity(selectedMenuItem, quantity);
+                        }
+                    } else {
+                        System.out.println("Invalid item number. Please try again.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid number.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
             }
         }
     }
+    
+    
+    
     
     private void checkoutCart() {
         if (cartManager.isEmpty()) {

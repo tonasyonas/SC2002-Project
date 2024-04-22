@@ -2,6 +2,8 @@ package FOMS.menu_manager;
 
 import java.util.Map;
 // import java.util.Map.Entry;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class ViewMenu {
@@ -31,5 +33,17 @@ public class ViewMenu {
         }
         return null;
     }
+
+    public MenuItem getMenuItemByNumber(int itemNumber, String branch) {
+        Map<String, MenuItem> menu = menuOrganizer.getMenuForBranch(branch);
+        if (menu != null) {
+            List<MenuItem> itemList = new ArrayList<>(menu.values());
+            if (itemNumber >= 1 && itemNumber <= itemList.size()) {
+                return itemList.get(itemNumber - 1);
+            }
+        }
+        return null;
+    }
+    
 
 }
