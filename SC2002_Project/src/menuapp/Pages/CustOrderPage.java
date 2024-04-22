@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
+import FOMS.branch_manager.*;
 
 public class CustOrderPage implements IPage{
 
@@ -13,6 +14,16 @@ public class CustOrderPage implements IPage{
         display();
         int choice;
         Scanner sc = new Scanner(System.in);
+
+        // Initializing dependencies for ViewMenu
+        MenuDisplay menuDisplay = new ConsoleMenuDisplay();
+        String[] branches = ReadBranchList.getBranchIDs("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
+        BranchSelector branchSelector = new ConsoleBranchSelector(sc, branches);
+        String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
+        Map<String, MenuItem> menuMap = ReadMenu.readMenuItems(filename);
+        MenuOrganizer menuOrganizer = new MenuOrganizer(menuMap);
+        ViewMenu viewMenu = new ViewMenu(menuDisplay, branchSelector, menuOrganizer);
+
         do {
             System.out.println("Choose an option:");
             System.out.println("0. Exit");
@@ -30,11 +41,8 @@ public class CustOrderPage implements IPage{
 
             switch (choice) {
                 case 1:
-                    String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
-                    Map<String, MenuItem> menuMap = ReadMenu.readMenuItems(filename);
                     if (menuMap != null) {
-                        ViewMenu viewMenu = new ViewMenu(menuMap);
-                        viewMenu.displayMenuForBranch(sc); 
+                        viewMenu.displayMenuForBranch(); 
                     } else {
                         System.out.println("Error: Unable to read menu items from file.");
                     }
