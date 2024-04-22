@@ -118,13 +118,31 @@ public class CustOrderPage implements IPage{
             if (selectedItem != null) {
                 System.out.print("Enter quantity: ");
                 int quantity = Integer.parseInt(scanner.nextLine());
-                System.out.print("Enter any customizations (e.g., 'no onions', 'extra cheese'), or press Enter if none: ");
-                String customization = scanner.nextLine().trim();
+                System.out.println("Yes or No: Do you want any customisations");
+                String boolCustomisation = scanner.nextLine().trim();
+                if (boolCustomisation.equals("yes")) {
+                    System.out.println("Entering customization loop...");
+                    scanner.nextLine(); // Consume newline character
+                    for (int i = 0; i < quantity; i++) {
+                        System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedItem.getItem(), i+1);
+                        String customization = scanner.nextLine().trim();
+                        MenuItem item = new Drink(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch());
+                        item.setCustomizations(customization);
+                        cartManager.addItem(item, 1, customization);
+                        System.out.println("Item added to cart with the following customizations: " + customization);
+                    }
+                    System.out.println("Exiting customization loop...");
+                }
+                else {
+                    MenuItem item = new Drink(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch()); //need change 
+                    String customization = "";
+                    cartManager.addItem(item, quantity, customization);
+                    System.out.println("Item added to cart with the following customizations: " + customization);
+
+                }
                 
-                selectedItem.setCustomizations(customization);
-    
-                cartManager.addItem(selectedItem, quantity, customization);
-                System.out.println("Item added to cart with the following customizations: " + customization);
+             
+                
             } else {
                 System.out.println("Invalid item number. Please try again.");
             }
@@ -137,9 +155,10 @@ public class CustOrderPage implements IPage{
 
 
     private void modifyCart() {
-        int itemNumber = 1; // Initialize item number
+         // Initialize item number
     
         while (true) {
+            int itemNumber = 1;
             // Display cart items with item numbers and customizations
             System.out.println("Cart Items:");
             for (Map.Entry<MenuItem, Integer> entry : cartManager.getItems().entrySet()) {
@@ -175,14 +194,32 @@ public class CustOrderPage implements IPage{
                             // Prompt for new quantity
                             System.out.print("Enter new quantity (0 to remove): ");
                             int quantity = Integer.parseInt(scanner.nextLine());
-                            if (quantity == 0) {
-                                cartManager.removeItem(selectedMenuItem);
-                            } else {
-                                // Prompt for additional customizations
-                                System.out.print("Enter any additional customizations (e.g., 'no onions', 'extra cheese'), or press Enter if none: ");
-                                String additionalCustomization = scanner.nextLine().trim();
-                                String combinedCustomization = cartManager.getCustomizations(selectedMenuItem) + ", " + additionalCustomization;
-                                cartManager.updateItemQuantity(selectedMenuItem, quantity, combinedCustomization);
+                            cartManager.removeItem(selectedMenuItem);
+                            if (quantity > 0) {
+                                System.out.println("Yes or No: Do you want any customisations");
+                                String boolCustomisation = scanner.nextLine().trim();
+                                if (boolCustomisation.equals("yes")) {
+                                    System.out.println("Entering customization loop...");
+                                    scanner.nextLine(); // Consume newline character
+                                    for (int i = 0; i < quantity; i++) {
+                                        System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedMenuItem.getItem(), i+1);
+                                        String customization = scanner.nextLine().trim();
+                                        MenuItem item = new Drink(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch());
+                                        item.setCustomizations(customization);
+                                        cartManager.addItem(item, 1, customization);
+                                        System.out.println("Item added to cart with the following customizations: " + customization);
+                                    }
+                                    System.out.println("Exiting customization loop...");
+                                }
+                                else {
+                                    MenuItem item = new Drink(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); //need change 
+                                    String customization = "";
+                                    cartManager.addItem(item, quantity, customization);
+                                    System.out.println("Item added to cart with the following customizations: " + customization);
+
+                                }
+                                
+                             
                             }
                         } else {
                             System.out.println("Invalid item number. Please try again.");
