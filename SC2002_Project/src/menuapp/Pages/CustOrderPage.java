@@ -195,13 +195,6 @@ public class CustOrderPage implements IPage{
             System.out.println("Order not found.");
         }
     }
-
-    public void displayOrders() {
-        List<Order> allOrders = orderManager.getAllOrders();
-        for (Order order : allOrders) {
-            System.out.println("Order ID: " + order.getOrderId() + ", Total: $" + order.getTotal() + ", Status: " + order.getStatus());        }
-    }
-
     // Make sure to include finalize or a method to close the scanner at the end of using this class
     public void closeScanner() {
         if (scanner != null) {

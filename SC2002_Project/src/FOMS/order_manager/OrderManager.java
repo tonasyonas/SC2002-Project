@@ -3,13 +3,15 @@ package FOMS.order_manager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.*;
 import FOMS.menu_manager.*;
 
 public class OrderManager {
     private Map<String, Order> orders = new HashMap<>();
     private static int nextOrderId = 1; // Static variable to keep track of the next order ID
-    private static final String ORDER_ID_FILE = "SC2002_Project/src/FOMS/order_manager/order.txt";
+    private static final String ORDER_ID_FILE = "SC2002_Project/src/FOMS/order_manager/orderid.txt";
     private Scanner scanner = new Scanner(System.in);
 
 
