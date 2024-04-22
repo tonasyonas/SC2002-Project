@@ -3,6 +3,7 @@ package menuapp.Pages;
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.account_manager.*;
+import FOMS.branch_manager.OpenCloseBranchPage;
 import FOMS.Pages.IPage;
 
 public class AdminPage implements IPage{
@@ -68,7 +69,6 @@ public class AdminPage implements IPage{
                     // Pass the filename and credentials map to EditStaffList method
                     transferStaff.EditStaffList(filename, credentialsMap);
                     break;
-                
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;

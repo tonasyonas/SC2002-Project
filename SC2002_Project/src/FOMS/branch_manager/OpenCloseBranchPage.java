@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class OpenCloseBranchPage {
 
-    public static void main(String[] args) {
+    public static void openclosebranch() {
         Scanner scanner = new Scanner(System.in);
       
 
@@ -18,9 +18,11 @@ public class OpenCloseBranchPage {
 
         switch (choice) {
             case 1:
-                OpenBranch open = new OpenBranch();
-                open.OpeningBranch();
-            c
+                OpenBranch.OpeningBranch();
+                break;
+            case 2:
+                CloseBranch.ClosingBranch();
+                break;
 
         }
        

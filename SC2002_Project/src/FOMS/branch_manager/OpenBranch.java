@@ -1,5 +1,14 @@
 package FOMS.branch_manager;
+
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 
 public class OpenBranch extends AOpenCloseBranch {
@@ -28,7 +37,14 @@ public class OpenBranch extends AOpenCloseBranch {
 
     // Override the abstract method from AOpenCloseBranch
     public void editOpenclose(String branchID, String branchName, int quota) {
-        // Call the writeToTextFile method from the abstract class
-        writeToTextFile("SC2002_Project/src/FOMS/branch_manager/branch_list.txt", branchID, branchName, quota);
+        // Read existing branch list
+        List<String> branchList = readBranchList("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
+
+        // Append the new branch entry
+        String newBranchEntry = branchID + ";" + branchName + ";" + quota;
+        branchList.add(newBranchEntry);
+
+        // Write the updated branch list to the text file
+        writeToTextFile("SC2002_Project/src/FOMS/branch_manager/branch_list.txt", branchList);
     }
 }
