@@ -25,6 +25,7 @@ public class AdminPage implements IPage{
             System.out.println("4. Remove Staff");
             System.out.println("5. Promote Staff");
             System.out.println("6. Transfer Staff");
+            System.out.println("7. Open/Close Branch"); 
             System.out.print("Enter your choice: ");
             // Check if the input is an integer
             while (!sc.hasNextInt()) {
@@ -69,13 +70,16 @@ public class AdminPage implements IPage{
                     // Pass the filename and credentials map to EditStaffList method
                     transferStaff.EditStaffList(filename, credentialsMap);
                     break;
+                case 7:
+                    // New case for opening or closing branches
+                    OpenCloseBranchPage.openclosebranch(sc);
+                    break;
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;
             }
         } while (choice != 0);
         
-        sc.close();
     }
     
     @Override
@@ -85,8 +89,8 @@ public class AdminPage implements IPage{
 
     @Override
     public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        String userType = scanner.nextLine().trim().toLowerCase();
+        Scanner sc = new Scanner(System.in);
+        String userType = sc.nextLine().trim().toLowerCase();
         return userType;
     }
 

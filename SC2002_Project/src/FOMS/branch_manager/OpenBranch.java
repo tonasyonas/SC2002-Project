@@ -13,9 +13,8 @@ import java.util.Scanner;
 
 public class OpenBranch extends AOpenCloseBranch {
 
-    public static void OpeningBranch() {
-        Scanner scanner = new Scanner(System.in);
-
+    public static void OpeningBranch(Scanner scanner) {
+        
         System.out.println("Please enter the details of the branch:");
 
         System.out.print("Branch ID: ");
@@ -32,7 +31,6 @@ public class OpenBranch extends AOpenCloseBranch {
         branchManager.editOpenclose(branchID, branchName, quota);
 
         System.out.println("Branch details have been saved successfully.");
-        scanner.close();
     }
 
     // Override the abstract method from AOpenCloseBranch
