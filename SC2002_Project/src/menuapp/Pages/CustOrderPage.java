@@ -150,7 +150,7 @@ public class CustOrderPage implements IPage{
     
     private void checkoutCart() {
         if (cartManager.isEmpty()) {
-            System.out.println("Your cart is empty.");
+            System.out.println("Your cart is empty. Please add items before checkout.");
             return;
         }
         cartManager.displayItems();
@@ -194,6 +194,12 @@ public class CustOrderPage implements IPage{
         } else {
             System.out.println("Order not found.");
         }
+    }
+
+    public void displayOrders() {
+        List<Order> allOrders = orderManager.getAllOrders();
+        for (Order order : allOrders) {
+            System.out.println("Order ID: " + order.getOrderId() + ", Total: $" + order.getTotal() + ", Status: " + order.getStatus());        }
     }
 
     // Make sure to include finalize or a method to close the scanner at the end of using this class

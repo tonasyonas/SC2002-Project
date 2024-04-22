@@ -10,7 +10,6 @@ public class CartManager {
 
     public void addItem(MenuItem item, int quantity) {
         items.merge(item, quantity, Integer::sum);
-        System.out.println("Item added to cart.");
     }
 
     public void removeItem(MenuItem item, int quantity) {
