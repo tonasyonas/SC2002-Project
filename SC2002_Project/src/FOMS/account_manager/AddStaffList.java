@@ -12,7 +12,7 @@ public class AddStaffList extends AStaffListEditor {
 
     public AddStaffList(Scanner scanner, Boolean first) {
         this.scanner = scanner;
-        this.first = true;
+        this.first = first;
     }
 
     @Override
@@ -54,14 +54,14 @@ public class AddStaffList extends AStaffListEditor {
 
         if (role.equals("S") && (first == true)){
             if (totalStaff == 5 || totalStaff == 10){
-                System.out.println("Does not meet qutoa ratio! Remove a staff");
-                Scanner RemoveStaffScanner = new Scanner(System.in);
-                RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner,false);
-                removeStaffList.EditStaffList(filename, credentials);
+                System.out.println("Does not meet qutoa ratio! Add a manager");
+                Scanner addStaffScanner1 = new Scanner(System.in);
+                AddStaffList addStaffList = new AddStaffList(addStaffScanner1, false);
+                addStaffList.EditStaffList(filename, credentials);
             }
         }
 
-        if (role.equals("M") && (first == true)){
+        else if (role.equals("M") && (first == true)){
             System.out.println("Does not meet qutoa ratio! Remove a manager");
             Scanner RemoveStaffScanner = new Scanner(System.in);
             RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner,false);
