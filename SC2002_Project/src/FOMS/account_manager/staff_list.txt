@@ -1,7 +1,7 @@
-kumar Blackmore;kumarB;S;M;32;NTU
-Alexei;Alexei;M;M;25;NTU
-Tom Chan;TomC;M;M;56;JP
-Alica Ang;AlicaA;M;F;27;JE
-Mary lee;MaryL;S;F;44;JE
-Justin Loh;JustinL;S;M;49;JP
-Boss;boss;A;F;62;
+Boss;boss;A;F;62;;InhvQxXdoLvg1kMPzK2kYQ==;u+466DEiqH57YC6lNUBtRIgQTZ4TpxPvOIqFXVeQl1Q=;true
+kumar Blackmore;kumarB;S;M;32;NTU;yLWJ3PgSWBhBS6U3WVkJUw==;71wUBL9uR/zn79dNvunVuvBGo6WvCzDiQXKnSW8XYlY=;true
+Justin Loh;JustinL;S;M;49;JP;fEQSOUuViZpEsfdfgOU6cQ==;0nmq0sAIBsRtX04xyayNK42uzHgzRTMLiGQhLbDfZG4=;true
+Tom Chan;TomC;M;M;56;JP;eFIkwwOYVoqaVQj+Pyr1rw==;49PAH6nOgoGOuyHehtWvi1eOqbGP1NCa0DkvKFFBYQk=;true
+Alica Ang;AlicaA;M;F;27;JE;SLK9MJaUFNjyhkXv7g7EaQ==;3+vhdRe9GV5WLpWTioUFwo6vuqDavcK3yTwlcMHS7zI=;true
+Mary lee;MaryL;S;F;44;JE;0GaC8LIOKdAA3I0GzaE3RA==;T7xJI0ym62XD1bNq9NH9IHMlc8abAeMpgOeu6Md1xrU=;true
+Alexei;Alexei;M;M;25;NTU;+sg48DyodiQDbFfIGhp3DQ==;Ybm1OH23hxMUo2sPE8Iky/Z5Zr+iVHU88ePfWabVopc=;true

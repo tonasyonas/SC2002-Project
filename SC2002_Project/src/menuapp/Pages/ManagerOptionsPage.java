@@ -11,7 +11,13 @@ import FOMS.Pages.IPage;
 
 public class ManagerOptionsPage implements IPage {
 
-    public ManagerOptionsPage() {
+    BranchManager branchmanager;
+    private Map<String, UserCredentials> staffCredentials;
+
+    public ManagerOptionsPage(BranchManager branchmanager) {
+        this.branchmanager = branchmanager;
+        this.staffCredentials = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
+
     }
 
     public void addMenuItem() {
@@ -40,7 +46,8 @@ public class ManagerOptionsPage implements IPage {
     }
 
     public void displayStaffList() {
-    //
+        DisplayManagerBranchStaff branchlist = new DisplayManagerBranchStaff(staffCredentials);
+        branchlist.displaystaffDetails(branchmanager);
     }
     
     @Override

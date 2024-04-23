@@ -2,8 +2,14 @@ package menuapp.Pages;
 
 import java.util.Scanner;
 import FOMS.Pages.IPage;
+import FOMS.FOMS_entity.*;
 
 public class BranchManagerOptionsPage implements IPage {
+    BranchManager branchManager;
+
+    public BranchManagerOptionsPage (BranchManager branchmanager){
+        this.branchManager = branchmanager;
+    }
 
     @Override
     public void startPage() {
@@ -21,7 +27,7 @@ public class BranchManagerOptionsPage implements IPage {
             switch (choice) {
                 case "1":
                     System.out.println("Manager Options selected.");
-                    ManagerOptionsPage managerOptionsPage = new ManagerOptionsPage();
+                    ManagerOptionsPage managerOptionsPage = new ManagerOptionsPage(branchManager);
                     managerOptionsPage.startPage();
                     break;
                 case "2":
@@ -49,5 +55,9 @@ public class BranchManagerOptionsPage implements IPage {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         return input.trim().toLowerCase();
+    }
+
+    public BranchManager getBranchManager(){
+        return branchManager;
     }
 }
