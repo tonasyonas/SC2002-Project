@@ -12,7 +12,7 @@ public class ConsoleMenuDisplay implements MenuDisplay {
         System.out.println("Menu Items for branch " + branchName + ": ");
         int i = 1;
         for (MenuItem item : menuItems.values()) {
-            System.out.printf("%d. Name: %-20s Price: $%.2f\n", i++, item.getItem(), item.getCost());
+            System.out.printf("%d. Name: %-20s Price: $%.2f %-20s Description: %s\n", i++, item.getItem(), item.getCost(), " ", item.getDescription());
         }
     }
 

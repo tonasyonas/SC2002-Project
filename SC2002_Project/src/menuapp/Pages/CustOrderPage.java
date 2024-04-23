@@ -22,6 +22,8 @@ public class CustOrderPage implements IPage{
         this.scanner = new Scanner(System.in);
         this.cartManager = new CartManager();
         this.orderManager = new OrderManager();
+        this.branchSelector = new ConsoleBranchSelector(scanner, getBranches());
+        this.viewMenu = new ViewMenu(new ConsoleMenuDisplay(), branchSelector, new MenuOrganizer(getMenuMap()));
         initializeDependencies();
     }
 
@@ -43,6 +45,24 @@ public class CustOrderPage implements IPage{
             return null;
         }
     }
+
+    private Map<String, MenuItem> getMenuMap() {
+        String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
+        return ReadMenu.readMenuItems(filename);
+    }
+
+    private String[] getBranches() {
+        List<Branch> branchlist = ReadBranchList.getBranchList("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
+        return AllBranch.getBranchIDs(branchlist);
+    }
+
+    private void refreshMenu() {
+        // Reload the menu items from the file every time the menu needs to be displayed
+        MenuOrganizer menuOrganizer = new MenuOrganizer(getMenuMap());
+        this.viewMenu = new ViewMenu(new ConsoleMenuDisplay(), branchSelector, menuOrganizer);
+    }
+
+
     
     @Override
     public void startPage() {
@@ -61,6 +81,7 @@ public class CustOrderPage implements IPage{
                     if (selectedBranch == null) {
                         selectedBranch = branchSelector.selectBranch();
                     }
+                    refreshMenu();
                     viewMenu.displayMenuForBranch(selectedBranch);
                     addItemsToCart();
                     break;

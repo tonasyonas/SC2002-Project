@@ -6,7 +6,7 @@ public class Burger extends MenuItem{
         super(item, cost, branch);
     }
 
-    public Burger(String item, double cost, String branch, boolean available) {
-        super(item, cost, branch, available);
+    public Burger(String item, double cost, String branch, boolean available, String description) {
+        super(item, cost, branch, available, description);
     }
 }

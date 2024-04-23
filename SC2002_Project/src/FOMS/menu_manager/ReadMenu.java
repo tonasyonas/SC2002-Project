@@ -22,26 +22,27 @@ public class ReadMenu {
                 }
     
                 String[] parts = line.split(";");
-                if (parts.length == 5) {
+                if (parts.length >=5 ) {
                     try {
                         String itemName = parts[0].trim();
                         double itemPrice = Double.parseDouble(parts[1].trim());
                         String itemBranch = parts[2].trim();
                         String itemType = parts[3].trim().toLowerCase();
                         boolean available = Boolean.parseBoolean(parts[4].trim());
+                        String description = (parts.length > 5) ? parts[5].trim() : "No description";
                         MenuItem item = null;
                         switch (itemType) {
                             case "burger":
-                                item = new Burger(itemName, itemPrice, itemBranch, available);
+                                item = new Burger(itemName, itemPrice, itemBranch, available, description);
                                 break;
                             case "drink":
-                                item = new Drink(itemName, itemPrice, itemBranch, available);
+                                item = new Drink(itemName, itemPrice, itemBranch, available, description);
                                 break;
                             case "set meal":
-                                item = new SetMeal(itemName, itemPrice, itemBranch, available);
+                                item = new SetMeal(itemName, itemPrice, itemBranch, available, description);
                                 break;
                             case "side":
-                                item = new Side(itemName, itemPrice, itemBranch, available);
+                                item = new Side(itemName, itemPrice, itemBranch, available, description);
                                 break;
                             default:
                                 System.err.println("Unknown item type '" + itemType + "'");

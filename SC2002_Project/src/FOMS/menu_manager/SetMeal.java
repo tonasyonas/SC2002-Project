@@ -5,7 +5,7 @@ public class SetMeal extends MenuItem {
     public SetMeal(String item, double cost, String branch) {
         super(item, cost, branch);
     }
-    public SetMeal(String item, double cost, String branch, boolean available) {
-        super(item, cost, branch, available);
+    public SetMeal(String item, double cost, String branch, boolean available, String description) {
+        super(item, cost, branch, available, description);
     }
 }
