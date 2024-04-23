@@ -12,3 +12,7 @@
 16;New;20.700000000000003;Dine-in;chicken nuggetx1@6.9,(no sauce),chicken nuggetx1@6.9,(sauce),chicken nuggetx1@6.9,(extra sauce)
 17;New;6.9;Takeaway;chicken nuggetx1@6.9,(vegetarian)
 18;New;3.2;Dine-in;FRIESx1@3.2,
+19;New;13.8;Dine-in;chicken nuggetx2@6.9,
+20;New;13.8;Takeaway;chicken nuggetx2@6.9,
+21;New;13.8;Takeaway;chicken nuggetx2@6.9,
+22;New;19.80;Takeaway;3PC set mealx2@9.90,

@@ -1,6 +1,6 @@
 package FOMS.order_manager;
 
-public class OnlinePaymentPlatform implements PaymentStrategy {
+public class OnlinePaymentPlatform implements IPaymentStrategy {
     @Override
     public void pay(double amount) {
         // Simulate online payment platform

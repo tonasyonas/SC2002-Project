@@ -1,7 +1,7 @@
 package FOMS.order_manager;
 
 
-public interface PaymentStrategy {
+public interface IPaymentStrategy {
     void pay(double amount);
     String getPaymentMethod();
 }

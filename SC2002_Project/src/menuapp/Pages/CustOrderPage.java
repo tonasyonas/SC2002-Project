@@ -1,5 +1,6 @@
 package menuapp.Pages;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
@@ -258,7 +259,7 @@ public class CustOrderPage implements IPage{
         }
         cartManager.displayItems();
         double total = cartManager.calculateTotal();
-        System.out.println("Total: $" + total);
+        System.out.printf("Total: $%.2f\n", total);
         return handlePayment(total);
     }
 
@@ -270,7 +271,7 @@ public class CustOrderPage implements IPage{
         int paymentChoice = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
-        PaymentStrategy paymentStrategy;
+        IPaymentStrategy paymentStrategy;
         switch (paymentChoice) {
             case 1:
                 paymentStrategy = new CreditCardPayment();

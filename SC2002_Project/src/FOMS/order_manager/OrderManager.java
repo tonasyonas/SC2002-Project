@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.io.*;
+import java.text.DecimalFormat;
+
 import FOMS.menu_manager.*;
 
 public class OrderManager {
@@ -91,33 +93,36 @@ public class OrderManager {
     }
 
     private String formatOrderDetails(Order order) {
+        DecimalFormat df = new DecimalFormat("#0.00");
+    
         StringBuilder sb = new StringBuilder();
         sb.append(order.getOrderId()).append(';')
           .append(order.getStatus()).append(';')
-          .append(order.getTotal()).append(';')
+          .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
           .append(order.getOrderType()).append(';');
-
+    
         for (OrderItem item : order.getOrderItems()) {
             sb.append(item.getMenuItem().getItem()).append('x')
               .append(item.getQuantity()).append('@')
-              .append(item.getMenuItem().getCost()).append(',');
-
-              if (!item.getCustomization().isEmpty()) {
+              .append(df.format(item.getMenuItem().getCost())).append(','); // Format cost to two decimal places
+    
+            if (!item.getCustomization().isEmpty()) {
                 sb.append('(').append(item.getCustomization()).append(')');
             }
             
             sb.append(',');
         }
-
-        
-
+    
         // Remove the last comma from the item list
         if (!order.getOrderItems().isEmpty()) {
             sb.setLength(sb.length() - 1);
         }
-
+    
         return sb.toString();
     }
+    
+
+   
     
     public Order getOrderById(String orderId) {
         // Logic to retrieve the Order object from wherever it's stored, e.g., a map or database

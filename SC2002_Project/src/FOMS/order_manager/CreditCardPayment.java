@@ -1,6 +1,6 @@
 package FOMS.order_manager;
 
-public class CreditCardPayment implements PaymentStrategy {
+public class CreditCardPayment implements IPaymentStrategy {
     @Override
     public void pay(double amount) {
         // Simulate credit card payment

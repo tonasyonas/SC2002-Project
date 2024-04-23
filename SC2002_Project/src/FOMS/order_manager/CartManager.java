@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.text.DecimalFormat;
 
 
 public class CartManager {
@@ -49,13 +50,20 @@ public class CartManager {
     
     
 
+
     public double calculateTotal() {
         double total = 0.0;
         for (OrderItem item : cartItems.values()) {
             total += item.getMenuItem().getCost() * item.getQuantity();
         }
+        
+        // Round the total to two decimal places
+        DecimalFormat df = new DecimalFormat("#.##");
+        total = Double.parseDouble(df.format(total));
+        
         return total;
     }
+    
     
 
     public boolean isEmpty() {
