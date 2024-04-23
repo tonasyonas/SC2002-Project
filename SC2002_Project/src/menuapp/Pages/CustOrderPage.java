@@ -264,7 +264,7 @@ public class CustOrderPage implements IPage{
     }
 
     private boolean handlePayment(double total) {
-        System.out.println("Payment method: ");
+        System.out.println("Payment methods: ");
         GetPaymentMethods.displayPaymentMethods();
         System.out.print("Choose your payment method: ");
         int paymentChoice = scanner.nextInt();
