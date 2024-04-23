@@ -4,6 +4,7 @@ import java.util.Map;
 // import java.util.Map.Entry;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 
 public class ViewMenu {
@@ -45,5 +46,21 @@ public class ViewMenu {
         return null;
     }
     
+    public void displayAvailableMenuForBranch(String selectedBranch) {
+        Map<String, MenuItem> fullMenu = menuOrganizer.getMenuForBranch(selectedBranch);
+        if (fullMenu != null) {
+            // Filter the menu to include only available items
+            Map<String, MenuItem> availableMenu = fullMenu.entrySet().stream()
+                .filter(entry -> entry.getValue().isAvailable())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
+            if (!availableMenu.isEmpty()) {
+                menuDisplay.displayMenu(selectedBranch, availableMenu);
+            } else {
+                System.out.println("No available menu items for this branch.");
+            }
+        } else {
+            System.out.println("No menu available for this branch.");
+        }
+    }
 }
