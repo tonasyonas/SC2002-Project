@@ -38,16 +38,13 @@ public class StaffLoginPage implements IPage {
             do {
                 System.out.print("Enter your password: ");
                 password = scanner.nextLine();
-                if (loginController.login(loginID, password, scanner)) { // Use the new login method
+                if (loginController.login(loginID, password, scanner)) {
                     System.out.println("Login successful. Welcome, " + loginID + "!");
-                    // Check if password needs to be reset
-                    if (credentials.getNeedsPasswordReset()) {
                         System.out.println("Would you like to change your password now? (yes/no)");
                         String response = scanner.nextLine().trim();
                         if ("yes".equalsIgnoreCase(response)) {
-                            loginController.promptPasswordChange(scanner, loginID); // Use the new promptPasswordChange method
+                            loginController.promptPasswordChange(scanner, loginID); 
                         }
-                    }
                     break; // Exit the loop after successful login
                 } else {
                     System.out.println("Login failed. Incorrect login ID or password.");
