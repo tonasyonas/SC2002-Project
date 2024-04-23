@@ -269,19 +269,8 @@ public class CustOrderPage implements IPage{
         System.out.print("Choose your payment method: ");
         int paymentChoice = scanner.nextInt();
         scanner.nextLine(); // consume newline
-
-        IPaymentStrategy paymentStrategy;
-        switch (paymentChoice) {
-            case 1:
-                paymentStrategy = new CreditCardPayment();
-                break;
-            case 2:
-                paymentStrategy = new OnlinePaymentPlatform();
-                break;
-            default:
-                System.out.println("Invalid payment method selected.");
-                return false;
-        }
+        System.out.print("Selected payment method: ");
+        GetPaymentMethods.displayPaymentMethod(paymentChoice);
 
         System.out.println("Enter payment amount: ");
         double payment = scanner.nextDouble();
@@ -292,7 +281,8 @@ public class CustOrderPage implements IPage{
             return false;
         }
 
-        System.out.println("Payment successful using " + paymentStrategy.getPaymentMethod() + "!");
+        System.out.print("Payment successful using ");
+        GetPaymentMethods.displayPaymentMethod(paymentChoice);
         return true;
     }
 
