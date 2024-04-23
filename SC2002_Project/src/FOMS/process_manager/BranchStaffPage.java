@@ -10,12 +10,16 @@ public class BranchStaffPage {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
+        String branch = "BranchName"; // This should be dynamically retrieved based on the logged-in staff.
+
 
         while (!exit) {
             System.out.println("1. Display Orders");
             System.out.println("2. Processs Orders");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the leftover newline.
+
 
             switch (choice) {
                 case 1:
