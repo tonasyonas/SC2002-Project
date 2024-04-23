@@ -11,13 +11,24 @@ import FOMS.Pages.IPage;
 public class StaffLoginPage implements IPage {
 
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
-    private Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+    private LoginController loginController;
+    private Map<String, UserCredentials> staffCredentials; // Declaration of LoginController
+
+    public StaffLoginPage() {
+        loginController = new LoginController(); 
+        loginController.initializeSystem();
+        staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+
+    }
+
 
     @Override
     public void startPage() {
         display();
         String loginID = getInput();
         UserCredentials credentials = staffCredentials.get(loginID);
+        System.out.println(loginID);
+        System.out.println(credentials);
 
         Scanner scanner = new Scanner(System.in);
         if (credentials != null) {
@@ -30,11 +41,12 @@ public class StaffLoginPage implements IPage {
                     System.out.println("Login successful. Welcome, " + loginID + "!");
                     // Check if password needs to be reset
                     if (credentials.getNeedsPasswordReset()) {
-                        System.out.println("Would you like to change your password now? (yes/no)");
+                        System.out.println("It is your first login, Would you like to change your password now? (yes/no)");
                         String response = scanner.nextLine().trim();
                         if ("yes".equalsIgnoreCase(response)) {
                             LoginController.promptPasswordChange(scanner, loginID, staffCredentials);
                         }
+                        
                     }
                     break; // Exit the loop after successful login
                 } else {
@@ -80,7 +92,7 @@ public class StaffLoginPage implements IPage {
     @Override
     public String getInput() {
         Scanner scanner = new Scanner(System.in);
-        String userType = scanner.nextLine().trim().toLowerCase();
+        String userType = scanner.nextLine();
         return userType;
     }
 

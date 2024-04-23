@@ -13,7 +13,7 @@ public class App {
         System.out.println(" |_|    \\____/|_|  |_|_____/ ");        
         System.out.println("\n================== Welcome to FOMS! ==================");
 
-        Restaurant myRestaurant = new Restaurant();
+        //Restaurant myRestaurant = new Restaurant();
         StartUpPage startUpPage = new StartUpPage();
         startUpPage.startPage();
         

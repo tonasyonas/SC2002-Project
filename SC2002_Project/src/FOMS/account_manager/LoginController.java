@@ -57,9 +57,7 @@ public class LoginController {
     }
 
     private void initializeStaffPasswords() {
-        // Assuming here that we have a method to create initial credentials
-        // If you are starting from scratch, you would create these from a predefined list
-        this.staffCredentials = ReadStaffList.getRawStaffCredentials(FILE_NAME); // Adjust as per previous advice if necessary
+        this.staffCredentials = ReadStaffList.getRawStaffCredentials(FILE_NAME); 
         for (Map.Entry<String, UserCredentials> entry : this.staffCredentials.entrySet()) {
             String salt = PasswordUtils.getSalt();
             String hashedPassword = PasswordUtils.hashPassword("password", salt);
@@ -69,6 +67,12 @@ public class LoginController {
             credentials.needsPasswordReset = true;
         }
         saveCredentialsToFile(this.staffCredentials);
+    }
+    public void initializeSystem() {
+        if (!isInitialized()) {
+            initializeStaffPasswords();
+            setInitialized();
+        }
     }
 
     public static boolean login(Map<String, UserCredentials> credentialsMap, String loginID, String password, Scanner scanner) {
