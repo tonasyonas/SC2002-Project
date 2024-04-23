@@ -1,76 +1,85 @@
 package FOMS.process_manager;
 
+import FOMS.order_manager.Order;
+import FOMS.order_manager.OrderItem;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
-import FOMS.order_manager.Order;
-import FOMS.order_manager.OrderItem;
+import java.util.concurrent.*;
 
 public class ProcessOrder {
 
-    public static List<Order> processOrderID(String orderIdToFind, String status) {
-        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt";
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10); // Configure pool size as needed
+
+    public static List<Order> processOrderID(String orderIdToFind, String status, String filename) {
         try {
             List<Order> ordersList = ReadOrderList.readOrdersFromFile(filename);
             for (Order order : ordersList) {
                 if (order.getOrderId().equals(orderIdToFind)) {
-                    order.setStatus(status); 
+                    order.setStatus(status);
+                    if ("Ready for Pickup".equals(status)) {
+                        scheduleOrderTimeout(order, 5, ordersList, filename); // Schedule to mark as 'Cancelled' after 5 minutes
+                    }
                     saveOrderListToFile(ordersList, filename); // Save the updated order list to file
-                    return ordersList; // Found the order with the specified ID
+                    return ordersList;
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception as needed
+            e.printStackTrace();
         }
-        return null; // Order with the specified ID not found
+        return null;
     }
 
-    private static void saveOrderListToFile(List<Order> ordersList, String filename) {
+    private static void scheduleOrderTimeout(Order order, long delayMinutes, List<Order> ordersList, String filename) {
+        ScheduledFuture<?> timeoutHandle = scheduler.schedule(() -> {
+            order.setStatus("Cancelled");
+            System.out.println("Order " + order.getOrderId() + " cancelled due to non-pickup.");
+            try {
+                saveOrderListToFile(ordersList, filename); // Save changes to file
+            } catch (IOException e) {
+                System.err.println("Failed to save order update to file: " + e.getMessage());
+            }
+        }, delayMinutes, TimeUnit.MINUTES);
+
+        
+
+    private static void saveOrderListToFile(List<Order> ordersList, String filename) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Order order : ordersList) {
                 String orderDetails = formatOrderDetails(order);
                 writer.write(orderDetails);
-                writer.newLine(); // To ensure each order is on a new line.
+                writer.newLine();
             }
             System.out.println("Order list saved successfully to " + filename);
-        } catch (IOException e) {
-            System.err.println("Failed to save order list to file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     private static String formatOrderDetails(Order order) {
         DecimalFormat df = new DecimalFormat("#0.00");
-    
+
         StringBuilder sb = new StringBuilder();
         sb.append(order.getOrderId()).append(';')
-                .append(order.getStatus()).append(';')
-                .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
-                .append(order.getOrderType()).append(';')
-                .append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
-    
-        for (OrderItem item : order.getOrderItems()) {
-            String food = item.getMenuItem().getItem();
-            int quantity = item.getQuantity();
-            double price = item.getMenuItem().getCost();
-            String customizations = item.getCustomization();
-    
-            // Append food, quantity, price, and customizations
-            sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
-            if (customizations != null && !customizations.isEmpty()) { // Check if customizations is not null
-                sb.append(customizations);
+          .append(order.getStatus()).append(';')
+          .append(df.format(order.getTotal())).append(';')
+          .append(order.getOrderType()).append(';');
+
+        if (order.getOrderItems() != null && !order.getOrderItems().isEmpty()) {
+            sb.append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
+            for (OrderItem item : order.getOrderItems()) {
+                sb.append(item.getMenuItem().getItem()).append(", ")
+                  .append(item.getQuantity()).append(", ")
+                  .append(df.format(item.getMenuItem().getCost()));
+                if (item.getCustomization() != null && !item.getCustomization().isEmpty()) {
+                    sb.append(", ").append(item.getCustomization());
+                }
+                sb.append("; ");
             }
-            sb.append("; ");
-        }
-    
-        // Remove the last semicolon and space from the item list
-        if (!order.getOrderItems().isEmpty()) {
+            // Remove the last semicolon and space
             sb.setLength(sb.length() - 2);
         }
-    
         return sb.toString();
     }
-    
 }

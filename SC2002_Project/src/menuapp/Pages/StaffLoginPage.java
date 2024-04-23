@@ -2,7 +2,11 @@ package menuapp.Pages;
 
 import FOMS.account_manager.*;
 import FOMS.branch_manager.*;
+import FOMS.order_manager.Order;
 import FOMS.process_manager.*;
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.FOMS_entity.*;
@@ -60,9 +64,20 @@ public class StaffLoginPage implements IPage {
                     break;
                 case "S":
                     BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
-                    // Proceed with branch staff actions
-                    BranchStaffPage.startBranchStaffPage(credentials.getBranch()); // Modified call
+                    // Retrieve orders for the branch
+                    try {
+                        // Assuming that ReadOrderList.readOrdersFromFile(String) is accessible and properly handles reading orders from a file
+                        List<Order> orders = ReadOrderList.readOrdersFromFile("SC2002_Project/src/FOMS/order_manager/order.txt"); // Ensure the file path matches your system's structure
+                
+                        // Proceed with branch staff actions, now passing the list of orders along with the branch
+                        BranchStaffPage.startBranchStaffPage(credentials.getBranch(), orders);
+                    } catch (IOException e) {
+                        System.err.println("Failed to load orders: " + e.getMessage());
+                        // Handle the exception more gracefully or log it. Consider what should happen in this error case.
+                        // Should the user be notified? Should there be a retry mechanism?
+                    }
                     break;
+                
                 case "M":
                     BranchManager bmanagement = new BranchManager(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     BranchManagerOptionsPage bmoptionspage = new BranchManagerOptionsPage(bmanagement);
