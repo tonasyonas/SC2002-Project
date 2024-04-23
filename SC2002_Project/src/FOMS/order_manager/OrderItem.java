@@ -1,6 +1,8 @@
 package FOMS.order_manager;
 import FOMS.menu_manager.*;
 
+import java.util.Objects;
+
 public class OrderItem {
     private MenuItem menuItem;
     private int quantity;
@@ -46,6 +48,20 @@ public class OrderItem {
 
     public void setCustomization(String customization) {
         this.customization = customization;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        OrderItem that = (OrderItem) obj;
+        return Objects.equals(getMenuItem(), that.getMenuItem()) &&
+               Objects.equals(getCustomization(), that.getCustomization());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMenuItem(), getCustomization());
     }
 
 

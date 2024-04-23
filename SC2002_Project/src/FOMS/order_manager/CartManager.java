@@ -5,96 +5,100 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 
 public class CartManager {
-    private List<OrderItem> items = new ArrayList<>();
+    private Map<String, OrderItem> cartItems = new LinkedHashMap<>();
 
     // Method to add an item to the cart with possible customizations
     public void addItem(MenuItem item, int quantity, String customization) {
-        for (OrderItem orderItem : items) {
-            if (orderItem.getMenuItem().equals(item) && orderItem.getCustomization().equals(customization)) {
-                orderItem.setQuantity(orderItem.getQuantity() + quantity);
-                return;
-            }
+        // Create a unique key based on item name and customization
+        String key = item.getItem() + "-" + customization.toLowerCase();
+
+        if (cartItems.containsKey(key)) {
+            OrderItem existingItem = cartItems.get(key);
+            existingItem.setQuantity(existingItem.getQuantity() + quantity);
+        } else {
+            cartItems.put(key, new OrderItem(item, quantity, customization));
         }
-        items.add(new OrderItem(item, quantity, customization));
     }
 
 
-    public void removeItem(MenuItem item) {
-        items.removeIf(orderItem -> orderItem.getMenuItem().equals(item));
+    public void removeItem(MenuItem item, String customization) {
+        String key = item.getItem() + "-" + customization.toLowerCase();
+        cartItems.remove(key);
     }
+    
 
     public void clearCart() {
-        items.clear();
+        cartItems.clear();
         System.out.println("Cart cleared.");
     }
 
     public void displayItems() {
-        if (items.isEmpty()) {
+        if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty.");
         } else {
-            for (OrderItem item : items) {
-                System.out.println(item.getMenuItem().getItem() + " x " + item.getQuantity() + " Customization: " + item.getCustomization()); // Include customization details
+            int itemNumber = 1;
+            for (OrderItem item : cartItems.values()) {
+                System.out.println(itemNumber++ + ". " + item.getMenuItem().getItem() + 
+                                   " - Quantity: " + item.getQuantity() + 
+                                   " - Customization: " + item.getCustomization());
             }
         }
     }
-    
 
     public double calculateTotal() {
         double total = 0.0;
-        for (OrderItem item : items) {
+        for (OrderItem item : cartItems.values()) {
             total += item.getMenuItem().getCost() * item.getQuantity();
         }
         return total;
     }
+    
 
     public boolean isEmpty() {
-        return items.isEmpty();
+        return cartItems.isEmpty();
     }
+    
 
     // Method to get a copy of the items in the cart
-    public Map<MenuItem, Integer> getItems() {
-        Map<MenuItem, Integer> cartItems = new HashMap<>();
-        for (OrderItem orderItem : items) {
-            cartItems.put(orderItem.getMenuItem(), orderItem.getQuantity());
+    public Map<OrderItem, Integer> getItems() {
+        Map<OrderItem, Integer> itemsWithQuantities = new LinkedHashMap<>();
+        for (OrderItem orderItem : cartItems.values()) {
+            itemsWithQuantities.put(orderItem, orderItem.getQuantity());
         }
-        return cartItems;
+        return itemsWithQuantities;
     }
+
 
 
     // Method to update the quantity of an item, identified by MenuItem and customization
-    public void updateItemQuantity(MenuItem item, int newQuantity, String newCustomization) {
-        // Find the order item that matches the menu item, regardless of its current customization
-        OrderItem orderItemToUpdate = null;
-        for (OrderItem orderItem : items) {
-            if (orderItem.getMenuItem().equals(item)) {
-                orderItemToUpdate = orderItem;
-                break;
-            }
-        }
-    
-        if (orderItemToUpdate != null) {
-            // If we found an item and the new quantity is not zero, update quantity and customization
-            if (newQuantity > 0) {
-                orderItemToUpdate.setQuantity(newQuantity);
-                orderItemToUpdate.setCustomization(newCustomization);
-                System.out.println("Item quantity and customization updated.");
-            } else {
-                // If the quantity is 0, remove the item
-                items.remove(orderItemToUpdate);
-                System.out.println("Item removed from cart.");
-            }
+    public void updateItemQuantity(MenuItem item, int newQuantity, String customization) {
+        String key = item.getItem() + "-" + customization.toLowerCase();
+        OrderItem orderItem = cartItems.get(key);
+
+        if (orderItem != null && newQuantity > 0) {
+            orderItem.setQuantity(newQuantity);
+            // Assuming setCustomization is a method within OrderItem that updates customization
+            orderItem.setCustomization(customization);
+            System.out.println("Item quantity and customization updated.");
+        } else if (orderItem != null && newQuantity <= 0) {
+            cartItems.remove(key);
+            System.out.println("Item removed from cart.");
         } else {
-            // If no matching item was found
             System.out.println("Item not found in the cart.");
         }
     }
     
 
     public String getCustomizations(MenuItem item) {
-        return item.getCustomizations(); // Call getCustomizations() method of MenuItem
-    }
-
-
+        for (OrderItem orderItem : cartItems.values()) {
+            if (orderItem.getMenuItem().equals(item)) {
+                return orderItem.getCustomization();
+            }
+        }
+        return ""; // Return empty string if no customizations are found.
+    }    
 }

@@ -126,7 +126,7 @@ public class CustOrderPage implements IPage{
                     for (int i = 0; i < quantity; i++) {
                         System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedItem.getItem(), i+1);
                         String customization = scanner.nextLine().trim();
-                        MenuItem item = new Drink(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch());
+                        MenuItem item = new MenuItem(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch());
                         item.setCustomizations(customization);
                         cartManager.addItem(item, 1, customization);
                         System.out.println("Item added to cart with the following customizations: " + customization);
@@ -134,7 +134,7 @@ public class CustOrderPage implements IPage{
                     System.out.println("Exiting customization loop...");
                 }
                 else {
-                    MenuItem item = new Drink(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch()); //need change 
+                    MenuItem item = new MenuItem(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch()); //need change 
                     String customization = "";
                     cartManager.addItem(item, quantity, customization);
                     System.out.println("Item added to cart with the following customizations: " + customization);
@@ -155,20 +155,20 @@ public class CustOrderPage implements IPage{
 
 
     private void modifyCart() {
-         // Initialize item number
-    
         while (true) {
             int itemNumber = 1;
             // Display cart items with item numbers and customizations
             System.out.println("Cart Items:");
-            for (Map.Entry<MenuItem, Integer> entry : cartManager.getItems().entrySet()) {
-                MenuItem item = entry.getKey();
+            for (Map.Entry<OrderItem, Integer> entry : cartManager.getItems().entrySet()) {
+                OrderItem orderItem = entry.getKey();
+                MenuItem item = orderItem.getMenuItem();
                 int quantity = entry.getValue();
-                String customizations = item.getCustomizations(); // Retrieve customizations directly from MenuItem
-                String displayCustomization = customizations.isEmpty() ? "No customization" : customizations.toString();
+                String customizations = orderItem.getCustomization(); // Customization is now part of OrderItem
+                String displayCustomization = customizations.isEmpty() ? "No customization" : customizations;
                 System.out.println(itemNumber + ". " + item.getItem() + " - Quantity: " + quantity + " - Customization: " + displayCustomization);
                 itemNumber++; // Increment item number
             }
+    
             
             
     
@@ -188,13 +188,15 @@ public class CustOrderPage implements IPage{
                         int selectedNumber = Integer.parseInt(input);
                         if (selectedNumber >= 1 && selectedNumber <= cartManager.getItems().size()) {
                             // Get the selected item based on item number
-                            MenuItem[] itemsArray = cartManager.getItems().keySet().toArray(new MenuItem[0]);
-                            MenuItem selectedMenuItem = itemsArray[selectedNumber - 1];
+                            OrderItem[] orderItemsArray = cartManager.getItems().keySet().toArray(new OrderItem[0]);
+                            OrderItem selectedOrderItem = orderItemsArray[selectedNumber - 1];
+                            MenuItem selectedMenuItem = selectedOrderItem.getMenuItem();
+
     
                             // Prompt for new quantity
                             System.out.print("Enter new quantity (0 to remove): ");
                             int quantity = Integer.parseInt(scanner.nextLine());
-                            cartManager.removeItem(selectedMenuItem);
+                            cartManager.removeItem(selectedMenuItem, selectedOrderItem.getCustomization());
                             if (quantity > 0) {
                                 System.out.println("Yes or No: Do you want any customisations");
                                 String boolCustomisation = scanner.nextLine().trim();
@@ -204,7 +206,7 @@ public class CustOrderPage implements IPage{
                                     for (int i = 0; i < quantity; i++) {
                                         System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedMenuItem.getItem(), i+1);
                                         String customization = scanner.nextLine().trim();
-                                        MenuItem item = new Drink(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch());
+                                        MenuItem item = new MenuItem(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch());
                                         item.setCustomizations(customization);
                                         cartManager.addItem(item, 1, customization);
                                         System.out.println("Item added to cart with the following customizations: " + customization);
@@ -212,7 +214,7 @@ public class CustOrderPage implements IPage{
                                     System.out.println("Exiting customization loop...");
                                 }
                                 else {
-                                    MenuItem item = new Drink(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); //need change 
+                                    MenuItem item = new MenuItem(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); //need change 
                                     String customization = "";
                                     cartManager.addItem(item, quantity, customization);
                                     System.out.println("Item added to cart with the following customizations: " + customization);

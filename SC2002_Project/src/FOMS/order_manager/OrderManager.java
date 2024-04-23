@@ -24,22 +24,25 @@ public class OrderManager {
             System.out.println("Cannot place an empty order.");
             return null;
         }
+
         String orderId = String.valueOf(nextOrderId++);
         Order newOrder = new Order(orderId);
-        Map<MenuItem, Integer> cartItems = cartManager.getItems();
-        cartItems.forEach((item, quantity) -> {
-            // Here, we should also get the customizations for each item
-            String customization = cartManager.getCustomizations(item); // Make sure this method exists in your CartManager and returns a non-null string
-            OrderItem orderItem = new OrderItem(item, quantity, customization);
-            newOrder.addItem(orderItem);
-        });
+        newOrder.setOrderType(orderType); // Set the order type
+
+
+        // Adjusted to work with the new Map structure in CartManager
+        for (OrderItem orderItem : cartManager.getItems().keySet()) {
+            // You can directly add the OrderItem as it now includes both the MenuItem and customization
+            newOrder.addItem(new OrderItem(orderItem.getMenuItem(), orderItem.getQuantity(), orderItem.getCustomization()));
+        }
         newOrder.setStatus(OrderStatus.NEW.toString());
         orders.put(orderId, newOrder);
         cartManager.clearCart();
         saveNextOrderId(); // Save the next order ID for persistence
-    
+
         return orderId;
     }
+
     
     
     
@@ -91,7 +94,8 @@ public class OrderManager {
         StringBuilder sb = new StringBuilder();
         sb.append(order.getOrderId()).append(';')
           .append(order.getStatus()).append(';')
-          .append(order.getTotal()).append(';');
+          .append(order.getTotal()).append(';')
+          .append(order.getOrderType()).append(';');
 
         for (OrderItem item : order.getOrderItems()) {
             sb.append(item.getMenuItem().getItem()).append('x')
@@ -119,7 +123,5 @@ public class OrderManager {
         // Logic to retrieve the Order object from wherever it's stored, e.g., a map or database
         return orders.get(orderId);
     }
-    
-
 
 }

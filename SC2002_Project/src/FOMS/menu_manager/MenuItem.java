@@ -3,7 +3,7 @@ package FOMS.menu_manager;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MenuItem {
+public class MenuItem {
     private String item;
     private double cost;
     private String branch; // Attribute to store branch information

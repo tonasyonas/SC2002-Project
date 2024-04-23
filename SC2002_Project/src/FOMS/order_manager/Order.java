@@ -8,6 +8,7 @@ public class Order {
     private String orderId;
     private double total;
     private String status; // Possible values: "New", "Ready to Pickup", "Completed"
+    private String orderType;
 
     // Constructor
     public Order(String orderId) {
@@ -54,5 +55,15 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    // Method to get the order type
+    public String getOrderType() {
+        return orderType;
+    }
+
 }
 
