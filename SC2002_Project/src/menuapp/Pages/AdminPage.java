@@ -90,7 +90,7 @@ public class AdminPage implements IPage{
     
     @Override
     public void display() {
-        System.out.println("Welcome, admin!");
+        System.out.println("Welcome, Admin!");
     }
 
     @Override

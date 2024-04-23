@@ -5,10 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import FOMS.FOMS_entity.*;
-// import FOMS.FOMS_entity.FOMS.FOMS_entity.Admin;
 import FOMS.menu_manager.*;
+// import FOMS.FOMS_entity.FOMS.FOMS_entity.Admin;
 
 public class Restaurant {
     private static final String BRANCH_FILE = "SC2002_Project/src/FOMS/branch_manager/branch_list.txt";
