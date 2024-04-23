@@ -7,11 +7,6 @@ import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 import FOMS.branch_manager.*;
 import FOMS.order_manager.*;
-// import java.text.DecimalFormat;
-// import java.util.HashMap;
-// import java.util.ArrayList;
-// import FOMS.order_manager.CreditCardPayment;
-// import FOMS.order_manager.OnlinePaymentPlatform;
 
 public class CustOrderPage implements IPage{
     private Scanner scanner;
@@ -20,6 +15,7 @@ public class CustOrderPage implements IPage{
     private OrderManager orderManager;  // handle order operations
     private BranchSelector branchSelector; // declare at class level
     private String selectedBranch; // New member to store the selected branch
+    private String orderType; // to hold the order type across different parts of the process
 
     public CustOrderPage() {
         this.scanner = new Scanner(System.in);
@@ -59,12 +55,11 @@ public class CustOrderPage implements IPage{
                 System.out.print("Your choice: ");
                 continue; // Skip the rest of the loop iteration
             }
-            if (choice == 1 && selectedBranch == null) {
-                // Initial branch selection
-                selectedBranch = branchSelector.selectBranch();
-            }
             switch (choice) {
                 case 1:
+                    if (selectedBranch == null) {
+                        selectedBranch = branchSelector.selectBranch();
+                    }
                     viewMenu.displayMenuForBranch(selectedBranch);
                     addItemsToCart();
                     break;
@@ -72,9 +67,9 @@ public class CustOrderPage implements IPage{
                     modifyCart();
                     break;
                 case 3:
-                    if(checkoutCart()){
-                        finalizeOrder();
-                    };
+                    if (checkoutCart()) { // This will now also set the orderType
+                        finalizeOrder(this.orderType); // Pass the order type stored in the instance variable
+                    }
                     break;
                 case 4:
                     checkOrderStatus();
@@ -96,6 +91,7 @@ public class CustOrderPage implements IPage{
             }
         } while (true);
     }
+
 
 
     @Override
@@ -261,20 +257,18 @@ public class CustOrderPage implements IPage{
             System.out.println("Your cart is empty. Please add items before checkout.");
             return false;
         }
-        String orderType = getOrderTypeFromUser();
-
+        // Prompt for order type before initiating payment
+        this.orderType = getOrderTypeFromUser(); // Store order type in the instance variable
         cartManager.displayItems();
         double total = cartManager.calculateTotal();
         System.out.printf("Total: $%.2f\n", total);
+        
+        // Handle payment
         boolean paymentSuccessful = handlePayment(total);
-
-    // If payment is successful, finalize the order
-        if (paymentSuccessful) {
-            finalizeOrder(); // Pass the order type to finalizeOrder method
-        }
-
         return paymentSuccessful;
     }
+
+    
 
     private boolean handlePayment(double total) {
         System.out.println("Payment methods: ");
@@ -300,8 +294,7 @@ public class CustOrderPage implements IPage{
     }
 
 
-    private void finalizeOrder() {
-        String orderType = getOrderTypeFromUser();
+    private void finalizeOrder(String orderType) {
         String orderId = orderManager.placeOrder(cartManager, orderType);
         if (orderId != null) {
             Order order = orderManager.getOrderById(orderId);
@@ -315,6 +308,7 @@ public class CustOrderPage implements IPage{
             System.out.println("There was an error placing your order.");
         }
     }
+    
     private String getOrderTypeFromUser() {
         System.out.println("Select order type:");
         System.out.println("1 - Takeaway");
@@ -322,16 +316,15 @@ public class CustOrderPage implements IPage{
         System.out.print("Your choice: ");
         String input = scanner.nextLine().trim();
         Integer choice = tryParseInt(input);
-
+    
         if (choice != null) {
             return (choice == 1) ? "Takeaway" : "Dine-in";
         } else {
             System.out.println("Invalid input. Please enter 1 for Takeaway or 2 for Dine-in.");
-            return getOrderTypeFromUser(); // Recursive call to re-prompt the user
+            return getOrderTypeFromUser();  // Recursive call to re-prompt the user
+        }
     }
-
-    }
-
+    
 
 
     private void checkOrderStatus() {

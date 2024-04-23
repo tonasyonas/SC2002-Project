@@ -2,6 +2,7 @@ package FOMS.order_manager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class Order {
     private List<OrderItem> orderItems;
@@ -9,6 +10,7 @@ public class Order {
     private double total;
     private String status; // Possible values: "New", "Ready to Pickup", "Completed"
     private String orderType;
+    private LocalDateTime readyTime;
 
     // Constructor
     public Order(String orderId, String status, double total, String orderType, List<OrderItem> orderItems ) {
@@ -18,6 +20,7 @@ public class Order {
         this. orderType = orderType;
         this.orderItems = orderItems;
         this.total=total;
+        setStatus(status);
     }
 
     public Order(String orderId) {
@@ -60,11 +63,7 @@ public class Order {
         return status;
     }
 
-    // Setter for status
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
+    
     public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
@@ -74,6 +73,15 @@ public class Order {
         return orderType;
     }
 
- 
+    public void setStatus(String status) {
+        if ("Ready to Pickup".equals(status) && !"Ready to Pickup".equals(this.status)) {
+            this.readyTime = LocalDateTime.now(); // Set the timestamp when order becomes ready
+        }
+        this.status = status;
+    }
+
+    public LocalDateTime getReadyTime() {
+        return this.readyTime;
+    }
 }
 

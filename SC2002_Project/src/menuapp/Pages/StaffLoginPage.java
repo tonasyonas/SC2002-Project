@@ -64,10 +64,11 @@ public class StaffLoginPage implements IPage {
                     BranchStaffPage.startBranchStaffPage(credentials.getBranch()); // Modified call
                     break;
                 case "M":
-                    System.out.println("Welcome");
                     BranchManager bmanagement = new BranchManager(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     DisplayManagerBranchStaff branchlist = new DisplayManagerBranchStaff(staffCredentials);
                     branchlist.displaystaffDetails(bmanagement);
+                    BranchManagerOptionsPage bmoptionspage = new BranchManagerOptionsPage();
+                    bmoptionspage.startPage();
                     // Proceed with branch manager actions
                     break;
                 default:
