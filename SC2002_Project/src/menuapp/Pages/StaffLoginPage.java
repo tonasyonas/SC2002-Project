@@ -12,15 +12,18 @@ public class StaffLoginPage implements IPage {
 
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
     private LoginController loginController;
-    private Map<String, UserCredentials> staffCredentials; // Declaration of LoginController
+    private Map<String, UserCredentials> staffCredentials;
 
     public StaffLoginPage() {
-        loginController = new LoginController(); 
-        loginController.initializeSystem();
-        staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
-
+        if (!InitializationHandler.isInitialized()) { 
+            InitializationHandler handler = new InitializationHandler();
+            handler.initializeStaffPasswords();
+            InitializationHandler.setInitialized();
+        }
+        // Now that initialization is done, retrieve the staff credentials
+        this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+        this.loginController = new LoginController(new SimplePasswordManager());
     }
-
 
     @Override
     public void startPage() {
@@ -35,32 +38,30 @@ public class StaffLoginPage implements IPage {
             do {
                 System.out.print("Enter your password: ");
                 password = scanner.nextLine();
-                if (LoginController.login(staffCredentials, loginID, password, scanner)) {
+                if (loginController.login(loginID, password, scanner)) { // Use the new login method
                     System.out.println("Login successful. Welcome, " + loginID + "!");
                     // Check if password needs to be reset
                     if (credentials.getNeedsPasswordReset()) {
-                        System.out.println("It is your first login, Would you like to change your password now? (yes/no)");
+                        System.out.println("Would you like to change your password now? (yes/no)");
                         String response = scanner.nextLine().trim();
                         if ("yes".equalsIgnoreCase(response)) {
-                            LoginController.promptPasswordChange(scanner, loginID, staffCredentials);
+                            loginController.promptPasswordChange(scanner, loginID); // Use the new promptPasswordChange method
                         }
-                        
                     }
                     break; // Exit the loop after successful login
                 } else {
                     System.out.println("Login failed. Incorrect login ID or password.");
                 }
             } while (true); // Infinite loop until successful login
-    
-    
+
             // Switch case to create objects based on role after successful login
             switch (credentials.getRole()) {
-                case "A": 
+                case "A":
                     Admin admin = new Admin(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     AdminPage adminpage = new AdminPage();
                     adminpage.startPage();
                     break;
-                case "S": 
+                case "S":
                     BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     // Proceed with branch staff actions
                     break;
