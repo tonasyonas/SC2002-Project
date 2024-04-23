@@ -1,4 +1,4 @@
 CreditCard
-PayNow
 PayLah!
 GooglePay
+Paypal

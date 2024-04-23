@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetPaymentMethods {
-    private static final String PAYMENT_METHODS_FILE = "payment_methods.txt";
+    private static final String PAYMENT_METHODS_FILE = "SC2002_Project/src/FOMS/order_manager/payment_methods.txt";
 
     public static List<String> getPaymentMethods() {
         List<String> paymentMethods = new ArrayList<>();
