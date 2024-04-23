@@ -77,7 +77,7 @@ public class OrderManager {
         }
     }
 
-    public void saveOrderToFile(Order order, String filename) {
+    public void saveOrderToFile(Order order, String SelectedBranch, String filename) {
         // Format the order details
         String orderDetails = formatOrderDetails(order);
 
@@ -97,9 +97,10 @@ public class OrderManager {
 
     StringBuilder sb = new StringBuilder();
     sb.append(order.getOrderId()).append(';')
-      .append(order.getStatus()).append(';')
-      .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
-      .append(order.getOrderType()).append(';');
+    .append(order.getStatus()).append(';')
+    .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
+    .append(order.getOrderType()).append(';')
+    .append(order.getOrderItems().getFirst().getMenuItem().getBranch()).append(';');
 
     for (OrderItem item : order.getOrderItems()) {
         String food = item.getMenuItem().getItem();
@@ -115,6 +116,7 @@ public class OrderManager {
         sb.append("; ");
     }
 
+
     // Remove the last semicolon and space from the item list
     if (!order.getOrderItems().isEmpty()) {
         sb.setLength(sb.length() - 2);
@@ -124,8 +126,6 @@ public class OrderManager {
 }
 
     
-
-   
     
     public Order getOrderById(String orderId) {
         // Logic to retrieve the Order object from wherever it's stored, e.g., a map or database
