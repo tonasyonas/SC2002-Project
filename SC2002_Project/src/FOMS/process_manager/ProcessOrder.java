@@ -49,7 +49,7 @@ public class ProcessOrder {
                 .append(order.getStatus()).append(';')
                 .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
                 .append(order.getOrderType()).append(';')
-                .append(order.getOrderItems().getFirst().getMenuItem().getBranch()).append(';');
+                .append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
     
         for (OrderItem item : order.getOrderItems()) {
             String food = item.getMenuItem().getItem();
