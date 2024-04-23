@@ -18,6 +18,13 @@ public class MenuItem {
         this.customizations = "";  // Initialize as empty string
     }
 
+    public MenuItem(String item, double cost, String branch) {
+        this.item = item;
+        this.cost = cost;
+        this.branch = branch; // Initialize the branch
+        this.customizations = "";  // Initialize as empty string
+    }
+
     public String getItem() {
         return item;
     }
