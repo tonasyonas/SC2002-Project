@@ -136,10 +136,7 @@ public class CustOrderPage implements IPage{
         System.out.println("4 - Check Order Status");
         System.out.println("5 - Collect Order");
         System.out.println("6 - Exit");
-        if (selectedBranch != null) {
-            System.out.println("6 - Change Branch");
-        }
-        System.out.print("Your choice: ");
+        System.out.println("Your choice: ");
     }
 
     private void addItemsToCart() {
@@ -315,6 +312,9 @@ public class CustOrderPage implements IPage{
             if (order != null) {
                 System.out.println("Order ID: " + orderId + " has been placed successfully.");
                 orderManager.saveOrderToFile(order, selectedBranch, "SC2002_Project/src/FOMS/order_manager/order.txt");
+                System.out.println("Receipt: ");
+                DisplayOrder.viewOrderDetails(orderId);
+                
             } else {
                 System.out.println("Error: Order not found after payment.");
             }

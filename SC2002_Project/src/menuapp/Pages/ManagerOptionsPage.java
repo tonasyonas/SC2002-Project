@@ -64,7 +64,7 @@ public class ManagerOptionsPage implements IPage {
                     System.out.println("Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please enter a number (0-6).");
+                    System.out.println("Invalid choice. Please enter a number (0-4).");
                     break;
             }
         } while (!choice.equals("0"));

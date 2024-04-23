@@ -52,14 +52,14 @@ public class AdminPage implements IPage{
                 case 3:
                     System.out.println("Adding Staff: Please give details");
                     Scanner addStaffScanner = new Scanner(System.in);
-                    AddStaffList addStaffList = new AddStaffList(addStaffScanner);
+                    AddStaffList addStaffList = new AddStaffList(addStaffScanner,true);
                     addStaffList.EditStaffList(filename, credentialsMap);
                     break;
                 case 4:
                     // Remove staff
                     System.out.println("Remove Staff");
                     Scanner RemoveStaffScanner = new Scanner(System.in);;
-                    RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner);
+                    RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner,true);
                     removeStaffList.EditStaffList(filename, credentialsMap);
                     break;
                 case 5:

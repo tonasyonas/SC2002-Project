@@ -56,7 +56,8 @@ public class ViewFilteredStaffList {
         displayStaff(filteredList);
     }
 
-    public void displayStaff(List<UserCredentials> staffList) {
+    public static int displayStaff(List<UserCredentials> staffList) {
+        int count = 0;
         if (staffList.isEmpty()) {
             System.out.println("No staff members match the criteria.");
         } else {
@@ -66,8 +67,11 @@ public class ViewFilteredStaffList {
                                    ", Gender: " + credentials.getGender() +
                                    ", Age: " + credentials.getAge() +
                                    ", Branch: " + credentials.getBranch());
+                count ++;
+
             }
         }
+        return count;
     }
 
     // Method to be called from elsewhere in your application
