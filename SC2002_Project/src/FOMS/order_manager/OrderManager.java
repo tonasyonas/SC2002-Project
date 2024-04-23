@@ -72,9 +72,9 @@ public class OrderManager {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Order ID file not found. Starting with order ID 1.");
-        } catch (IOException e) {
-            System.err.println("Failed to load next order ID: " + e.getMessage());
-        }
+        // } catch (IOException e) {
+        //     System.err.println("Failed to load next order ID: " + e.getMessage());
+         }
     }
 
     public void saveOrderToFile(Order order, String SelectedBranch, String filename) {
