@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 import FOMS.account_manager.*;
 import FOMS.branch_manager.OpenCloseBranchPage;
+import FOMS.order_manager.AddRemovePayment;
 import FOMS.Pages.IPage;
 
 public class AdminPage implements IPage{
@@ -26,6 +27,7 @@ public class AdminPage implements IPage{
             System.out.println("5. Promote Staff");
             System.out.println("6. Transfer Staff");
             System.out.println("7. Open/Close Branch"); 
+            System.out.println("8. Add/Remove Payment Method"); 
             System.out.print("Enter your choice: ");
             // Check if the input is an integer
             while (!sc.hasNextInt()) {
@@ -73,6 +75,10 @@ public class AdminPage implements IPage{
                 case 7:
                     // New case for opening or closing branches
                     OpenCloseBranchPage.openclosebranch(sc);
+                    break;
+                case 8:
+                    // For adding/removing payment methods
+                    AddRemovePayment.addRemovePayment(sc);
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose again.");
