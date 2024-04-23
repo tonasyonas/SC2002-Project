@@ -14,7 +14,10 @@ public class BranchStaffPage {
 
         while (!exit) {
             System.out.println("1. Display Orders");
-            System.out.println("2. Processs Orders");
+            System.out.println("2. Display New Orders");
+            System.out.println("3. View Specific Order Details");
+            System.out.println("4. Process Orders");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the leftover newline.
@@ -24,7 +27,16 @@ public class BranchStaffPage {
                     DisplayOrder.displayOrders(branch); // Pass the branch to the display orders method
                     break;
                 case 2:
+                    DisplayNewOrders.displayNewOrders(branch); 
+                    break;
+                case 3:
+                    viewSpecificOrderDetails(); // View details of a specific order
+                    break;
+                case 4:
                     processOrders(); // Processing might also be branch-specific
+                    break;
+                case 5:
+                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter 1 or 2.");
@@ -45,5 +57,12 @@ public class BranchStaffPage {
         } else {
             System.out.println("Order not found or an error occurred.");
         }
+    }
+
+    public static void viewSpecificOrderDetails() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the order ID to view details: ");
+        String orderId = scanner.nextLine();
+        DisplayOrder.viewOrderDetails(orderId);
     }
 }
