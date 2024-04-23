@@ -69,9 +69,7 @@ public class ReadOrderList {
               
             }
         }
-    
-        System.out.println(); // Print a newline after printing all items
-    
+        
         return new Order(orderId, status, total, orderType, items);
     }
     

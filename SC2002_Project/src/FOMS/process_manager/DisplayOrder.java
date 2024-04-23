@@ -3,7 +3,7 @@ package FOMS.process_manager;
 import java.io.IOException;
 import java.util.List;
 
-import FOMS.order_manager.Order;
+import FOMS.order_manager.*;
 
 public abstract class DisplayOrder {
 
@@ -26,16 +26,30 @@ public abstract class DisplayOrder {
         try {
             List<Order> orders = ReadOrderList.readOrdersFromFile(filename);
             for (Order order : orders) {
-                // Display orders only for the specific branch
-                if (order.getOrderItems().get(0).getMenuItem().getBranch().equals(branch)) {
-                    System.out.println(order);
+                // Check if the order's branch matches the staff's branch
+                if (!order.getOrderItems().isEmpty() && order.getOrderItems().get(0).getMenuItem().getBranch().equals(branch)) {
+                    System.out.println("Order ID: " + order.getOrderId());
+                    System.out.println("Status: " + order.getStatus());
+                    System.out.println("Order Type: " + order.getOrderType());
+                    System.out.println("Branch: " + branch);
+                    System.out.println("Items:");
+                    for (OrderItem item : order.getOrderItems()) {
+                        System.out.println(" - Item: " + item.getMenuItem().getItem());
+                        System.out.println("   Quantity: " + item.getQuantity());
+                        System.out.println("   Price: $" + String.format("%.2f", item.getMenuItem().getCost()));
+                        if (item.getCustomization() != null && !item.getCustomization().isEmpty()) {
+                            System.out.println("   Customizations: " + item.getCustomization());
+                        }
+                    }
+                    System.out.println("Total: $" + String.format("%.2f", order.getTotal()));
+                    System.out.println("---------------------------");
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
         }
     }
-
+    
 
 
     

@@ -7,11 +7,9 @@ import FOMS.order_manager.Order;
 
 public class BranchStaffPage {
 
-    public static void main(String[] args) {
+    public static void startBranchStaffPage(String branch) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
-        String branch = "BranchName"; // This should be dynamically retrieved based on the logged-in staff.
-
 
         while (!exit) {
             System.out.println("1. Display Orders");
@@ -20,13 +18,12 @@ public class BranchStaffPage {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the leftover newline.
 
-
             switch (choice) {
                 case 1:
-                    DisplayOrder.displayOrders();
+                    DisplayOrder.displayOrders(branch); // Pass the branch to the display orders method
                     break;
                 case 2:
-                    processOrders();
+                    processOrders(); // Processing might also be branch-specific
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter 1 or 2.");
@@ -35,6 +32,7 @@ public class BranchStaffPage {
 
         scanner.close();
     }
+
 
     public static void processOrders() {
         Scanner scanner = new Scanner(System.in);
