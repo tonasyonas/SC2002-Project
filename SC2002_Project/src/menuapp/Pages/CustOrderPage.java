@@ -278,16 +278,6 @@ public class CustOrderPage implements IPage{
         scanner.nextLine(); // consume newline
         System.out.print("Selected payment method: ");
         GetPaymentMethods.displayPaymentMethod(paymentChoice);
-
-        System.out.println("Enter payment amount: ");
-        double payment = scanner.nextDouble();
-        scanner.nextLine(); // consume newline
-
-        if (payment < total) {
-            System.out.println("Insufficient payment. Transaction cancelled.");
-            return false;
-        }
-
         System.out.print("Payment successful using ");
         GetPaymentMethods.displayPaymentMethod(paymentChoice);
         return true;
