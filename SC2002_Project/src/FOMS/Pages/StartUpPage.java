@@ -10,6 +10,7 @@ public class StartUpPage implements IPage {
 
     public StartUpPage() {
         this.scanner = new Scanner(System.in); // Initialize it once here
+        System.out.println("Are you a customer or a staff member?");
     }
 
     @Override
@@ -34,7 +35,6 @@ public class StartUpPage implements IPage {
 
     @Override
     public void display() {
-        System.out.println("Are you a customer or a staff member?");
         System.out.print("Enter 'customer' or 'staff': ");
     }
 
