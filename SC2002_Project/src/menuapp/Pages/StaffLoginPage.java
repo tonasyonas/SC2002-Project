@@ -27,8 +27,6 @@ public class StaffLoginPage implements IPage {
         display();
         String loginID = getInput();
         UserCredentials credentials = staffCredentials.get(loginID);
-        System.out.println(loginID);
-        System.out.println(credentials);
 
         Scanner scanner = new Scanner(System.in);
         if (credentials != null) {
