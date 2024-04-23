@@ -261,10 +261,19 @@ public class CustOrderPage implements IPage{
             System.out.println("Your cart is empty. Please add items before checkout.");
             return false;
         }
+        String orderType = getOrderTypeFromUser();
+
         cartManager.displayItems();
         double total = cartManager.calculateTotal();
         System.out.printf("Total: $%.2f\n", total);
-        return handlePayment(total);
+        boolean paymentSuccessful = handlePayment(total);
+
+    // If payment is successful, finalize the order
+        if (paymentSuccessful) {
+            finalizeOrder(); // Pass the order type to finalizeOrder method
+        }
+
+        return paymentSuccessful;
     }
 
     private boolean handlePayment(double total) {
