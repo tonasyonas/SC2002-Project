@@ -93,33 +93,36 @@ public class OrderManager {
     }
 
     private String formatOrderDetails(Order order) {
-        DecimalFormat df = new DecimalFormat("#0.00");
-    
-        StringBuilder sb = new StringBuilder();
-        sb.append(order.getOrderId()).append(';')
-          .append(order.getStatus()).append(';')
-          .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
-          .append(order.getOrderType()).append(';');
-    
-        for (OrderItem item : order.getOrderItems()) {
-            sb.append(item.getMenuItem().getItem()).append('x')
-              .append(item.getQuantity()).append('@')
-              .append(df.format(item.getMenuItem().getCost())).append(','); // Format cost to two decimal places
-    
-            if (!item.getCustomization().isEmpty()) {
-                sb.append('(').append(item.getCustomization()).append(')');
-            }
-            
-            sb.append(',');
+    DecimalFormat df = new DecimalFormat("#0.00");
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(order.getOrderId()).append(';')
+      .append(order.getStatus()).append(';')
+      .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
+      .append(order.getOrderType()).append(';');
+
+    for (OrderItem item : order.getOrderItems()) {
+        String food = item.getMenuItem().getItem();
+        int quantity = item.getQuantity();
+        double price = item.getMenuItem().getCost();
+        String customizations = item.getCustomization();
+
+        // Append food, quantity, price, and customizations
+        sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
+        if (!customizations.isEmpty()) {
+            sb.append(customizations);
         }
-    
-        // Remove the last comma from the item list
-        if (!order.getOrderItems().isEmpty()) {
-            sb.setLength(sb.length() - 1);
-        }
-    
-        return sb.toString();
+        sb.append("; ");
     }
+
+    // Remove the last semicolon and space from the item list
+    if (!order.getOrderItems().isEmpty()) {
+        sb.setLength(sb.length() - 2);
+    }
+
+    return sb.toString();
+}
+
     
 
    
