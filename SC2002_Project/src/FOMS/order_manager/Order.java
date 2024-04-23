@@ -11,6 +11,14 @@ public class Order {
     private String orderType;
 
     // Constructor
+    public Order(String orderId, String status, double total, String orderType, List<OrderItem> orderItems ) {
+        this.orderItems = orderItems;
+        this.orderId = orderId;
+        this.status = status; 
+        this. orderType = orderType;
+        this.orderItems = orderItems;
+    }
+
     public Order(String orderId) {
         this.orderItems = new ArrayList<>();
         this.orderId = orderId;
@@ -65,5 +73,6 @@ public class Order {
         return orderType;
     }
 
+ 
 }
 

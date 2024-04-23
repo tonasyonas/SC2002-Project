@@ -305,7 +305,7 @@ public class CustOrderPage implements IPage{
             Order order = orderManager.getOrderById(orderId);
             if (order != null) {
                 System.out.println("Order ID: " + orderId + " has been placed successfully.");
-                orderManager.saveOrderToFile(order, "SC2002_Project/src/FOMS/order_manager/order.txt");
+                orderManager.saveOrderToFile(order, selectedBranch, "SC2002_Project/src/FOMS/order_manager/order.txt");
             } else {
                 System.out.println("Error: Order not found after payment.");
             }
