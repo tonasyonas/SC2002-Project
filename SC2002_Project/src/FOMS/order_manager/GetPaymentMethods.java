@@ -22,8 +22,11 @@ public class GetPaymentMethods {
 
     public static void displayPaymentMethods() {
         List<String> paymentMethods = getPaymentMethods();
-        for (int i = 0; i < paymentMethods.size(); i++) {
-            System.out.println((i + 1) + ". " + paymentMethods.get(i));
+        for (String method : paymentMethods) {
+            String[] parts = method.split(";");
+            if (parts.length >= 2) {
+                System.out.println(parts[0] + ". " + parts[1]);
+            }
         }
     }
 

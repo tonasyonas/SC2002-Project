@@ -45,4 +45,28 @@ public class ReadStaffList {
         }
         return credentials;
     }
-}
+        public static Map<String, UserCredentials> getRawStaffCredentials(String filename) {
+            Map<String, UserCredentials> credentials = new HashMap<>();
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(";");
+                    // Assume minimum data is available and avoid using salt and hashed password
+                    if (parts.length >= 5) {
+                        String name = parts[0];
+                        String loginID = parts[1];
+                        String role = parts[2];
+                        Staff.Gender gender = "F".equals(parts[3]) ? Staff.Gender.F : Staff.Gender.M;
+                        int age = Integer.parseInt(parts[4]);
+                        String branch = parts.length > 5 ? parts[5] : "";
+                        // Create credentials with placeholders for salt and hashedPassword
+                        credentials.put(loginID, new UserCredentials(name, role, gender, age, branch, "", "", false));
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading file: " + e.getMessage());
+            }
+            return credentials;
+        }
+    }
+    
