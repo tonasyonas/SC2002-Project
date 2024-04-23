@@ -2,7 +2,7 @@ package menuapp.Pages;
 
 import FOMS.account_manager.*;
 import FOMS.branch_manager.*;
-
+import FOMS.process_manager.*;
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.FOMS_entity.*;
@@ -63,6 +63,7 @@ public class StaffLoginPage implements IPage {
                 case "S": 
                     BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     // Proceed with branch staff actions
+                    BranchStaffPage.startBranchStaffPage(credentials.getBranch()); // Modified call
                     break;
                 case "M":
                     System.out.println("Welcome");

@@ -39,10 +39,6 @@ public class ReadOrderList {
         String branch = parts[4];
         List<OrderItem> items = new ArrayList<>();
     
-        System.out.println("Order ID: " + orderId);
-        System.out.println("Status: " + status);
-        System.out.println("Total: " + String.format("%.2f", total));
-        System.out.println("Type: " + orderType);
     
         if (parts.length > 5) {
             for (int i = 5; i < parts.length; i++) {
@@ -56,12 +52,11 @@ public class ReadOrderList {
                     String customization = itemParts[3];
                     OrderItem orderItem = new OrderItem(menuItem, quantity, customization);
                     items.add(orderItem);
-                    System.out.println(quantity + " x " + item + " Price: " + String.format("%.2f", price) + customization);
                 }
                 else {
                     OrderItem orderItem = new OrderItem(menuItem, quantity);
                     items.add(orderItem);
-                    System.out.println(quantity + " x " + item + " Price: " + String.format("%.2f", price) + " No Customization");
+                   
                 }
             
 
@@ -69,9 +64,7 @@ public class ReadOrderList {
               
             }
         }
-    
-        System.out.println(); // Print a newline after printing all items
-    
+        
         return new Order(orderId, status, total, orderType, items);
     }
     
