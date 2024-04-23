@@ -1,18 +1,17 @@
 package menuapp.Pages;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 import FOMS.branch_manager.*;
 import FOMS.order_manager.*;
-import FOMS.order_manager.CreditCardPayment;
-import FOMS.order_manager.OnlinePaymentPlatform;
-
+// import java.text.DecimalFormat;
+// import java.util.HashMap;
+// import java.util.ArrayList;
+// import FOMS.order_manager.CreditCardPayment;
+// import FOMS.order_manager.OnlinePaymentPlatform;
 
 public class CustOrderPage implements IPage{
     private Scanner scanner;
@@ -21,7 +20,6 @@ public class CustOrderPage implements IPage{
     private OrderManager orderManager;  // handle order operations
     private BranchSelector branchSelector; // declare at class level
     private String selectedBranch; // New member to store the selected branch
-
 
     public CustOrderPage() {
         this.scanner = new Scanner(System.in);
@@ -52,12 +50,13 @@ public class CustOrderPage implements IPage{
     @Override
     public void startPage() {
         display();
+        showOptions();
         do {
-            showOptions();
             String input = scanner.nextLine().trim();
             Integer choice = tryParseInt(input);  // improved to handle non-integer input
             if (choice == null) {
                 System.out.println("Invalid input. Please enter a number.");
+                System.out.print("Your choice: ");
                 continue; // Skip the rest of the loop iteration
             }
             if (choice == 1 && selectedBranch == null) {
@@ -92,6 +91,7 @@ public class CustOrderPage implements IPage{
 
                 default:
                     System.out.println("Invalid choice. Please choose again.");
+                    System.out.print("Your choice: ");
                     break;
             }
         } while (true);
