@@ -9,6 +9,8 @@ import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 import FOMS.branch_manager.*;
 import FOMS.order_manager.*;
+import FOMS.order_manager.CreditCardPayment;
+import FOMS.order_manager.OnlinePaymentPlatform;
 
 
 public class CustOrderPage implements IPage{
@@ -30,7 +32,6 @@ public class CustOrderPage implements IPage{
     private void initializeDependencies() {
         MenuDisplay menuDisplay = new ConsoleMenuDisplay();
         List<Branch> branchlist = ReadBranchList.getBranchList("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
-
         String[] branches = AllBranch.getBranchIDs(branchlist);
         this.branchSelector = new ConsoleBranchSelector(scanner, branches);
         String filename = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
@@ -39,14 +40,25 @@ public class CustOrderPage implements IPage{
         this.viewMenu = new ViewMenu(menuDisplay, branchSelector, menuOrganizer);
     }
 
+    private Integer tryParseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
     
     @Override
     public void startPage() {
         display();
-        int choice;
         do {
             showOptions();
-            choice = Integer.parseInt(scanner.nextLine());  // improved to handle non-integer input
+            String input = scanner.nextLine().trim();
+            Integer choice = tryParseInt(input);  // improved to handle non-integer input
+            if (choice == null) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue; // Skip the rest of the loop iteration
+            }
             if (choice == 1 && selectedBranch == null) {
                 // Initial branch selection
                 selectedBranch = branchSelector.selectBranch();
@@ -60,7 +72,9 @@ public class CustOrderPage implements IPage{
                     modifyCart();
                     break;
                 case 3:
-                    checkoutCart();
+                    if(checkoutCart()){
+                        finalizeOrder();
+                    };
                     break;
                 case 4:
                     checkOrderStatus();
@@ -237,51 +251,85 @@ public class CustOrderPage implements IPage{
         
     
     
-    private void checkoutCart() {
+    private boolean checkoutCart() {
         if (cartManager.isEmpty()) {
             System.out.println("Your cart is empty. Please add items before checkout.");
-            return;
+            return false;
         }
         cartManager.displayItems();
         double total = cartManager.calculateTotal();
         System.out.println("Total: $" + total);
+        return handlePayment(total);
+    }
 
-        // Choose between takeaway or dine-in
-        System.out.println("Choose an option for your order:");
-        System.out.println("1 - Takeaway");
-        System.out.println("2 - Dine-in");
+    private boolean handlePayment(double total) {
+        System.out.println("Choose a payment method:");
+        System.out.println("1 - Credit Card");
+        System.out.println("2 - Online Payment Platform");
         System.out.print("Your choice: ");
-        String orderType = (scanner.nextInt() == 1) ? "Takeaway" : "Dine-in";
+        int paymentChoice = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
-        // Simulate payment process
-        System.out.println("Proceeding to payment...");
+        PaymentStrategy paymentStrategy;
+        switch (paymentChoice) {
+            case 1:
+                paymentStrategy = new CreditCardPayment();
+                break;
+            case 2:
+                paymentStrategy = new OnlinePaymentPlatform();
+                break;
+            default:
+                System.out.println("Invalid payment method selected.");
+                return false;
+        }
+
         System.out.println("Enter payment amount: ");
         double payment = scanner.nextDouble();
         scanner.nextLine(); // consume newline
 
-        if (payment >= total) {
-            System.out.println("Payment successful!");
-            String orderId = orderManager.placeOrder(cartManager, orderType); // This should clear the cart and create an order
-            // Retrieve the Order object using the orderId (you'll need to implement getOrderById in OrderManager)
-            Order order = orderManager.getOrderById(orderId);
-            System.out.println("Receipt:");
-            System.out.println("Total Paid: $" + payment);
-            System.out.println("Change: $" + (payment - total));
-            System.out.println("Order type: " + orderType);
-            System.out.println("Order ID: " + orderId);
-            System.out.println("Thank you for your purchase!");
+        if (payment < total) {
+            System.out.println("Insufficient payment. Transaction cancelled.");
+            return false;
+        }
 
-            // Now, save the order details to a file
+        System.out.println("Payment successful using " + paymentStrategy.getPaymentMethod() + "!");
+        return true;
+    }
+
+
+    private void finalizeOrder() {
+        String orderType = getOrderTypeFromUser();
+        String orderId = orderManager.placeOrder(cartManager, orderType);
+        if (orderId != null) {
+            Order order = orderManager.getOrderById(orderId);
             if (order != null) {
+                System.out.println("Order ID: " + orderId + " has been placed successfully.");
                 orderManager.saveOrderToFile(order, "SC2002_Project/src/FOMS/order_manager/order.txt");
             } else {
                 System.out.println("Error: Order not found after payment.");
             }
         } else {
-            System.out.println("Insufficient payment. Transaction cancelled.");
+            System.out.println("There was an error placing your order.");
         }
     }
+    private String getOrderTypeFromUser() {
+        System.out.println("Select order type:");
+        System.out.println("1 - Takeaway");
+        System.out.println("2 - Dine-in");
+        System.out.print("Your choice: ");
+        String input = scanner.nextLine().trim();
+        Integer choice = tryParseInt(input);
+
+        if (choice != null) {
+            return (choice == 1) ? "Takeaway" : "Dine-in";
+        } else {
+            System.out.println("Invalid input. Please enter 1 for Takeaway or 2 for Dine-in.");
+            return getOrderTypeFromUser(); // Recursive call to re-prompt the user
+    }
+
+    }
+
+
 
     private void checkOrderStatus() {
         System.out.print("Enter your order ID: ");

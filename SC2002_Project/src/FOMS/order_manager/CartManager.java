@@ -40,14 +40,14 @@ public class CartManager {
         if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty.");
         } else {
-            int itemNumber = 1;
-            for (OrderItem item : cartItems.values()) {
-                System.out.println(itemNumber++ + ". " + item.getMenuItem().getItem() + 
-                                   " - Quantity: " + item.getQuantity() + 
-                                   " - Customization: " + item.getCustomization());
+            for (OrderItem orderItem : cartItems.values()) {
+                String customizationDisplay = orderItem.getCustomization().isEmpty() ? "No customization" : orderItem.getCustomization();
+                System.out.println(orderItem.getMenuItem().getItem() + " - Quantity: " + orderItem.getQuantity() + " - Customization: " + customizationDisplay);
             }
         }
     }
+    
+    
 
     public double calculateTotal() {
         double total = 0.0;

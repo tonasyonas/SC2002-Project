@@ -7,3 +7,8 @@
 11;New;29.700000000000003;3PC set mealx2@9.9,(sprite),3PC set mealx1@9.9,(coke)
 12;New;20.700000000000003;chicken nuggetx3@6.9,(chilli)
 13;New;16.799999999999997;Dine-in;CAJUN FISHx2@5.6,(no sauce),CAJUN FISHx1@5.6,(sauce)
+14;New;9.600000000000001;Takeaway;FRIESx1@3.2,(chilli),FRIESx1@3.2,(ketchup),FRIESx1@3.2,
+15;New;8.100000000000001;Takeaway;COLE SLAWx1@2.7,(extra tomato),COLE SLAWx1@2.7,(no lettuce),COLE SLAWx1@2.7,
+16;New;20.700000000000003;Dine-in;chicken nuggetx1@6.9,(no sauce),chicken nuggetx1@6.9,(sauce),chicken nuggetx1@6.9,(extra sauce)
+17;New;6.9;Takeaway;chicken nuggetx1@6.9,(vegetarian)
+18;New;3.2;Dine-in;FRIESx1@3.2,
