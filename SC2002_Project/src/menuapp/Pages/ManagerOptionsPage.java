@@ -17,26 +17,6 @@ public class ManagerOptionsPage implements IPage {
         this.staffCredentials = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
     }
 
-    public void editMenuItem() {
-        // Logic to edit an existing menu item
-        // Implement test cases to validate this functionality
-    }
-
-    public void removeMenuItem() {
-        // Logic to remove an existing menu item
-        // Implement test cases to validate this functionality
-    }
-
-    public void manageAvailability() {
-        // Logic to manage the availability of menu items
-        // Implement test cases to validate this functionality
-    }
-
-    public void manageVariations() {
-        // Logic to manage variations in menu items and prices among branches
-        // Implement test cases to validate this functionality
-    }
-
     public void displayStaffList() {
         DisplayManagerBranchStaff branchlist = new DisplayManagerBranchStaff(staffCredentials);
         branchlist.displaystaffDetails(branchmanager);
@@ -76,7 +56,8 @@ public class ManagerOptionsPage implements IPage {
                     editMenuItemPage.startPage();
                     break;
                 case 3:
-                    removeMenuItem();
+                    RemoveMenuItemPage removeMenuItemPage = new RemoveMenuItemPage(branchmanager);
+                    removeMenuItemPage.startPage();
                     break;
                 case 4:
                     displayStaffList();
