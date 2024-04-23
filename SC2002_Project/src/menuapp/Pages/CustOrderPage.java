@@ -81,12 +81,15 @@ public class CustOrderPage implements IPage{
                     checkOrderStatus();
                     break;
                 case 5:
+                    Scanner collectscanner = new Scanner(System.in);
+                    CollectOrderPage collectOrderPage = new CollectOrderPage(collectscanner);
+                    collectOrderPage.startPage();
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     scanner.close();
                     return;
-                case 6:
-                    selectedBranch = branchSelector.selectBranch();
-                    break;
+
                 default:
                     System.out.println("Invalid choice. Please choose again.");
                     break;
@@ -111,7 +114,8 @@ public class CustOrderPage implements IPage{
         System.out.println("2 - View/Edit Cart");
         System.out.println("3 - Checkout");
         System.out.println("4 - Check Order Status");
-        System.out.println("5 - Exit");
+        System.out.println("5 - Collect Order");
+        System.out.println("6 - Exit");
         if (selectedBranch != null) {
             System.out.println("6 - Change Branch");
         }
