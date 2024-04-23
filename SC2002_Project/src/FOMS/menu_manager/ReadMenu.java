@@ -22,26 +22,26 @@ public class ReadMenu {
                 }
     
                 String[] parts = line.split(";");
-                if (parts.length == 4) {
+                if (parts.length == 5) {
                     try {
                         String itemName = parts[0].trim();
                         double itemPrice = Double.parseDouble(parts[1].trim());
                         String itemBranch = parts[2].trim();
                         String itemType = parts[3].trim().toLowerCase();
-    
+                        boolean available = Boolean.parseBoolean(parts[4].trim());
                         MenuItem item = null;
                         switch (itemType) {
                             case "burger":
-                                item = new Burger(itemName, itemPrice, itemBranch);
+                                item = new Burger(itemName, itemPrice, itemBranch, available);
                                 break;
                             case "drink":
-                                item = new Drink(itemName, itemPrice, itemBranch);
+                                item = new Drink(itemName, itemPrice, itemBranch, available);
                                 break;
                             case "set meal":
-                                item = new SetMeal(itemName, itemPrice, itemBranch);
+                                item = new SetMeal(itemName, itemPrice, itemBranch, available);
                                 break;
                             case "side":
-                                item = new Side(itemName, itemPrice, itemBranch);
+                                item = new Side(itemName, itemPrice, itemBranch, available);
                                 break;
                             default:
                                 System.err.println("Unknown item type '" + itemType + "'");

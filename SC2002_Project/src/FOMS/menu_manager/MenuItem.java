@@ -8,11 +8,12 @@ public class MenuItem {
     private double cost;
     private String branch; // Attribute to store branch information
     private String customizations;  // Customizations as a simple string
+    private boolean available;
 
-
-    public MenuItem(String item, double cost, String branch) {
+    public MenuItem(String item, double cost, String branch, boolean available) {
         this.item = item;
         this.cost = cost;
+        this.available = available;
         this.branch = branch; // Initialize the branch
         this.customizations = "";  // Initialize as empty string
     }
@@ -60,4 +61,11 @@ public class MenuItem {
         this.customizations = "";
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 }

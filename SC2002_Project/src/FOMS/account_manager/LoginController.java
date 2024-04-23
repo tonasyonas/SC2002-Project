@@ -1,59 +1,76 @@
 package FOMS.account_manager;
 import java.util.Map;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-public class LoginController {
-private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
-Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
 
-    // public static void main(String[] args) {
-    //     Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
-    //     Scanner scanner = new Scanner(System.in);
-    
-    //     try {
-    //         System.out.println("Are you a customer or a staff member?");
-    //         System.out.print("Enter 'customer' or 'staff': ");
-    //         String userType = scanner.nextLine().trim().toLowerCase();
-    
-    //         if (userType.equals("customer")) {
-    //             // Allow customers to proceed to the ordering system without logging in
-    //             System.out.println("Welcome to the ordering system!");
-    //             // Proceed to the ordering system
-    //         } else if (userType.equals("staff")) {
-    //             System.out.print("Enter your login ID: ");
-    //             String loginID = scanner.nextLine().trim();
-    //             UserCredentials credentials = staffCredentials.get(loginID);
-    //             if (credentials != null) {
-    //                 // Prompt staff members to log in
-    //                 System.out.print("Enter your password: ");
-    //                 String password = scanner.nextLine();
-    //                 if (login(staffCredentials, loginID, password, scanner)) {
-    //                     System.out.println("Login successful. Welcome, " + loginID + "!");
-    //                     // Check if password needs to be reset
-    //                     if (credentials.needsPasswordReset) {
-    //                         System.out.println("Would you like to change your password now? (yes/no)");
-    //                         String response = scanner.nextLine().trim();
-    //                         if ("yes".equalsIgnoreCase(response)) {
-    //                             promptPasswordChange(scanner, loginID, staffCredentials);
-    //                         }
-    //                     }
-    //                     // Proceed to the ordering system
-    //                 } else {
-    //                     System.out.println("Login failed. Incorrect login ID or password.");
-    //                 }
-    //             } else {
-    //                 System.out.println("Staff member not found. Please try again.");
-    //             }
-    //         } else {
-    //             System.out.println("Invalid user type. Please enter 'customer' or 'staff'.");
-    //         }
-    //     } finally {
-    //         scanner.close();
-    //     }
-    // }
-    
+public class LoginController {
+    private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
+    private static final String INIT_FILE = "SC2002_Project/src/FOMS/account_manager/init_config.txt";
+    private Map<String, UserCredentials> staffCredentials;
+
+    public static void main(String[] args) {
+        LoginController controller = new LoginController();
+        controller.run(); // Handle all logic after initialization check inside this method
+    }
+
+    public LoginController() {
+        if (!isInitialized()) {
+            initializeStaffPasswords();
+            setInitialized();
+        }
+        loadStaffCredentials(); // Load credentials only after ensuring they are initialized
+    }
+
+    private void run() {
+        // Any additional code to run after initialization
+    }
+
+    private void loadStaffCredentials() {
+        this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+    }
+
+    private boolean isInitialized() {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(INIT_FILE));
+            for (String line : lines) {
+                if ("initialized=true".equals(line.trim())) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading init config file: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private void setInitialized() {
+        try {
+            Files.write(Paths.get(INIT_FILE), "initialized=true".getBytes());
+        } catch (IOException e) {
+            System.err.println("Error writing to init config file: " + e.getMessage());
+        }
+    }
+
+    private void initializeStaffPasswords() {
+        // Assuming here that we have a method to create initial credentials
+        // If you are starting from scratch, you would create these from a predefined list
+        this.staffCredentials = ReadStaffList.getRawStaffCredentials(FILE_NAME); // Adjust as per previous advice if necessary
+        for (Map.Entry<String, UserCredentials> entry : this.staffCredentials.entrySet()) {
+            String salt = PasswordUtils.getSalt();
+            String hashedPassword = PasswordUtils.hashPassword("password", salt);
+            UserCredentials credentials = entry.getValue();
+            credentials.salt = salt;
+            credentials.hashedPassword = hashedPassword;
+            credentials.needsPasswordReset = true;
+        }
+        saveCredentialsToFile(this.staffCredentials);
+    }
+
     public static boolean login(Map<String, UserCredentials> credentialsMap, String loginID, String password, Scanner scanner) {
         UserCredentials credentials = credentialsMap.get(loginID);
         if (credentials != null && PasswordUtils.verifyPassword(password, credentials.salt, credentials.hashedPassword)) {
@@ -77,17 +94,10 @@ Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredential
         String newHashedPassword = PasswordUtils.hashPassword(newPassword, newSalt);
         UserCredentials oldCredentials = credentialsMap.get(loginID);
         if (oldCredentials != null) {
-            UserCredentials newCredentials = new UserCredentials(
-                oldCredentials.name,
-                oldCredentials.role,
-                oldCredentials.gender,
-                oldCredentials.age,
-                oldCredentials.branch,
-                newSalt,
-                newHashedPassword,
-                oldCredentials.needsPasswordReset = false
-            );
-            credentialsMap.put(loginID, newCredentials); // Replace old credentials with new ones
+            oldCredentials.salt = newSalt;
+            oldCredentials.hashedPassword = newHashedPassword;
+            oldCredentials.needsPasswordReset = false;
+            credentialsMap.put(loginID, oldCredentials); // Replace old credentials with updated ones
             return saveCredentialsToFile(credentialsMap);
         } else {
             return false; // User not found in credentials map
@@ -109,5 +119,4 @@ Map<String, UserCredentials> staffCredentials = ReadStaffList.getStaffCredential
         }
         return true;
     }
-    
 }
