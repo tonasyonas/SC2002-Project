@@ -1,4 +1,4 @@
-CreditCard
-PayLah!
-GooglePay
-Paypal
+1;CreditCard
+2;PayPal
+3;PayLah!
+4;GooglePay
