@@ -20,6 +20,30 @@ public class GetPaymentMethods {
         return paymentMethods;
     }
 
+    public static void displayPaymentMethod(int choice){
+        // Print the payment method associated with the choice
+        boolean found = false;
+        try (BufferedReader reader = new BufferedReader(new FileReader(PAYMENT_METHODS_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 2) {
+                    int index = Integer.parseInt(parts[0]);
+                    if (index == choice) {
+                        System.out.println(parts[1]);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!found) {
+            System.out.println("Invalid payment choice!");
+        }
+    }
+
     public static void displayPaymentMethods() {
         List<String> paymentMethods = getPaymentMethods();
         for (String method : paymentMethods) {
@@ -30,4 +54,8 @@ public class GetPaymentMethods {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.print("Selected payment method: ");
+        GetPaymentMethods.displayPaymentMethod(3);
+    }
 }
