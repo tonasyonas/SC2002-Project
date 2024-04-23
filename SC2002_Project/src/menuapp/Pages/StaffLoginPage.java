@@ -65,8 +65,6 @@ public class StaffLoginPage implements IPage {
                     break;
                 case "M":
                     BranchManager bmanagement = new BranchManager(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
-                    DisplayManagerBranchStaff branchlist = new DisplayManagerBranchStaff(staffCredentials);
-                    branchlist.displaystaffDetails(bmanagement);
                     BranchManagerOptionsPage bmoptionspage = new BranchManagerOptionsPage(bmanagement);
                     bmoptionspage.startPage();
                     // Proceed with branch manager actions
