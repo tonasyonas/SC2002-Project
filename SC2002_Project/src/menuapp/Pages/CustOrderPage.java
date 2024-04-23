@@ -50,8 +50,8 @@ public class CustOrderPage implements IPage{
     @Override
     public void startPage() {
         display();
-        showOptions();
         do {
+            showOptions();
             String input = scanner.nextLine().trim();
             Integer choice = tryParseInt(input);  // improved to handle non-integer input
             if (choice == null) {
@@ -156,7 +156,7 @@ public class CustOrderPage implements IPage{
                     MenuItem item = new MenuItem(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch()); //need change 
                     String customization = "";
                     cartManager.addItem(item, quantity, customization);
-                    System.out.println("Item added to cart with the following customizations: " + customization);
+                    System.out.println("Item added to cart with no customizations.");
 
                 }
                 
@@ -236,7 +236,7 @@ public class CustOrderPage implements IPage{
                                     MenuItem item = new MenuItem(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); //need change 
                                     String customization = "";
                                     cartManager.addItem(item, quantity, customization);
-                                    System.out.println("Item added to cart with the following customizations: " + customization);
+                                    System.out.println("Item added to cart with no customizations.");
 
                                 }
                                 

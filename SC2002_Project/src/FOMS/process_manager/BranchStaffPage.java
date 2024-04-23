@@ -15,9 +15,8 @@ public class BranchStaffPage {
         while (!exit) {
             System.out.println("1. Display Orders");
             System.out.println("2. Display New Orders");
-            System.out.println("3. View Specific Order Details");
-            System.out.println("4. Process Orders");
-            System.out.println("5. Exit");
+            System.out.println("3. Process Orders");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the leftover newline.
@@ -30,12 +29,9 @@ public class BranchStaffPage {
                     DisplayNewOrders.displayNewOrders(branch); 
                     break;
                 case 3:
-                    viewSpecificOrderDetails(); // View details of a specific order
-                    break;
-                case 4:
                     processOrders(); // Processing might also be branch-specific
                     break;
-                case 5:
+                case 4:
                     exit = true;
                     break;
                 default:
@@ -51,18 +47,20 @@ public class BranchStaffPage {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the order ID to process: ");
         String orderId = scanner.nextLine();
-        List<Order> updatedOrderList = ProcessOrder.processOrderID(orderId, "Ready for Pickup");
-        if (updatedOrderList != null) {
-            System.out.println("Order processed successfully.");
-        } else {
-            System.out.println("Order not found or an error occurred.");
+        DisplayOrder.viewOrderDetails(orderId);
+        System.out.println("Confirm that you want to process this order (Yes or No)");
+        String boolconfirmation = scanner.nextLine().toLowerCase();
+        if (boolconfirmation.equals("yes")){
+            List<Order> updatedOrderList = ProcessOrder.processOrderID(orderId, "Ready for Pickup");
+            if (updatedOrderList != null) {
+                System.out.println("Order processed successfully.");
+            } else {
+                System.out.println("Order not found or an error occurred.");
+            }
         }
+
+
     }
 
-    public static void viewSpecificOrderDetails() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the order ID to view details: ");
-        String orderId = scanner.nextLine();
-        DisplayOrder.viewOrderDetails(orderId);
-    }
+  
 }
