@@ -31,8 +31,6 @@ public class ManagerOptionsPage implements IPage {
         System.out.println("1. Add Menu Item");
         System.out.println("2. Edit Menu Item");
         System.out.println("3. Remove Menu Item");
-        System.out.println("4. Manage Availability");
-        System.out.println("5. Manage Variations");
         System.out.println("4. Display Staff List");
         System.out.println("0. Exit");
         do {
@@ -70,7 +68,6 @@ public class ManagerOptionsPage implements IPage {
                     break;
             }
         } while (!choice.equals("0"));
-        scanner.close();
     }
 
     @Override
