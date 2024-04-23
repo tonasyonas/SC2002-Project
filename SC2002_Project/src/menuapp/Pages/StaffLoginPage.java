@@ -40,7 +40,7 @@ public class StaffLoginPage implements IPage {
                 password = scanner.nextLine();
                 if (loginController.login(loginID, password, scanner)) {
                     System.out.println("Login successful. Welcome, " + loginID + "!");
-                        System.out.println("Would you like to change your password now? (yes/no)");
+                        System.out.print("Would you like to change your password now? (Yes/No) ");
                         String response = scanner.nextLine().trim();
                         if ("yes".equalsIgnoreCase(response)) {
                             loginController.promptPasswordChange(scanner, loginID); 

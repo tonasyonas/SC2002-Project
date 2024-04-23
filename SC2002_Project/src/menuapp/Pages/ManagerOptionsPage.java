@@ -2,12 +2,10 @@ package menuapp.Pages;
 
 import FOMS.account_manager.*;
 import FOMS.branch_manager.DisplayManagerBranchStaff;
-
-import java.util.Map;
-import java.util.Scanner;
-
 import FOMS.FOMS_entity.BranchManager;
 import FOMS.Pages.IPage;
+import java.util.Map;
+import java.util.Scanner;
 
 public class ManagerOptionsPage implements IPage {
 
@@ -92,10 +90,10 @@ public class ManagerOptionsPage implements IPage {
                     System.out.println("Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please enter a number from 0-6.");
+                    System.out.println("Invalid choice. Please enter a number (0-6).");
                     break;
             }
-        } while (!choice.equals(0));
+        } while (!choice.equals("0"));
         scanner.close();
     }
 
