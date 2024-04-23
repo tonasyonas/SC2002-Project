@@ -7,6 +7,7 @@ import FOMS.Pages.IPage;
 import FOMS.menu_manager.*;
 import FOMS.branch_manager.*;
 import FOMS.order_manager.*;
+import FOMS.process_manager.DisplayOrder;
 
 public class CustOrderPage implements IPage{
     private Scanner scanner;
@@ -72,7 +73,9 @@ public class CustOrderPage implements IPage{
                     }
                     break;
                 case 4:
-                    checkOrderStatus();
+                    System.out.print("Enter your order ID: ");
+                    String orderId = scanner.nextLine();
+                    DisplayOrder.viewOrderDetails(orderId);
                     break;
                 case 5:
                     Scanner collectscanner = new Scanner(System.in);
@@ -315,18 +318,6 @@ public class CustOrderPage implements IPage{
         }
     }
     
-
-
-    private void checkOrderStatus() {
-        System.out.print("Enter your order ID: ");
-        String orderId = scanner.nextLine();
-        OrderStatus status = orderManager.getOrderStatus(orderId);
-        if (status != null) {
-            System.out.println("Order Status: " + status);
-        } else {
-            System.out.println("Order not found.");
-        }
-    }
     // Make sure to include finalize or a method to close the scanner at the end of using this class
     public void closeScanner() {
         if (scanner != null) {

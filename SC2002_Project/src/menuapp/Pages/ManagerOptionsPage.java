@@ -11,18 +11,12 @@ import FOMS.Pages.IPage;
 
 public class ManagerOptionsPage implements IPage {
 
-    BranchManager branchmanager;
+    private BranchManager branchmanager;
     private Map<String, UserCredentials> staffCredentials;
 
     public ManagerOptionsPage(BranchManager branchmanager) {
         this.branchmanager = branchmanager;
         this.staffCredentials = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
-
-    }
-
-    public void addMenuItem() {
-        // Logic to add a new menu item
-        // Implement test cases to validate this functionality
     }
 
     public void editMenuItem() {
@@ -68,7 +62,9 @@ public class ManagerOptionsPage implements IPage {
             choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    addMenuItem();
+                    // Create an instance of AddMenuItemPage and start it
+                    AddMenuItemPage addMenuItemPage = new AddMenuItemPage(branchmanager);
+                    addMenuItemPage.startPage();
                     break;
                 case "2":
                     editMenuItem();
