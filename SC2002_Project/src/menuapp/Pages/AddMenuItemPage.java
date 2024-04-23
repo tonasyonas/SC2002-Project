@@ -54,8 +54,19 @@ public class AddMenuItemPage implements IPage {
                     System.out.print("Is the item available? (true/false): ");
                     String availability = scanner.nextLine().trim();
     
+                    String description;
+                    while (true) {
+                        System.out.print("Enter description (maximum 20 characters): ");
+                        description = scanner.nextLine().trim();
+                        if (description.length() <= 20) {
+                            break; // Exit the loop if description is within 20 characters
+                        } else {
+                            System.out.println("Description exceeds 20 characters. Please enter a shorter description.");
+                        }
+                    }
+    
                     // Format the details for writing to the file
-                    String newItem = name + ";" + price + ";" + branch + ";" + category + ";" + availability + "\n";
+                    String newItem = name + ";" + price + ";" + branch + ";" + category + ";" + availability + ";" + description + "\n";
     
                     // Append the new menu item to the file
                     FileWriter writer = new FileWriter(FILE_NAME, true);
@@ -69,8 +80,7 @@ public class AddMenuItemPage implements IPage {
             }
         } catch (IOException e) {
             System.out.println("An error occurred while adding the menu item: " + e.getMessage());
-        } finally {
-        }
+        } 
     }
     private boolean isItemNameUnique(String name) throws IOException {
         File file = new File(FILE_NAME);
