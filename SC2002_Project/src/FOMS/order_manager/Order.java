@@ -17,6 +17,7 @@ public class Order {
         this.status = status; 
         this. orderType = orderType;
         this.orderItems = orderItems;
+        this.total=total;
     }
 
     public Order(String orderId) {

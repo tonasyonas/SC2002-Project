@@ -1,31 +1,76 @@
 package FOMS.process_manager;
 
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.List;
+import FOMS.order_manager.Order;
+import FOMS.order_manager.OrderItem;
 
 public class ProcessOrder {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("1. Display Orders");
-            System.out.println("2. Process Orders");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    DisplayOrder.displayOrders();
-                    break;
-                case 2:
-                    System.out.println("Enter Order ID:");
-                    int selectedID = scanner.nextInt();
-
-                    break;
-               
-                default:
-                    System.out.println("Invalid command. Please try again.");
+    public static List<Order> processOrderID(String orderIdToFind, String status) {
+        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt";
+        try {
+            List<Order> ordersList = ReadOrderList.readOrdersFromFile(filename);
+            for (Order order : ordersList) {
+                if (order.getOrderId().equals(orderIdToFind)) {
+                    order.setStatus(status); 
+                    saveOrderListToFile(ordersList, filename); // Save the updated order list to file
+                    return ordersList; // Found the order with the specified ID
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
+        return null; // Order with the specified ID not found
+    }
+
+    private static void saveOrderListToFile(List<Order> ordersList, String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Order order : ordersList) {
+                String orderDetails = formatOrderDetails(order);
+                writer.write(orderDetails);
+                writer.newLine(); // To ensure each order is on a new line.
+            }
+            System.out.println("Order list saved successfully to " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to save order list to file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
+    private static String formatOrderDetails(Order order) {
+        DecimalFormat df = new DecimalFormat("#0.00");
+    
+        StringBuilder sb = new StringBuilder();
+        sb.append(order.getOrderId()).append(';')
+                .append(order.getStatus()).append(';')
+                .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
+                .append(order.getOrderType()).append(';')
+                .append(order.getOrderItems().getFirst().getMenuItem().getBranch()).append(';');
+    
+        for (OrderItem item : order.getOrderItems()) {
+            String food = item.getMenuItem().getItem();
+            int quantity = item.getQuantity();
+            double price = item.getMenuItem().getCost();
+            String customizations = item.getCustomization();
+    
+            // Append food, quantity, price, and customizations
+            sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
+            if (customizations != null && !customizations.isEmpty()) { // Check if customizations is not null
+                sb.append(customizations);
+            }
+            sb.append("; ");
+        }
+    
+        // Remove the last semicolon and space from the item list
+        if (!order.getOrderItems().isEmpty()) {
+            sb.setLength(sb.length() - 2);
+        }
+    
+        return sb.toString();
+    }
+    
 }
