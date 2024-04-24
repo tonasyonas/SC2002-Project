@@ -2,11 +2,13 @@ package FOMS.order_manager;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 import java.text.DecimalFormat;
 
 import FOMS.menu_manager.*;
+import FOMS.process_manager.*;
 
 public class OrderManager {
     private Map<String, Order> orders = new HashMap<>();
@@ -19,6 +21,7 @@ public class OrderManager {
     public OrderManager() {
         orders = new HashMap<>();
         loadNextOrderId();
+        loadOrdersFromFile(); 
     }
 
     public String placeOrder(CartManager cartManager, String orderType) {
@@ -91,6 +94,20 @@ public class OrderManager {
             e.printStackTrace();
         }
     }
+
+    private void loadOrdersFromFile() {
+        // Assuming you have a method to read orders from file
+        try {
+            List<Order> loadedOrders = ReadOrderList.readOrdersFromFile(ORDER_FILE);
+            for (Order order : loadedOrders) {
+                orders.put(order.getOrderId(), order);
+            }
+            System.out.println("Loaded " + loadedOrders.size() + " orders from file.");
+        } catch (IOException e) {
+            System.err.println("Failed to load orders from file: " + e.getMessage());
+        }
+    }
+
 
     private String formatOrderDetails(Order order) {
     DecimalFormat df = new DecimalFormat("#0.00");
