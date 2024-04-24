@@ -100,7 +100,7 @@ public class CustOrderPage implements IPage{
                     break;
                 case 5:
                     Scanner collectscanner = new Scanner(System.in);
-                    CollectOrderPage collectOrderPage = new CollectOrderPage(collectscanner);
+                    CollectOrderPage collectOrderPage = new CollectOrderPage(collectscanner, orderManager);
                     collectOrderPage.startPage();
                     break;
                 case 6:

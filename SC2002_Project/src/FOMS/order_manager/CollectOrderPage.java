@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class CollectOrderPage {
     private Scanner scanner;
+    private OrderManager orderManager;
 
-    // Constructor that accepts a Scanner object
-    public CollectOrderPage(Scanner scanner) {
+    public CollectOrderPage(Scanner scanner, OrderManager orderManager) {
         this.scanner = scanner;
+        this.orderManager = orderManager;
     }
 
     // Method to start the page
@@ -17,6 +18,19 @@ public class CollectOrderPage {
         String orderID = scanner.nextLine();
         
         // Process the order (you may need to implement this)
-        ProcessOrder.processOrderID(orderID, "Completed");
+        Order orderToCollect = orderManager.getOrderById(orderID);
+        if (orderToCollect != null) {
+            // Check the status of the order
+            if ("Ready for Pickup".equals(orderToCollect.getStatus())) {
+                // Process the order (you may need to implement this)
+                ProcessOrder.processOrderID(orderID, "Completed");
+                System.out.println("Order collected successfully.");
+            } else {
+                System.out.println("Order is not ready for pickup.");
+            }
+        } else {
+            System.out.println("Order ID not found.");
+        }
     }
+
 }
