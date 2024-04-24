@@ -97,11 +97,17 @@ public class AddStaff extends ABaseAddStaff {
             }
         }
 
-        else if (first == false){
+        //else if (first == true && totalStaff == quota)rej
+
+       
+
+        else if (first == false || first == true){
             credentials.put(loginID, newCredentials);
             System.out.println("Staff added successfull");
 
         }
+
+
         // Write updated credentials to the file
         writeToFile(filename, credentials);
     }
