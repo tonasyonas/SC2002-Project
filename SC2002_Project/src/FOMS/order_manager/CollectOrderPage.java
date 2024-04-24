@@ -21,16 +21,20 @@ public class CollectOrderPage {
         Order orderToCollect = orderManager.getOrderById(orderID);
         if (orderToCollect != null) {
             // Check the status of the order
-            if ("Ready for Pickup".equals(orderToCollect.getStatus())) {
+            String status = orderToCollect.getStatus();
+            if ("Ready for Pickup".equals(status)) {
                 // Process the order (you may need to implement this)
                 ProcessOrder.processOrderID(orderID, "Completed");
                 System.out.println("Order collected successfully.");
+            } else if ("Completed".equals(status)) {
+                System.out.println("Order has already been collected.");
+            } else if ("Cancelled".equals(status)) {
+                System.out.println("Order was cancelled because it was not collected within 5 minutes.");
             } else {
-                System.out.println("Order is not ready for pickup. Current status: " + orderToCollect.getStatus());
+                System.out.println("Order is not ready for pickup. Current status: " + status);
             }
         } else {
             System.out.println("Order ID not found.");
         }
-    }
-
+}
 }
