@@ -1,5 +1,7 @@
 package FOMS.account_manager;
+
 import FOMS.FOMS_entity.Staff;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +10,10 @@ import java.util.Scanner;
 
 /**
  * Abstract base class for adding staff members.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
  */
 public abstract class ABaseAddStaff {
     protected Scanner scanner;

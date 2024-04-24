@@ -1,4 +1,5 @@
 package FOMS.account_manager;
+
 import FOMS.FOMS_entity.Staff;
 
 import java.io.BufferedWriter;
@@ -9,6 +10,11 @@ import java.util.Scanner;
 
 /**
  * Abstract base class for removing staff members.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ * 
  */
 public abstract class ABaseRemoveStaff {
     protected Scanner scanner;

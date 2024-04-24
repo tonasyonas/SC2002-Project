@@ -1,11 +1,29 @@
 package FOMS.process_manager;
 
+import FOMS.order_manager.Order;
+
 import java.util.Scanner;
 import java.util.List;
-import FOMS.order_manager.Order;
-// import java.io.IOException;
+
+/**
+ * The {@code BranchStaffPage} class represents the user interface for branch staff members.
+ * It allows staff members to interact with orders, display them, and process them according to their status and needs.
+ * This class primarily deals with the command-line interface for the branch staff operations.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ * 
+ */
 
 public class BranchStaffPage {
+
+    /**
+     * Starts the interface for branch staff members.
+     * Provides options for staff to display and process orders.
+     * 
+     * @param branch The branch name to which the staff belongs and where the orders are managed.
+     */
 
     public static void startBranchStaffPage(String branch) {
         Scanner scanner = new Scanner(System.in);
@@ -49,6 +67,10 @@ public class BranchStaffPage {
     }
 
 
+    /**
+     * Processes the orders based on the order ID provided by the user.
+     * It displays the order details and asks for confirmation before processing the order.
+     */
     public static void processOrders() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the order ID to process: ");
