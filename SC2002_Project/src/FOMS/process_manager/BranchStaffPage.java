@@ -11,13 +11,12 @@ public class BranchStaffPage {
         Scanner scanner = new Scanner(System.in);
         String choice;
         int choiceint;
-        System.out.println("Choose an option:");
-        System.out.println("0. Exit");
-        System.out.println("1. Display Orders");
-        System.out.println("2. Display New Orders");
-        System.out.println("3. Process Orders");
-
         do {
+            System.out.println("Choose an option:");
+            System.out.println("0. Exit");
+            System.out.println("1. Display Orders");
+            System.out.println("2. Display New Orders");
+            System.out.println("3. Process Orders");
             System.out.print("Enter your choice: ");
             choice = scanner.nextLine();
             try{
