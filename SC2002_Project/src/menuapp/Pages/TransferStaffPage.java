@@ -59,8 +59,8 @@ public class TransferStaffPage implements IPage {
     }
 
     private void transferRegularStaff() {
-        AddStaff addStaff = new AddStaff(scanner, true);
-        addStaff.addSpecificRoleStaff(filename, credentialsMap);
+        ConcreteTransferStaff transferS = new ConcreteTransferStaff(scanner);
+        transferS.transfer(filename, credentialsMap);
     }
 
    

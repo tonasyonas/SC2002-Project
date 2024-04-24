@@ -59,7 +59,7 @@ public class ConcreteTransferManager extends AStaffTransfer {
                         System.out.println("Transfer denied due to transferred branch constraint");
                     }
 
-                    if (first) {
+                    if (first == true) {
                         System.out.printf("%s does not hit quota ratio\n", originalBranch);
                         System.out.printf("Add manager to %s\n", originalBranch);
                         AddManager addManager = new AddManager(scanner, false);
