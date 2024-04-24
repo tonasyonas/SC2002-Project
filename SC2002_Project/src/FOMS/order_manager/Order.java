@@ -99,19 +99,19 @@ public class Order {
             @Override
             public void run() {
                 System.out.println("Timer task running for order " + orderId);
-                if ("Ready for Pickup".equals(status)) {
+                if ("Completed".equals(status)) {
+                    cancelTimer();
+                
+                }else{
                     setStatus("Cancelled");
                     System.out.println("Order " + orderId + " has been cancelled due to not being picked up on time.");
     
                     // Now save the changes to file
         
                     ProcessOrder.saveOrderListToFile(ordersList, filename);
-                
-                }else{
-                    cancelTimer();
                 }
             }
-        }, 5 * 60 * 1000);  
+        }, 60 * 1000);  
     }
     
     
