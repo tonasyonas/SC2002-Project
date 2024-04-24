@@ -56,11 +56,8 @@ public class AdminPage implements IPage {
                     break;
                 case 4:
                     // Remove staff
-                    System.out.println("Remove Staff");
-                    Scanner RemoveStaffScanner = new Scanner(System.in);
-                    ;
-                    RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner, true);
-                    removeStaffList.EditStaffList(filename, credentialsMap);
+                    RemoveStaffPage removeStaffPage = new RemoveStaffPage(sc, credentialsMap, filename);
+                    removeStaffPage.startPage();
                     break;
                 case 5:
                     PromoteStaff promoteStaff = new PromoteStaff(sc);
