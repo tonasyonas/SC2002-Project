@@ -29,7 +29,7 @@ public class CollectOrderPage {
             } else if ("Completed".equals(status)) {
                 System.out.println("Order has already been collected.");
             } else if ("Cancelled".equals(status)) {
-                System.out.println("Order was cancelled because it was not collected within 5 minutes.");
+                System.out.println("Order was cancelled because it was not collected within 1 minute.");
             } else {
                 System.out.println("Order is not ready for pickup. Current status: " + status);
             }
