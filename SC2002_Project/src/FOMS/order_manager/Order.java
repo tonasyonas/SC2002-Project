@@ -117,6 +117,7 @@ public class Order {
     public void cancelTimer() {
         if (cancellationTimer != null) {
             cancellationTimer.cancel();
+            System.out.println("TOrder has been collected! " + orderId);
         }
     }
 }
