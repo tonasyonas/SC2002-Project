@@ -64,7 +64,6 @@ public class BranchStaffPage {
                 System.out.println("Order not found or an error occurred.");
             }
         }
-        scanner.close();
     }
   
 }
