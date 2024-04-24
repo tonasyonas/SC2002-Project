@@ -46,7 +46,6 @@ public class BranchStaffPage {
             }
         } while (!choice.equals("0"));
 
-        scanner.close();
     }
 
 
