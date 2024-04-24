@@ -65,9 +65,8 @@ public class AdminPage implements IPage {
                     promoteStaff.EditStaffList(filename, credentialsMap);
                     break;
                 case 6:
-                    TransferStaff transferStaff = new TransferStaff(sc);
-                    // Pass the filename and credentials map to EditStaffList method
-                    transferStaff.EditStaffList(filename, credentialsMap);
+                    TransferStaffPage transferStaffPage = new TransferStaffPage(sc, credentialsMap, filename);
+                    transferStaffPage.startPage();
                     break;
                 case 7:
                     // New case for opening or closing branches

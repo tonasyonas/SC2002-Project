@@ -23,7 +23,9 @@ public class RemoveManager extends ABaseRemoveStaff {
             List <UserCredentials> filteredList = filter.filter(credentialsList);
             int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
             if (user.getRole().equals("M")) {
-                if ((totalStaff == 7 || totalStaff == 12)){  
+                if (first == false) credentials.remove(loginIDToRemove);
+
+                else if ((totalStaff == 7 || totalStaff == 12)){  
                     System.out.println("Does not meet qutoa ratio! Add a manager");
                     System.out.println("1. Add a Manager");
                     System.out.println("2. Exit");
@@ -34,9 +36,10 @@ public class RemoveManager extends ABaseRemoveStaff {
                     switch (choice) {
                         case 1:
                             // Re-use the scanner instead of creating a new one
-                            credentials.remove(loginIDToRemove);
                             AddManager addManager = new AddManager(scanner, false);
                             addManager.addSpecificRoleStaff(filename, credentials);
+                            credentials.remove(loginIDToRemove);
+
                             break;
                         case 2:
                             System.out.println("Exiting...");

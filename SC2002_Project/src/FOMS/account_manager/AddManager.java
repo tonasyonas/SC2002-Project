@@ -61,7 +61,7 @@ public class AddManager extends ABaseAddStaff {
         List <UserCredentials> filteredList = filter.filter(credentialsList);
         int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
 
-        if (first && (totalStaff == 5 || totalStaff == 10)) {
+        if (first==true && (totalStaff == 5 || totalStaff == 10)) {
             System.out.println("Does not meet quota ratio!");
             System.out.println("1. Remove a Manager");
             System.out.println("2. Add Staff");
@@ -71,26 +71,39 @@ public class AddManager extends ABaseAddStaff {
 
             switch (choice) {
                 case 1:
+                    credentials.put(loginID, newCredentials);
                     RemoveManager removeManager = new RemoveManager(scanner, false);
                     removeManager.removeSpecificRoleStaff(filename, credentials);
+                    System.out.println("Manager Added Successfully");
+
                     break;
                 case 2:
+                    credentials.put(loginID, newCredentials);
                     AddStaff addStaff = new AddStaff(scanner, false);
                     addStaff.addSpecificRoleStaff(filename, credentials);
+                    System.out.println("Manager Added Successfully");
+
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter 1 or 2.");
                     break;
             }
 
-            writeToFile(filename, credentials);
         }
 
+        else if(first == false){
+            credentials.put(loginID, newCredentials);
+            System.out.println("Manager Added Successfully");
+
+
+
+        }
         else {
             System.out.println("Cannot add manager. Please try another option");
         }
 
         // Write updated credentials to the file
-      
+        writeToFile(filename, credentials);
+
     }
 }

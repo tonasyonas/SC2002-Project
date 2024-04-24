@@ -57,13 +57,12 @@ public class AddStaff extends ABaseAddStaff {
 
         // Creating and adding new staff credentials
         UserCredentials newCredentials = new UserCredentials(name, "S", gender, age, branch, salt, hashedPassword, true);
-        credentials.put(loginID, newCredentials);
         IStaffFilter filter = new BranchFilter(branch);
         List <UserCredentials> filteredList = filter.filter(credentialsList);
         int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
 
 
-        if (first && (totalStaff == 5 || totalStaff == 10)) {
+        if (first == true && (totalStaff == 5 || totalStaff == 10)) {
             System.out.println("Does not meet quota ratio! Choose an action:");
             System.out.println("1. Add Manager");
             System.out.println("2. Remove Staff");
@@ -76,10 +75,18 @@ public class AddStaff extends ABaseAddStaff {
                 case 1:
                     AddManager addManager = new AddManager(new Scanner(System.in), false);
                     addManager.addSpecificRoleStaff(filename, credentials);
+                    credentials.put(loginID, newCredentials);
+                    System.out.println("Staff added successfull");
+
+
                     break;
                 case 2:
                     RemoveStaff removeStaff = new RemoveStaff(new Scanner(System.in), false);
                     removeStaff.removeSpecificRoleStaff(filename, credentials);
+                    credentials.put(loginID, newCredentials);
+                    System.out.println("Staff added successfull");
+
+
                     break;
                 case 3:
                     System.out.println("Exiting...");
@@ -88,6 +95,12 @@ public class AddStaff extends ABaseAddStaff {
                     System.out.println("Invalid choice. Please enter a valid number (1-3).");
                     break;
             }
+        }
+
+        else if (first == false){
+            credentials.put(loginID, newCredentials);
+            System.out.println("Staff added successfull");
+
         }
         // Write updated credentials to the file
         writeToFile(filename, credentials);

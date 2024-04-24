@@ -23,8 +23,8 @@ public class RemoveStaff extends ABaseRemoveStaff {
             List <UserCredentials> filteredList = filter.filter(credentialsList);
             int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
             if (user.getRole().equals("S")) {
-                credentials.remove(loginIDToRemove);
-                if ((totalStaff == 7 || totalStaff == 12)){  
+                if (first == false) credentials.remove(loginIDToRemove);
+                else if ((totalStaff == 7 || totalStaff == 12)){  
                     System.out.println("Does not meet quota ratio! Choose your next action:");
                     System.out.println("1. Add a Staff Member");
                     System.out.println("2. Exit");
@@ -36,6 +36,7 @@ public class RemoveStaff extends ABaseRemoveStaff {
                         case 1:
                             AddStaff addStaff = new AddStaff(scanner, false);
                             addStaff.addSpecificRoleStaff(filename, credentials);
+                            credentials.remove(loginIDToRemove);
                             break;
                         case 2:
                             System.out.println("Exiting...");
