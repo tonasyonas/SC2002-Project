@@ -2,15 +2,35 @@ package FOMS.menu_manager;
 
 import java.util.Scanner;
 
+/**
+ * A class for selecting branches from the console.
+ * Implements the BranchSelector interface.
+ * It allows users to select a branch from a list displayed in the console.
+ *
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class ConsoleBranchSelector implements BranchSelector {
     private Scanner scanner;
     private String[] branches;
 
+    /**
+     * Constructs a ConsoleBranchSelector with the specified scanner and branches.
+     *
+     * @param scanner  The scanner object used for input.
+     * @param branches An array containing the names of the branches.
+     */
     public ConsoleBranchSelector(Scanner scanner, String[] branches) {
         this.scanner = scanner;
         this.branches = branches;
     }
 
+    /**
+     * Displays the list of branches and prompts the user to select one.
+     *
+     * @return The name of the selected branch.
+     */
     @Override
     public String selectBranch() {
         System.out.println("Please select your branch:");

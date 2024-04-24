@@ -8,8 +8,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The ReadMenu class provides methods to read menu items from a file and construct a map of menu items.
+ * It reads menu items from a specified file, parses the lines, and creates MenuItem objects accordingly.
+ * Menu items are stored in a map using a composite key of item name and branch.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class ReadMenu {
 
+    /**
+     * Reads menu items from the specified file and constructs a map of menu items.
+     * 
+     * @param filename The path to the file containing the menu items.
+     * @return A map containing the menu items, with composite keys of item name and branch.
+     */
     public static Map<String, MenuItem> readMenuItems(String filename) {
         Map<String, MenuItem> menu = new HashMap<>();
     
