@@ -66,9 +66,15 @@ public class AddManager extends ABaseAddStaff {
                     System.out.println("Invalid choice. Please enter 1 or 2.");
                     break;
             }
+
+            writeToFile(filename, credentials);
+        }
+
+        else {
+            System.out.println("Cannot add manager. Please try another option");
         }
 
         // Write updated credentials to the file
-        writeToFile(filename, credentials);
+      
     }
 }
