@@ -3,6 +3,14 @@ package FOMS.order_manager;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import FOMS.process_manager.ProcessOrder;
+
+import java.io.IOException;
+import java.time.Duration;
+
 
 public class Order {
     private List<OrderItem> orderItems;
@@ -11,6 +19,7 @@ public class Order {
     private String status; // Possible values: "New", "Ready to Pickup", "Completed"
     private String orderType;
     private LocalDateTime readyTime;
+    private Timer cancellationTimer;
 
     // Constructor
     public Order(String orderId, String status, double total, String orderType, List<OrderItem> orderItems ) {
@@ -74,7 +83,7 @@ public class Order {
     }
 
     public void setStatus(String status) {
-        if ("Ready to Pickup".equals(status) && !"Ready to Pickup".equals(this.status)) {
+        if ("Ready for Pickup".equals(status) && !"Ready for Pickup".equals(this.status)) {
             this.readyTime = LocalDateTime.now(); // Set the timestamp when order becomes ready
         }
         this.status = status;
@@ -83,5 +92,33 @@ public class Order {
     public LocalDateTime getReadyTime() {
         return this.readyTime;
     }
+    public void startCancellationTimer(List<Order> ordersList, String filename) {
+        System.out.println("Starting cancellation timer for order " + orderId);
+        cancellationTimer = new Timer();
+        cancellationTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Timer task running for order " + orderId);
+                if ("Ready for Pickup".equals(status)) {
+                    setStatus("Cancelled");
+                    System.out.println("Order " + orderId + " has been cancelled due to not being picked up on time.");
+    
+                    // Now save the changes to file
+        
+                    ProcessOrder.saveOrderListToFile(ordersList, filename);
+                
+                }
+            }
+        }, 5 * 60 * 1000);  
+    }
+    
+    
+
+    public void cancelTimer() {
+        if (cancellationTimer != null) {
+            cancellationTimer.cancel();
+        }
+    }
 }
+
 

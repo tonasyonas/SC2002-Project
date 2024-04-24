@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 import FOMS.order_manager.Order;
 import FOMS.order_manager.OrderItem;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ProcessOrder {
 
@@ -16,7 +18,12 @@ public class ProcessOrder {
             List<Order> ordersList = ReadOrderList.readOrdersFromFile(filename);
             for (Order order : ordersList) {
                 if (order.getOrderId().equals(orderIdToFind)) {
-                    order.setStatus(status); 
+                    order.setStatus(status);
+                    if ("Ready for Pickup".equals(status)) {
+                        order.startCancellationTimer(ordersList, filename);  // Start the timer when the order is ready
+                    } else {
+                        order.cancelTimer();  // Cancel the timer if the order status changes
+                    }
                     saveOrderListToFile(ordersList, filename); // Save the updated order list to file
                     return ordersList; // Found the order with the specified ID
                 }
@@ -27,7 +34,7 @@ public class ProcessOrder {
         return null; // Order with the specified ID not found
     }
 
-    private static void saveOrderListToFile(List<Order> ordersList, String filename) {
+    public static void saveOrderListToFile(List<Order> ordersList, String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Order order : ordersList) {
                 String orderDetails = formatOrderDetails(order);
@@ -43,20 +50,20 @@ public class ProcessOrder {
 
     private static String formatOrderDetails(Order order) {
         DecimalFormat df = new DecimalFormat("#0.00");
-    
+
         StringBuilder sb = new StringBuilder();
         sb.append(order.getOrderId()).append(';')
-                .append(order.getStatus()).append(';')
-                .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
-                .append(order.getOrderType()).append(';')
-                .append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
-    
+          .append(order.getStatus()).append(';')
+          .append(df.format(order.getTotal())).append(';')
+          .append(order.getOrderType()).append(';')
+          .append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
+
         for (OrderItem item : order.getOrderItems()) {
             String food = item.getMenuItem().getItem();
             int quantity = item.getQuantity();
             double price = item.getMenuItem().getCost();
             String customizations = item.getCustomization();
-    
+
             // Append food, quantity, price, and customizations
             sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
             if (customizations != null && !customizations.isEmpty()) { // Check if customizations is not null
@@ -64,13 +71,14 @@ public class ProcessOrder {
             }
             sb.append("; ");
         }
-    
+
         // Remove the last semicolon and space from the item list
         if (!order.getOrderItems().isEmpty()) {
             sb.setLength(sb.length() - 2);
         }
-    
+
         return sb.toString();
     }
-    
 }
+
+
