@@ -1,3 +1,6 @@
+/**
+ * The LoginController class manages user login and password-related operations.
+ */
 package FOMS.account_manager;
 
 import java.util.Map;
@@ -8,11 +11,12 @@ public class LoginController {
     private Map<String, UserCredentials> staffCredentials;
     private PasswordManager passwordManager;
 
-    public static void main(String[] args) {
-        LoginController controller = new LoginController(new SimplePasswordManager());
-        controller.run(); // Handle all logic after initialization check inside this method
-    }
-
+    /**
+     * Constructs a new LoginController instance with the specified PasswordManager.
+     * Initializes staff passwords if the system is not already initialized.
+     * Loads staff credentials after initialization.
+     * @param passwordManager The PasswordManager instance to use for password operations.
+     */
     public LoginController(PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
         if (!InitializationHandler.isInitialized()) {
@@ -23,10 +27,20 @@ public class LoginController {
         this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME); // Load credentials after initialization
     }
 
+    /**
+     * Runs the login controller logic.
+     * Any additional logic to run after initialization should be handled inside this method.
+     */
     private void run() {
-        // Any additional code to run after initialization
     }
 
+    /**
+     * Attempts to log in a user with the specified login ID and password.
+     * @param loginID The login ID of the user.
+     * @param password The password entered by the user.
+     * @param scanner The Scanner object for user input.
+     * @return true if login is successful, false otherwise.
+     */
     public boolean login(String loginID, String password, Scanner scanner) {
         UserCredentials credentials = staffCredentials.get(loginID);
         if (credentials != null && passwordManager.verifyPassword(password, credentials)) {
@@ -35,6 +49,11 @@ public class LoginController {
         return false;
     }
 
+    /**
+     * Prompts the user to change their password.
+     * @param scanner The Scanner object for user input.
+     * @param loginID The login ID of the user.
+     */
     public void promptPasswordChange(Scanner scanner, String loginID) {
         System.out.println("Please enter your new password:");
         String newPassword = scanner.nextLine();
