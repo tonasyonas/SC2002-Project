@@ -6,14 +6,36 @@ import java.util.Scanner;
 import FOMS.Pages.IPage;
 import FOMS.FOMS_entity.BranchManager;
 
+/**
+ * The {@code EditMenuItemPage} class implements the {@code IPage} interface and provides functionalities to edit existing menu items.
+ * This class allows branch managers to modify details such as price, description, and availability of menu items that belong
+ * to their respective branches. It supports interactive modifications through a simple text-based interface.
+ *
+ * <p>Upon being initiated, it prompts the user to enter the name of the menu item to edit. Once the item is found, it allows
+ * the user to select which attribute of the menu item they wish to edit. If the specified item belongs to the manager's branch,
+ * the changes are committed to the menu list file. The class handles file operations to ensure data integrity during the edit process.</p>
+ *
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
+
 public class EditMenuItemPage implements IPage {
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
     private BranchManager branchManager;
 
+    /**
+     * Constructs an {@code EditMenuItemPage} with a specified {@code BranchManager}.
+     * 
+     * @param branchManager The {@code BranchManager} instance associated with this page.
+     */
     public EditMenuItemPage(BranchManager branchManager) {
         this.branchManager = branchManager;
     }
 
+    /**
+     * Starts the edit menu item page by displaying a greeting, initiating the edit process, and transitioning to other options upon completion.
+     */
     @Override
     public void startPage() {
         display();
@@ -21,17 +43,30 @@ public class EditMenuItemPage implements IPage {
         goToOptionsPage();
     }
 
+    /**
+     * Displays the initial greeting and prompt to the user.
+     */
     @Override
     public void display() {
         System.out.println("Edit Menu Item:");
     }
 
+    /**
+     * Retrieves user input from the console, ensuring it is properly formatted.
+     * 
+     * @return A trimmed and lowercase version of the user input.
+     */
     @Override
     public String getInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine().trim().toLowerCase();
     }
 
+     /**
+     * Manages the editing of a menu item. This method handles file operations to locate the specified item,
+     * allows the user to select and modify specific attributes of the item, and updates the file accordingly.
+     * If the item is not found or does not belong to the user's branch, it notifies the user and makes no changes.
+     */
     public void editMenuItem() {
         Scanner scanner = new Scanner(System.in);
         try {
@@ -105,6 +140,9 @@ public class EditMenuItemPage implements IPage {
         } 
     }
     
+    /**
+     * Transitions to the manager options page after editing a menu item.
+     */
     private void goToOptionsPage() {
         IPage optionsPage = new ManagerOptionsPage(branchManager);
         optionsPage.startPage();

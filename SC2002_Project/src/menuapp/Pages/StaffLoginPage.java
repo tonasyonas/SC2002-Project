@@ -1,19 +1,38 @@
 package menuapp.Pages;
 
 import FOMS.account_manager.*;
-import FOMS.branch_manager.*;
 import FOMS.process_manager.*;
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.FOMS_entity.*;
 import FOMS.Pages.IPage;
 
+/**
+ * The {@code StaffLoginPage} class implements the {@code IPage} interface and facilitates the staff login process
+ * for the application. This class manages the verification of user credentials and directs users to the appropriate
+ * system pages based on their roles.
+ *
+ * <p>This class uses a {@code LoginController} to handle the authentication and optionally allows users to change their
+ * passwords upon successful login. It checks the user's role after logging in and navigates to either the {@code AdminPage},
+ * {@code BranchStaffPage}, or {@code BranchManagerOptionsPage} depending on the role assigned in the credentials.</p>
+ *
+ * <p>Upon initialization, the class ensures that all staff passwords are initialized properly if they have not been set up
+ * already. This setup is handled by an {@code InitializationHandler}, emphasizing security and proper data management.</p>
+ *
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class StaffLoginPage implements IPage {
 
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
     private LoginController loginController;
     private Map<String, UserCredentials> staffCredentials;
 
+    /**
+     * Constructs the {@code StaffLoginPage} and initializes necessary components for the login process.
+     * This includes loading staff credentials and setting up the {@code LoginController}.
+     */
     public StaffLoginPage() {
         if (!InitializationHandler.isInitialized()) { 
             InitializationHandler handler = new InitializationHandler();
@@ -25,6 +44,10 @@ public class StaffLoginPage implements IPage {
         this.loginController = new LoginController(new SimplePasswordManager());
     }
 
+    /**
+     * Initiates the staff login process, guides users through authentication, and directs them to the appropriate
+     * page based on their roles. This method provides a loop for continuous password attempts until successful login.
+     */
     @Override
     public void startPage() {
         display();
@@ -76,12 +99,20 @@ public class StaffLoginPage implements IPage {
         scanner.close();
     }
 
+    /**
+     * Displays the initial login prompt to the user asking for their login ID.
+     */
     @Override
     public void display() {
         System.out.println("Welcome to the staff login system!");
         System.out.print("Enter your login ID: ");
     }
 
+    /**
+     * Retrieves the login ID input from the user.
+     *
+     * @return The user's login ID as a string.
+     */
     @Override
     public String getInput() {
         Scanner scanner = new Scanner(System.in);

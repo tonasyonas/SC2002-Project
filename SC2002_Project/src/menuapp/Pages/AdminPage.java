@@ -7,7 +7,27 @@ import FOMS.branch_manager.OpenCloseBranchPage;
 import FOMS.order_manager.AddRemovePayment;
 import FOMS.Pages.IPage;
 
+/**
+ * The {@code AdminPage} class implements the {@code IPage} interface and represents the administration management
+ * console within the application. This page allows administrators to perform a variety of staff and branch management
+ * operations such as viewing, adding, removing, and transferring staff, promoting staff, managing branches, and
+ * modifying payment methods.
+ *
+ * <p>It encapsulates functionality through a menu-driven approach where administrators can select different options
+ * to manage various aspects of the application's administrative tasks. The class handles user inputs and redirects
+ * to appropriate pages or functions based on the selected options.</p>
+ *
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
+
 public class AdminPage implements IPage {
+
+    /**
+     * Starts the administration page, displaying a menu with various management options and processing user input
+     * to navigate through different administrative functions.
+     */
 
     @Override
     public void startPage() {
@@ -84,10 +104,19 @@ public class AdminPage implements IPage {
 
     }
 
+    /**
+     * Displays the initial greeting and menu options to the admin user.
+     */
     @Override
     public void display() {
         System.out.println("Welcome, Admin!");
     }
+
+    /**
+     * Captures and returns the user's input in a normalized format.
+     * 
+     * @return The trimmed and lower-cased user input string.
+     */
 
     @Override
     public String getInput() {
