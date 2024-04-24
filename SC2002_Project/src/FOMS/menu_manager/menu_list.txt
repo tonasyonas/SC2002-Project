@@ -7,3 +7,4 @@ chicken nugget;6.9;JP;side;true
 chicken nugget;6.6;NTU;side;true
 pepsi;2.1;JE;drink;true
 asd;124;NTU;drink;true;iaobnqiebgweg
+4;29;JE;don;false;sodn

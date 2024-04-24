@@ -2,6 +2,7 @@ package menuapp.Pages;
 
 import java.util.Scanner;
 import FOMS.Pages.IPage;
+import FOMS.process_manager.BranchStaffPage;
 import FOMS.FOMS_entity.*;
 
 public class BranchManagerOptionsPage implements IPage {
@@ -32,7 +33,8 @@ public class BranchManagerOptionsPage implements IPage {
                     break;
                 case "2":
                     System.out.println("Staff Options selected.");
-                    // Call the staff options method here
+                    BranchStaffPage.startBranchStaffPage(branchManager.getBranch()); 
+
                     break;
                 case "0":
                     System.out.println("Exiting...");
