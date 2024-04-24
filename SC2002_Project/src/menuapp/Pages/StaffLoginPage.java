@@ -54,13 +54,10 @@ public class StaffLoginPage implements IPage {
             // Switch case to create objects based on role after successful login
             switch (credentials.getRole()) {
                 case "A":
-                    Admin admin = new Admin(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     AdminPage adminpage = new AdminPage();
                     adminpage.startPage();
                     break;
                 case "S":
-                    BranchStaff bstaff = new BranchStaff(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
-                    // Proceed with branch staff actions
                     BranchStaffPage.startBranchStaffPage(credentials.getBranch()); // Modified call
                     break;
                 case "M":
