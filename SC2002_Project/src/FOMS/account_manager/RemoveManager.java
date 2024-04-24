@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class RemoveManager extends ABaseRemoveStaff {
 
-    public RemoveManager(Scanner scanner,    Boolean first) {
+    public RemoveManager(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
 
@@ -16,17 +16,34 @@ public class RemoveManager extends ABaseRemoveStaff {
         if (credentials.containsKey(loginIDToRemove)) {
             UserCredentials user = credentials.get(loginIDToRemove);
             if (user.getRole().equals("M")&& (first == true)){
-                System.out.println("Does not meet qutoa ratio! Remove a manager");
-                Scanner addStaffScanner = new Scanner(System.in);
-                AddStaffList addStaffList = new AddStaffList(addStaffScanner, false);
-                addStaffList.EditStaffList(filename, credentials);
+                System.out.println("Does not meet qutoa ratio! Add a manager");
+                System.out.println("1. Add a Manager");
+                System.out.println("2. Exit");
+                System.out.print("Enter choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+
+                switch (choice) {
+                    case 1:
+                        // Re-use the scanner instead of creating a new one
+                        AddManager addManager = new AddManager(scanner, false);
+                        addManager.addSpecificRoleStaff(filename, credentials);
+                        break;
+                    case 2:
+                        System.out.println("Exiting...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter 1 or 2.");
+                        break;
+                }
             }
-            credentials.remove(loginIDToRemove);
+            else {
+                System.out.println("The specified ID does not belong to a manager.");
+            }
+            // Save changes to the file regardless of actions taken
             writeToFile(filename, credentials);
-            System.out.println("Staff member removed successfully.");
         } else {
             System.out.println("Staff member with the provided login ID does not exist.");
-        }
+        }    
     }
-
 }

@@ -23,21 +23,31 @@ public class RemoveStaff extends ABaseRemoveStaff {
             List <UserCredentials> filteredList = filter.filter(credentialsList);
             int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
 
-            if (user.getRole().equals("S") && first == true) {
-                if (totalStaff == 7 || totalStaff == 12){
-                    System.out.println("Does not meet qutoa ratio! Add a staff");
-                    Scanner addStaffScanner = new Scanner(System.in);
-                    AddStaffList addStaffList = new AddStaffList(addStaffScanner, false);
-                    addStaffList.EditStaffList(filename, credentials);
+            if (user.getRole().equals("S") && (totalStaff == 7 || totalStaff == 12)){  
+                System.out.println("Does not meet quota ratio! Choose your next action:");
+                System.out.println("1. Add a Staff Member");
+                System.out.println("2. Exit");
+                System.out.print("Enter choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+
+                switch (choice) {
+                    case 1:
+                        AddStaff addStaff = new AddStaff(scanner, false);
+                        addStaff.addSpecificRoleStaff(filename, credentials);
+                        break;
+                    case 2:
+                        System.out.println("Exiting...");
+                        return;  // Exit the method
+                    default:
+                        System.out.println("Invalid choice. Please enter 1 or 2.");
+                        break;
                 }
+            } else {
+                System.out.println("Staff member removed successfully.");
             }
-            credentials.remove(loginIDToRemove);
-            writeToFile(filename, credentials);
-            System.out.println("Staff member removed successfully.");
         } else {
             System.out.println("Staff member with the provided login ID does not exist.");
         }
-
-
     }
 }
