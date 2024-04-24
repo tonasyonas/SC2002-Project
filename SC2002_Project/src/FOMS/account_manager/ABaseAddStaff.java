@@ -1,24 +1,43 @@
 package FOMS.account_manager;
-import FOMS.FOMS_entity.*;
+import FOMS.FOMS_entity.Staff;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Abstract base class for adding staff members.
+ */
 public abstract class ABaseAddStaff {
     protected Scanner scanner;
     protected Boolean first;
 
+    /**
+     * Constructs an ABaseAddStaff object.
+     *
+     * @param scanner The Scanner object to read input from the console.
+     * @param first   Indicates whether it's the first staff member being added.
+     */
     public ABaseAddStaff(Scanner scanner, Boolean first) {
         this.scanner = scanner;
         this.first = first;
     }
 
-    // Abstract method to be implemented by subclasses for specific staff role addition
+    /**
+     * Abstract method to be implemented by subclasses for adding specific staff roles.
+     *
+     * @param filename    The name of the file to write the staff details to.
+     * @param credentials A map containing login IDs and corresponding UserCredentials objects.
+     */
     protected abstract void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials);
 
-    // General method to write any kind of staff details to file
+    /**
+     * Writes staff details to a file.
+     *
+     * @param filename    The name of the file to write the staff details to.
+     * @param credentials A map containing login IDs and corresponding UserCredentials objects.
+     */
     protected void writeToFile(String filename, Map<String, UserCredentials> credentials) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Map.Entry<String, UserCredentials> entry : credentials.entrySet()) {

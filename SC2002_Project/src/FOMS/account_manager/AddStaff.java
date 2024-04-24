@@ -6,13 +6,31 @@ import java.util.ArrayList;
 
 import FOMS.FOMS_entity.*;
 
+/**
+ * The AddStaff class is responsible for adding a staff member to the system.
+ * It extends the ABaseAddStaff abstract class and implements the addSpecificRoleStaff method.
+ * This class prompts the user to input staff details and adds them to the system.
+ */
 public class AddStaff extends ABaseAddStaff {
+    /**
+     * The default password used for new staff accounts.
+     */
     private static final String DEFAULT_PASSWORD = "password";
 
+    /**
+     * Constructs a new AddStaff object.
+     * @param scanner The Scanner object used for user input.
+     * @param first A boolean indicating whether this is the first staff member being added.
+     */
     public AddStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
 
+    /**
+     * Adds a staff member to the system.
+     * @param filename The name of the file to write the updated credentials to.
+     * @param credentials A map containing the current credentials in the system.
+     */
     @Override
     public void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         // Assuming the user provides all necessary details for adding a staff member
