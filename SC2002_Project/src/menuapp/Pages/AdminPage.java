@@ -52,8 +52,8 @@ public class AdminPage implements IPage{
                 case 3:
                     System.out.println("Adding Staff: Please give details");
                     Scanner addStaffScanner = new Scanner(System.in);
-                    AddStaffList addStaffList = new AddStaffList(addStaffScanner,true);
-                    addStaffList.EditStaffList(filename, credentialsMap);
+                    AddStaff addStaff = new AddStaff(addStaffScanner,true);
+                    addStaff.addSpecificRoleStaff(filename, credentialsMap);
                     break;
                 case 4:
                     // Remove staff
