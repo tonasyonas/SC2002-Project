@@ -28,7 +28,8 @@ public class AddStaffPage implements IPage {
         System.out.println("Add Staff:");
         System.out.println("1 - Add Manager");
         System.out.println("2 - Add Staff");
-        System.out.println("3 - Go Back to Options");
+        System.out.println("3 - Add Admin");
+        System.out.println("4 - Go Back to Options");
     }
 
     public void addStaffBasedOnChoice() {
@@ -41,6 +42,8 @@ public class AddStaffPage implements IPage {
                 addRegularStaff();
                 break;
             case "3":
+                addAdmin();
+            case "4":
                 System.out.println("Returning to previous menu...");
                 break;
             default:
@@ -61,6 +64,11 @@ public class AddStaffPage implements IPage {
     private void addRegularStaff() {
         AddStaff addStaff = new AddStaff(scanner, true);
         addStaff.addSpecificRoleStaff(filename, credentialsMap);
+    }
+
+    private void addAdmin() {
+        AddAdmin addAdmin = new AddAdmin(scanner, true);
+        addAdmin.addSpecificRoleStaff(filename, credentialsMap);
     }
 
     private void goToOptionsPage() {

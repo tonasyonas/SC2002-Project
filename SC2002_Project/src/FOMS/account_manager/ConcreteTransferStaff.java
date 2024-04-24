@@ -10,27 +10,23 @@ public class ConcreteTransferStaff extends AStaffTransfer{
 
     @Override
     public void transfer(String filename, Map<String, UserCredentials> credentials) {
-        System.out.println("Enter login ID of the manager to transfer:");
+        System.out.println("Enter login ID of the staff member to transfer:");
         String loginIDToTransfer = scanner.nextLine();
 
         if (credentials.containsKey(loginIDToTransfer)) {
             UserCredentials user = credentials.get(loginIDToTransfer);
-            if (user.getRole().equals("M")) {
-                System.out.println("Enter new branch for manager:");
-                String transferredBranch = scanner.next();
-                scanner.nextLine();  // Consume the newline
+            System.out.println("Enter branch for staff member to transfer:");
+            String transferredBranch = scanner.next();
+            scanner.nextLine();  // Consume the newline
 
-                if (!user.getBranch().equals(transferredBranch)) {
-                    user.setBranch(transferredBranch);
-                    System.out.println("Manager transferred to " + transferredBranch);
-                } else {
-                    System.out.println("Manager already in " + transferredBranch);
-                }
+            if (!user.getBranch().equals(transferredBranch)) {
+                user.setBranch(transferredBranch);
+                System.out.println("Staff member transferred to " + transferredBranch);
             } else {
-                System.out.println("Specified ID does not belong to a manager.");
+                System.out.println("Staff member already in " + transferredBranch);
             }
         } else {
-            System.out.println("Manager with the provided login ID does not exist.");
+            System.out.println("Staff member with the provided login ID does not exist.");
         }
 
         writeToFile(filename, credentials);
