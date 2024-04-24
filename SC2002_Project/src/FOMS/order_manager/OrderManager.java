@@ -10,6 +10,14 @@ import java.text.DecimalFormat;
 import FOMS.menu_manager.*;
 import FOMS.process_manager.*;
 
+/**
+ * Manages orders placed by customers, including creation, status tracking, and persistence.
+ * The OrderManager class interacts with the CartManager to process and place orders.
+ *
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class OrderManager {
     private Map<String, Order> orders = new HashMap<>();
     private static int nextOrderId = 1; // Static variable to keep track of the next order ID
@@ -17,13 +25,25 @@ public class OrderManager {
     private static final String ORDER_FILE = "SC2002_Project/src/FOMS/order_manager/order.txt";
     private Scanner scanner = new Scanner(System.in);
 
-
+    /**
+     * Constructs an OrderManager object.
+     * Initializes the map to store orders and loads next order ID from file.
+     */
     public OrderManager() {
         orders = new HashMap<>();
         loadNextOrderId();
         loadOrdersFromFile(); 
     }
 
+    /**
+     * Places an order based on the items in the provided CartManager.
+     * Generates a new order ID, adds the order to the map, and clears the cart.
+     * Saves the next order ID for persistence.
+     *
+     * @param cartManager The CartManager containing the items to be ordered.
+     * @param orderType   The type of the order (e.g., dine-in, takeout).
+     * @return The ID of the placed order, or null if the cart is empty.
+     */
     public String placeOrder(CartManager cartManager, String orderType) {
         if (cartManager.isEmpty()) {
             System.out.println("Cannot place an empty order.");
@@ -47,10 +67,13 @@ public class OrderManager {
 
         return orderId;
     }
-
     
-    
-    
+    /**
+     * Retrieves the status of a specific order identified by its order ID.
+     *
+     * @param orderId The ID of the order to check.
+     * @return The status of the order, or null if the order ID is invalid.
+     */
     public OrderStatus getOrderStatus(String orderId) {
         Order order = orders.get(orderId);
         if (order != null) {
@@ -60,6 +83,9 @@ public class OrderManager {
     }
 
 
+    /**
+     * Saves the next order ID to a file for persistence.
+     */
     private void saveNextOrderId() {
         try (PrintWriter out = new PrintWriter(new FileWriter(ORDER_ID_FILE))) {
             out.println(nextOrderId);
@@ -68,6 +94,10 @@ public class OrderManager {
         }
     }
     
+    /**
+     * Loads the next order ID from a file for persistence.
+     * If the file is not found, starts with order ID 1.
+     */
     private void loadNextOrderId() {
         try (Scanner in = new Scanner(new FileReader(ORDER_ID_FILE))) {
             if (in.hasNextInt()) {
@@ -80,6 +110,13 @@ public class OrderManager {
          }
     }
 
+    /**
+     * Saves the details of the provided order to a file for persistence.
+     *
+     * @param order          The order to save.
+     * @param selectedBranch The branch where the order was placed.
+     * @param filename       The name of the file to save to.
+     */
     public void saveOrderToFile(Order order, String SelectedBranch, String filename) {
         // Format the order details
         String orderDetails = formatOrderDetails(order);
@@ -95,6 +132,9 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Loads orders from a file for persistence and adds them to the orders map.
+     */
     private void loadOrdersFromFile() {
         // Assuming you have a method to read orders from file
         try {
@@ -108,7 +148,12 @@ public class OrderManager {
         }
     }
 
-
+    /**
+     * Formats the details of the provided order for storage in a file.
+     *
+     * @param order The order to format.
+     * @return A formatted string containing order details.
+     */
     private String formatOrderDetails(Order order) {
     DecimalFormat df = new DecimalFormat("#0.00");
 
@@ -142,8 +187,12 @@ public class OrderManager {
     return sb.toString();
 }
 
-    
-    
+    /**
+     * Retrieves the order associated with the provided order ID.
+     *
+     * @param orderId The ID of the order to retrieve.
+     * @return The order corresponding to the provided ID, or null if not found.
+     */
     public Order getOrderById(String orderId) {
         // Logic to retrieve the Order object from wherever it's stored, e.g., a map or database
         return orders.get(orderId);

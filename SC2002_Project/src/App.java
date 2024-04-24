@@ -3,7 +3,7 @@ import FOMS.Pages.StartUpPage;
 // import FOMS.branch_manager.Restaurant;
 
 /**
- * The {@code App} class serves as the main entry point for the Fast Order Management System (FOMS).
+ * The {@code App} class serves as the main entry point for the FOMS.
  * It initializes the system and directs the user to the startup page where further interactions are handled.
  * This class primarily sets up the initial welcoming interface and triggers the main application logic through the
  * {@code StartUpPage} class.
