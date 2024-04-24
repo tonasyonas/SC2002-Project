@@ -1,2 +1,0 @@
-NUS;U Town;12
-NUS;UTown;12
