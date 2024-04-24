@@ -1,3 +1,6 @@
+/**
+ * The InitializationHandler class provides methods for initializing and managing staff credentials.
+ */
 package FOMS.account_manager;
 
 import java.io.FileWriter;
@@ -12,6 +15,10 @@ public class InitializationHandler {
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
     private Map<String, UserCredentials> staffCredentials; // Declare staffCredentials field
 
+    /**
+     * Checks if the system has been initialized.
+     * @return true if the system is initialized, false otherwise.
+     */
     public static boolean isInitialized() {
         try {
             List<String> lines = FileIOHandler.readLines(INIT_FILE);
@@ -26,6 +33,9 @@ public class InitializationHandler {
         return false;
     }
 
+    /**
+     * Sets the system as initialized.
+     */
     public static void setInitialized() {
         try {
             FileIOHandler.writeToFile(INIT_FILE, "initialized=true");
@@ -34,8 +44,11 @@ public class InitializationHandler {
         }
     }
 
+    /**
+     * Initializes staff passwords.
+     */
     public void initializeStaffPasswords() {
-        this.staffCredentials = ReadStaffList.getRawStaffCredentials(FILE_NAME); 
+        this.staffCredentials = ReadStaffList.getRawStaffCredentials(FILE_NAME);
         for (Map.Entry<String, UserCredentials> entry : this.staffCredentials.entrySet()) {
             String salt = PasswordUtils.getSalt();
             String hashedPassword = PasswordUtils.hashPassword("password", salt);
@@ -46,6 +59,12 @@ public class InitializationHandler {
         }
         saveCredentialsToFile(this.staffCredentials);
     }
+
+    /**
+     * Saves credentials to a file.
+     * @param credentialsMap The map containing user credentials.
+     * @return true if saving is successful, false otherwise.
+     */
     public static boolean saveCredentialsToFile(Map<String, UserCredentials> credentialsMap) {
         try (PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME))) {
             for (Map.Entry<String, UserCredentials> entry : credentialsMap.entrySet()) {

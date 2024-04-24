@@ -3,16 +3,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-
 import FOMS.FOMS_entity.*;
+/**
+ * The AddManager class is responsible for adding a manager to the system.
+ * It extends the ABaseAddStaff abstract class and implements the addSpecificRoleStaff method.
+ * This class prompts the user to input manager details and adds them to the system.
+ */
 public class AddManager extends ABaseAddStaff {
+    /**
+     * The default password used for new manager accounts.
+     */
     private static final String DEFAULT_PASSWORD = "password";
 
+    /**
+     * Constructs a new AddManager object.
+     * @param scanner The Scanner object used for user input.
+     * @param first A boolean indicating whether this is the first manager being added.
+     */
     public AddManager(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
 
+    /**
+     * Adds a manager to the system.
+     * @param filename The name of the file to write the updated credentials to.
+     * @param credentials A map containing the current credentials in the system.
+     */
     @Override
     public void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         // Assuming the user provides all necessary details for adding a staff member
