@@ -7,7 +7,7 @@ import FOMS.branch_manager.OpenCloseBranchPage;
 import FOMS.order_manager.AddRemovePayment;
 import FOMS.Pages.IPage;
 
-public class AdminPage implements IPage{
+public class AdminPage implements IPage {
 
     @Override
     public void startPage() {
@@ -26,8 +26,8 @@ public class AdminPage implements IPage{
             System.out.println("4. Remove Staff");
             System.out.println("5. Promote Staff");
             System.out.println("6. Transfer Staff");
-            System.out.println("7. Open/Close Branch"); 
-            System.out.println("8. Add/Remove Payment Method"); 
+            System.out.println("7. Open/Close Branch");
+            System.out.println("8. Add/Remove Payment Method");
             System.out.print("Enter your choice: ");
             // Check if the input is an integer
             while (!sc.hasNextInt()) {
@@ -45,21 +45,21 @@ public class AdminPage implements IPage{
                     break;
                 case 2:
                     System.out.println("Filtered Staff List:");
-                   
+
                     ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
                     viewer.filterStaff(sc);
                     break;
                 case 3:
-                    System.out.println("Adding Staff: Please give details");
-                    Scanner addStaffScanner = new Scanner(System.in);
-                    AddStaff addStaff = new AddStaff(addStaffScanner,true);
-                    addStaff.addSpecificRoleStaff(filename, credentialsMap);
+                    // Add staff
+                    AddStaffPage addStaffPage = new AddStaffPage(sc, credentialsMap, filename);
+                    addStaffPage.startPage();
                     break;
                 case 4:
                     // Remove staff
                     System.out.println("Remove Staff");
-                    Scanner RemoveStaffScanner = new Scanner(System.in);;
-                    RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner,true);
+                    Scanner RemoveStaffScanner = new Scanner(System.in);
+                    ;
+                    RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner, true);
                     removeStaffList.EditStaffList(filename, credentialsMap);
                     break;
                 case 5:
@@ -85,9 +85,9 @@ public class AdminPage implements IPage{
                     break;
             }
         } while (choice != 0);
-        
+
     }
-    
+
     @Override
     public void display() {
         System.out.println("Welcome, Admin!");

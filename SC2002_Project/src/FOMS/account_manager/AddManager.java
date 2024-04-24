@@ -14,7 +14,7 @@ public class AddManager extends ABaseAddStaff {
     }
 
     @Override
-    protected void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
+    public void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         // Assuming the user provides all necessary details for adding a staff member
           List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());
         System.out.println("Enter name:");
