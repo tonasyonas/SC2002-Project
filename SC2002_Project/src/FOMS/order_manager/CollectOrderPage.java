@@ -26,7 +26,7 @@ public class CollectOrderPage {
                 ProcessOrder.processOrderID(orderID, "Completed");
                 System.out.println("Order collected successfully.");
             } else {
-                System.out.println("Order is not ready for pickup.");
+                System.out.println("Order is not ready for pickup. Current status: " + orderToCollect.getStatus());
             }
         } else {
             System.out.println("Order ID not found.");
