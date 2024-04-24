@@ -7,10 +7,30 @@ import java.text.DecimalFormat;
 import java.util.List;
 import FOMS.order_manager.Order;
 import FOMS.order_manager.OrderItem;
-import java.util.Timer;
-import java.util.TimerTask;
+
+/**
+ * The {@code ProcessOrder} class provides functionality to process orders based on order ID.
+ * It allows updating the status of an order and persisting those changes to a file.
+ * This class is also responsible for starting and canceling a cancellation timer based on
+ * order status changes.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24 
+ */
+
 
 public class ProcessOrder {
+
+    /**
+     * Processes an order by ID, updates its status, and optionally manages a cancellation timer.
+     * It then saves the updated order list to a file.
+     * 
+     * @param orderIdToFind The ID of the order to process.
+     * @param status The new status to set for the order.
+     * @return A list of {@code Order} objects reflecting the updated state, or {@code null} if no matching order is found.
+     * @throws IOException if there is an issue reading or writing to the file.
+     */
 
     public static List<Order> processOrderID(String orderIdToFind, String status) {
         String filename = "SC2002_Project/src/FOMS/order_manager/order.txt";
@@ -34,6 +54,13 @@ public class ProcessOrder {
         return null; // Order with the specified ID not found
     }
 
+    /**
+     * Saves the list of orders to the specified file.
+     * 
+     * @param ordersList A list of {@code Order} objects to save.
+     * @param filename The path of the file where the orders are to be saved.
+     * @throws IOException if there is an issue writing to the file.
+     */
     public static void saveOrderListToFile(List<Order> ordersList, String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Order order : ordersList) {
@@ -47,6 +74,14 @@ public class ProcessOrder {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Formats the details of an order into a string suitable for file storage.
+     * It includes order ID, status, total, order type, branch, and item details.
+     * 
+     * @param order The {@code Order} object whose details are to be formatted.
+     * @return A formatted string representation of the order details.
+     */
 
     private static String formatOrderDetails(Order order) {
         DecimalFormat df = new DecimalFormat("#0.00");
