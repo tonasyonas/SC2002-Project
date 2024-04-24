@@ -46,10 +46,14 @@ public class AddStaff extends ABaseAddStaff {
 
 
         if (first && (totalStaff == 5 || totalStaff == 10)) {
+
+            // switch case to choose to add manager or remove staff or exit
             System.out.println("Does not meet quota ratio! Adding a manager...");
             Scanner addManagerScanner = new Scanner(System.in);
             AddManager addManager = new AddManager(addManagerScanner, false);
             addManager.addSpecificRoleStaff(filename, credentials);
+
+
         }
 
 

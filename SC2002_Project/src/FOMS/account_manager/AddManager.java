@@ -1,4 +1,6 @@
 package FOMS.account_manager;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class AddManager extends ABaseAddStaff {
     @Override
     protected void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         // Assuming the user provides all necessary details for adding a staff member
+          List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());
         System.out.println("Enter name:");
         String name = scanner.nextLine();
 
@@ -38,11 +41,16 @@ public class AddManager extends ABaseAddStaff {
         UserCredentials newCredentials = new UserCredentials(name, "M", gender, age, branch, salt, hashedPassword, true);
         credentials.put(loginID, newCredentials);
 
-        if (first == true){
+         IStaffFilter filter = new BranchFilter(branch);
+        List <UserCredentials> filteredList = filter.filter(credentialsList);
+        int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
+
+        if (first == true && (totalStaff == 5 || totalStaff == 10) ){
+            //remove manager or add staff
             System.out.println("Does not meet qutoa ratio! Remove a manager");
             Scanner RemoveStaffScanner = new Scanner(System.in);
-            RemoveStaffList removeStaffList = new RemoveStaffList(RemoveStaffScanner,false);
-            removeStaffList.EditStaffList(filename, credentials);
+            RemoveManager removeManager = new RemoveManager(RemoveStaffScanner,false);
+            removeManager.EditStaffList(filename, credentials);
         }
 
         // Write updated credentials to the file

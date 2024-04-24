@@ -9,7 +9,7 @@ public class RemoveManager extends ABaseRemoveStaff {
     }
 
     @Override
-    protected void removeSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
+    public void removeSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         System.out.println("Enter login ID of the staff member to remove:");
         String loginIDToRemove = scanner.nextLine().trim();
 
