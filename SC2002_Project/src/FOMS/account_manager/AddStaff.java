@@ -46,17 +46,31 @@ public class AddStaff extends ABaseAddStaff {
 
 
         if (first && (totalStaff == 5 || totalStaff == 10)) {
+            System.out.println("Does not meet quota ratio! Choose an action:");
+            System.out.println("1. Add Manager");
+            System.out.println("2. Remove Staff");
+            System.out.println("3. Exit");
+            System.out.print("Enter choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the rest of the line after number input
 
-            // switch case to choose to add manager or remove staff or exit
-            System.out.println("Does not meet quota ratio! Adding a manager...");
-            Scanner addManagerScanner = new Scanner(System.in);
-            AddManager addManager = new AddManager(addManagerScanner, false);
-            addManager.addSpecificRoleStaff(filename, credentials);
-
-
+            switch (choice) {
+                case 1:
+                    AddManager addManager = new AddManager(new Scanner(System.in), false);
+                    addManager.addSpecificRoleStaff(filename, credentials);
+                    break;
+                case 2:
+                    RemoveStaff removeStaff = new RemoveStaff(new Scanner(System.in), false);
+                    removeStaff.removeSpecificRoleStaff(filename, credentials);
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;  // Exit the method
+                default:
+                    System.out.println("Invalid choice. Please enter a valid number (1-3).");
+                    break;
+            }
         }
-
-
         // Write updated credentials to the file
         writeToFile(filename, credentials);
     }
