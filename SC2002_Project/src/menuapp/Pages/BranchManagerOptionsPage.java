@@ -20,7 +20,7 @@ import FOMS.FOMS_entity.*;
  */
 
 public class BranchManagerOptionsPage implements IPage {
-    BranchManager branchManager;
+    private BranchManager branchManager;
 
     /**
      * Constructs a {@code BranchManagerOptionsPage} with a specified {@code BranchManager}.
