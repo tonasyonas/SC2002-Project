@@ -94,7 +94,8 @@ public class StaffLoginPage implements IPage {
                     break;
             }
         } else {
-            System.out.println("Staff member not found. Please try again.");
+            System.out.println("Staff member not found. Please try again."); 
+            startPage();
         }
         scanner.close();
     }

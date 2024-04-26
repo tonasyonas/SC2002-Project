@@ -43,7 +43,7 @@ public class ConcreteTransferStaff extends AStaffTransfer {
                         switch (choice) {
                             case 1:
                                 RemoveStaff removeStaff = new RemoveStaff(scanner, false);
-                                removeStaff.removeSpecificRoleStaff(filename, credentials);
+                                removeStaff.removeRoleStaff(filename, credentials);
                                 first = true;
                                 break;
                             case 2:

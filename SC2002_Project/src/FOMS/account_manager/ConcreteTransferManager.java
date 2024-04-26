@@ -44,7 +44,7 @@ public class ConcreteTransferManager extends AStaffTransfer {
                         switch (choice) {
                             case 1:
                                 RemoveManager removeManager = new RemoveManager(scanner, false);
-                                removeManager.removeSpecificRoleStaff(filename, credentials);
+                                removeManager.removeRoleStaff(filename, credentials);
                                 first = true;
                                 break;
                             case 2:

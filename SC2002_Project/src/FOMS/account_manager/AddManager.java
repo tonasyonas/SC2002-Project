@@ -82,7 +82,7 @@ public class AddManager extends ABaseAddStaff {
                 case 1:
                     credentials.put(loginID, newCredentials);
                     RemoveManager removeManager = new RemoveManager(scanner, false);
-                    removeManager.removeSpecificRoleStaff(filename, credentials);
+                    removeManager.removeRoleStaff(filename, credentials);
                     System.out.println("Manager Added Successfully");
 
                     break;

@@ -91,7 +91,7 @@ public class AddStaff extends ABaseAddStaff {
                     break;
                 case 2:
                     RemoveStaff removeStaff = new RemoveStaff(new Scanner(System.in), false);
-                    removeStaff.removeSpecificRoleStaff(filename, credentials);
+                    removeStaff.removeRoleStaff(filename, credentials);
                     credentials.put(loginID, newCredentials);
                     System.out.println("Staff added successfull");
 
