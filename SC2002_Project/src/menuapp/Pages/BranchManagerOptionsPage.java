@@ -25,7 +25,7 @@ public class BranchManagerOptionsPage implements IPage {
     /**
      * Constructs a {@code BranchManagerOptionsPage} with a specified {@code BranchManager}.
      * 
-     * @param branchManager The {@code BranchManager} instance associated with this page.
+     * @param branchmanager The {@code BranchManager} instance associated with this page.
      */
     public BranchManagerOptionsPage (BranchManager branchmanager){
         this.branchManager = branchmanager;

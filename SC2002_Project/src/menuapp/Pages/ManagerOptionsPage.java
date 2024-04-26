@@ -32,7 +32,7 @@ public class ManagerOptionsPage implements IPage {
      * Constructs a {@code ManagerOptionsPage} with a specified {@code BranchManager}.
      * This constructor exemplifies the Dependency Inversion Principle by relying on a high-level {@code BranchManager} module for managerial functions.
      *
-     * @param branchManager The {@code BranchManager} instance associated with this page.
+     * @param branchmanager The BranchManager instance associated with this page.
      */
     public ManagerOptionsPage(BranchManager branchmanager) {
         this.branchmanager = branchmanager;
