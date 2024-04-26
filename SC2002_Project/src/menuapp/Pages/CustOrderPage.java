@@ -224,7 +224,7 @@ public class CustOrderPage implements IPage{
                 int quantity = Integer.parseInt(scanner.nextLine());
                 System.out.println("Yes or No: Do you want any customisations");
                 String boolCustomisation = scanner.nextLine().trim();
-                if (boolCustomisation.equals("yes")) {
+                if (boolCustomisation.equalsIgnoreCase("yes")) {
                     System.out.println("Entering customization loop...");
                     scanner.nextLine(); // Consume newline character
                     for (int i = 0; i < quantity; i++) {
