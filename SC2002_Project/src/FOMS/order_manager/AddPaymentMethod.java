@@ -31,10 +31,8 @@ public class AddPaymentMethod {
     public static void addPaymentMethod(String paymentMethod) {
         List<String> paymentMethods = GetPaymentMethods.getPaymentMethods();
 
-        // Determine the next available index
         int nextIndex = paymentMethods.size() + 1;
 
-        // Append the new payment method with the updated number
         String newPaymentMethodEntry = nextIndex + ";" + paymentMethod;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PAYMENT_METHODS_FILE, true))) {
             writer.write(newPaymentMethodEntry);

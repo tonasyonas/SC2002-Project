@@ -25,12 +25,12 @@ public class AddManager extends ABaseAddStaff {
      */
     public AddManager(Scanner scanner, Boolean first, BranchQuotaManager branchQuotaManager) {
         super(scanner, first);
-        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
+        this.branchQuotaManager = new BranchQuotaManager();  
     }
 
     public AddManager(Scanner scanner, Boolean first) {
         super(scanner, first);
-        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
+        this.branchQuotaManager = new BranchQuotaManager();  
     }
 
     /**
@@ -40,7 +40,6 @@ public class AddManager extends ABaseAddStaff {
      */
     @Override
     public void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
-        // Assuming the user provides all necessary details for adding a staff member
           List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());
         System.out.println("Enter name:");
         String name = scanner.nextLine();
@@ -58,11 +57,9 @@ public class AddManager extends ABaseAddStaff {
         System.out.println("Enter branch:");
         String branch = scanner.nextLine();
 
-        // Generate salt and hash password
         String salt = PasswordUtils.getSalt();
         String hashedPassword = PasswordUtils.hashPassword(DEFAULT_PASSWORD, salt);
 
-        // Creating and adding new staff credentials
         UserCredentials newCredentials = new UserCredentials(name, "M", gender, age, branch, salt, hashedPassword, true);
         credentials.put(loginID, newCredentials);
 
@@ -76,7 +73,7 @@ public class AddManager extends ABaseAddStaff {
             System.out.println("2. Add Staff");
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
@@ -100,7 +97,7 @@ public class AddManager extends ABaseAddStaff {
         }
         else if (!branchQuotaManager.canAddStaff(branch, totalStaff)) {
             System.out.println("Cannot add manager. Branch quota exceeded.");
-            return; // Exit the method if quota is exceeded
+            return; 
         }
 
         else if(first == false){
@@ -114,7 +111,6 @@ public class AddManager extends ABaseAddStaff {
             System.out.println("Cannot add manager. Please try another option");
         }
 
-        // Write updated credentials to the file
         writeToFile(filename, credentials);
 
     }

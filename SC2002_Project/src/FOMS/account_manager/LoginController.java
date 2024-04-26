@@ -24,15 +24,10 @@ public class LoginController {
             initializationHandler.initializeStaffPasswords();
             InitializationHandler.setInitialized();
         }
-        this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME); // Load credentials after initialization
+        this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);   
     }
 
-    /**
-     * Runs the login controller logic.
-     * Any additional logic to run after initialization should be handled inside this method.
-     */
-    private void run() {
-    }
+
 
     /**
      * Attempts to log in a user with the specified login ID and password.

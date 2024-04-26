@@ -27,12 +27,12 @@ public class AddStaff extends ABaseAddStaff {
      */
     public AddStaff(Scanner scanner, Boolean first, BranchQuotaManager branchQuotaManager) {
         super(scanner, first);
-        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
+        this.branchQuotaManager = new BranchQuotaManager();  
     }
 
     public AddStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
-        this.branchQuotaManager = new BranchQuotaManager();  // Initialize BranchQuotaManager here as well
+        this.branchQuotaManager = new BranchQuotaManager();  
 
     }
 
@@ -43,7 +43,6 @@ public class AddStaff extends ABaseAddStaff {
      */
     @Override
     public void addSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials) {
-        // Assuming the user provides all necessary details for adding a staff member
         List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());
         System.out.println("Enter name:");
         String name = scanner.nextLine();
@@ -61,11 +60,9 @@ public class AddStaff extends ABaseAddStaff {
         System.out.println("Enter branch:");
         String branch = scanner.nextLine();
 
-        // Generate salt and hash password
         String salt = PasswordUtils.getSalt();
         String hashedPassword = PasswordUtils.hashPassword(DEFAULT_PASSWORD, salt);
 
-        // Creating and adding new staff credentials
         UserCredentials newCredentials = new UserCredentials(name, "S", gender, age, branch, salt, hashedPassword, true);
         IStaffFilter filter = new BranchFilter(branch);
         List <UserCredentials> filteredList = filter.filter(credentialsList);
@@ -78,7 +75,7 @@ public class AddStaff extends ABaseAddStaff {
             System.out.println("3. Exit");
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the rest of the line after number input
+            scanner.nextLine();  
 
             switch (choice) {
                 case 1:
@@ -99,7 +96,7 @@ public class AddStaff extends ABaseAddStaff {
                     break;
                 case 3:
                     System.out.println("Exiting...");
-                    return;  // Exit the method
+                    return;  
                 default:
                     System.out.println("Invalid choice. Please enter a valid number (1-3).");
                     break;
@@ -108,7 +105,7 @@ public class AddStaff extends ABaseAddStaff {
 
         else if (first == true && !branchQuotaManager.canAddStaff(branch, totalStaff)) {
             System.out.println("Cannot add staff. Branch quota exceeded.");
-            return; // Exit the method if quota is exceeded
+            return; 
         }
 
         else if (first == false || first == true){
@@ -118,7 +115,6 @@ public class AddStaff extends ABaseAddStaff {
         }
 
 
-        // Write updated credentials to the file
         writeToFile(filename, credentials);
     }
 }

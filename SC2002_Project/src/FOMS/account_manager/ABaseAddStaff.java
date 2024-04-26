@@ -49,7 +49,7 @@ public abstract class ABaseAddStaff {
             for (Map.Entry<String, UserCredentials> entry : credentials.entrySet()) {
                 UserCredentials userCredentials = entry.getValue();
                 String line = userCredentials.getName() + ";" +
-                        entry.getKey() + ";" + // Login ID
+                        entry.getKey() + ";" +  
                         userCredentials.getRole() + ";" +
                         (userCredentials.getGender() == Staff.Gender.F ? "F" : "M") + ";" +
                         userCredentials.getAge() + ";" +

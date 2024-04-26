@@ -15,7 +15,7 @@ public class ViewFilteredStaffList {
         this.credentialsMap = credentialsMap;
     }
 
-    public void filterStaff(Scanner scanner) {  // Accept Scanner as parameter
+    public void filterStaff(Scanner scanner) {  
         List<UserCredentials> credentialsList = new ArrayList<>(credentialsMap.values());
         List<UserCredentials> filteredList;
 
@@ -48,7 +48,7 @@ public class ViewFilteredStaffList {
                 break;
             default:
                 System.out.println("Invalid option. Displaying all staff.");
-                filter = staff -> staff;  // Lambda for no filtering
+                filter = staff -> staff;  
                 break;
         }
         
@@ -74,9 +74,7 @@ public class ViewFilteredStaffList {
         return count;
     }
 
-    // Method to be called from elsewhere in your application
     public static void main(String[] args) {
-        // Assume a method exists that retrieves the staff credentials
         Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
         ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
         Scanner scanner = new Scanner(System.in);

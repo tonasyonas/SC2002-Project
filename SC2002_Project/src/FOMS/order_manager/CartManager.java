@@ -33,7 +33,6 @@ public class CartManager {
      * @param customization A string detailing any specific customization requests for the item.
      */
     public void addItem(MenuItem item, int quantity, String customization) {
-        // Create a unique key based on item name and customization
         String key = item.getItem() + "-" + customization.toLowerCase();
 
         if (cartItems.containsKey(key)) {
@@ -91,8 +90,7 @@ public class CartManager {
             total += item.getMenuItem().getCost() * item.getQuantity();
         }
         
-        // Round the total to two decimal places
-        DecimalFormat df = new DecimalFormat("#.##");
+         DecimalFormat df = new DecimalFormat("#.##");
         total = Double.parseDouble(df.format(total));
         
         return total;
@@ -137,7 +135,6 @@ public class CartManager {
 
         if (orderItem != null && newQuantity > 0) {
             orderItem.setQuantity(newQuantity);
-            // Assuming setCustomization is a method within OrderItem that updates customization
             orderItem.setCustomization(customization);
             System.out.println("Item quantity and customization updated.");
         } else if (orderItem != null && newQuantity <= 0) {
@@ -163,6 +160,6 @@ public class CartManager {
                 return orderItem.getCustomization();
             }
         }
-        return ""; // Return empty string if no customizations are found.
+        return ""; 
     }    
 }

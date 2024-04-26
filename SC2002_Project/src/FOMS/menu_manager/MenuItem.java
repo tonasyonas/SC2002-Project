@@ -1,7 +1,6 @@
 package FOMS.menu_manager;
 
-// import java.util.HashMap;
-// import java.util.Map;
+
 
 /**
  * Represents a menu item.
@@ -16,8 +15,8 @@ package FOMS.menu_manager;
 public class MenuItem {
     private String item;
     private double cost;
-    private String branch; // Attribute to store branch information
-    private String customizations;  // Customizations as a simple string
+    private String branch; 
+    private String customizations;  
     private boolean available;
     private String description;
 
@@ -34,9 +33,9 @@ public class MenuItem {
         this.item = item;
         this.cost = cost;
         this.available = available;
-        this.branch = branch; // Initialize the branch
+        this.branch = branch; 
         this.description = description;
-        this.customizations = "";  // Initialize as empty string
+        this.customizations = ""; 
     }
 
     /**
@@ -49,8 +48,8 @@ public class MenuItem {
     public MenuItem(String item, double cost, String branch) {
         this.item = item;
         this.cost = cost;
-        this.branch = branch; // Initialize the branch
-        this.customizations = "";  // Initialize as empty string
+        this.branch = branch; 
+        this.customizations = "";  
     }
 
     /**

@@ -47,13 +47,13 @@ public class BranchStaffPage {
 
             switch (choiceint) {
                 case 1:
-                    DisplayOrder.displayOrders(branch); // Pass the branch to the display orders method
+                    DisplayOrder.displayOrders(branch); 
                     break;
                 case 2:
                     DisplayNewOrders.displayNewOrders(branch); 
                     break;
                 case 3:
-                    processOrders(); // Processing might also be branch-specific
+                    processOrders(); 
                     break;
                 case 0:
                     System.out.println("Exiting...");

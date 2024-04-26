@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-// import java.util.Map.Entry;
 
 /**
  * The ViewMenu class provides functionality to display menu items for a specific branch,
@@ -88,7 +87,6 @@ public class ViewMenu {
     public void displayAvailableMenuForBranch(String selectedBranch) {
         Map<String, MenuItem> fullMenu = menuOrganizer.getMenuForBranch(selectedBranch);
         if (fullMenu != null) {
-            // Filter the menu to include only available items
             Map<String, MenuItem> availableMenu = fullMenu.entrySet().stream()
                 .filter(entry -> entry.getValue().isAvailable())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

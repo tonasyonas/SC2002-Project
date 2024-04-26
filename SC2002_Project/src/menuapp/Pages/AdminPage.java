@@ -49,13 +49,12 @@ public class AdminPage implements IPage {
             System.out.println("7. Open/Close Branch");
             System.out.println("8. Add/Remove Payment Method");
             System.out.print("Enter your choice: ");
-            // Check if the input is an integer
-            while (!sc.hasNextInt()) {
+             while (!sc.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number (1/2/3).");
-                sc.next(); // Consume invalid input
+                sc.next(); 
             }
             choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            sc.nextLine(); 
 
             switch (choice) {
                 case 1:
@@ -70,31 +69,26 @@ public class AdminPage implements IPage {
                     viewer.filterStaff(sc);
                     break;
                 case 3:
-                    // Add staff
-                    AddStaffPage addStaffPage = new AddStaffPage(sc, credentialsMap, filename);
+                     AddStaffPage addStaffPage = new AddStaffPage(sc, credentialsMap, filename);
                     addStaffPage.startPage();
                     break;
                 case 4:
-                    // Remove staff
-                    RemoveStaffPage removeStaffPage = new RemoveStaffPage(sc, credentialsMap, filename);
+                     RemoveStaffPage removeStaffPage = new RemoveStaffPage(sc, credentialsMap, filename);
                     removeStaffPage.startPage();
                     break;
                 case 5:
                     PromoteStaff promoteStaff = new PromoteStaff(sc);
-                    // Pass the filename and credentials map to EditStaffList method
-                    promoteStaff.EditStaffList(filename, credentialsMap);
+                     promoteStaff.EditStaffList(filename, credentialsMap);
                     break;
                 case 6:
                     TransferStaffPage transferStaffPage = new TransferStaffPage(sc, credentialsMap, filename);
                     transferStaffPage.startPage();
                     break;
                 case 7:
-                    // New case for opening or closing branches
-                    OpenCloseBranchPage.openclosebranch(sc);
+                     OpenCloseBranchPage.openclosebranch(sc);
                     break;
                 case 8:
-                    // For adding/removing payment methods
-                    AddRemovePayment.addRemovePayment(sc);
+                     AddRemovePayment.addRemovePayment(sc);
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose again.");

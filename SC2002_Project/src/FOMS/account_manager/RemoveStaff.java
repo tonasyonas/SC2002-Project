@@ -32,7 +32,7 @@ public class RemoveStaff extends ABaseRemoveStaff {
                     System.out.println("2. Exit");
                     System.out.print("Enter choice: ");
                     int choice = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine(); 
 
                     switch (choice) {
                         case 1:
@@ -42,7 +42,7 @@ public class RemoveStaff extends ABaseRemoveStaff {
                             break;
                         case 2:
                             System.out.println("Exiting...");
-                            return;  // Exit the method
+                            return;  
                         default:
                             System.out.println("Invalid choice. Please enter 1 or 2.");
                             break;

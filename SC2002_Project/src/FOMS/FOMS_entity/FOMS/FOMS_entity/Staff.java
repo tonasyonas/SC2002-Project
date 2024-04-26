@@ -34,7 +34,6 @@ public abstract class Staff {
     }
 
     public boolean authenticate(String password) {
-        //Hashing
         return password == this.hashedPassword;
     }
 
@@ -45,5 +44,4 @@ public abstract class Staff {
     public String getStaffActions() {
         return "logout";
     }
-    //Common functionalities that all the staff have
 }

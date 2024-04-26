@@ -93,7 +93,7 @@ public class RemoveMenuItemPage implements IPage {
                 String[] details = line.split(";");
                 if (details.length > 0 && details[0].equalsIgnoreCase(nameToRemove) && details[2].equalsIgnoreCase(branchManager.getBranch())) {
                     found = true;
-                    continue; // Skip writing this line to the temporary file
+                    continue;  
                 }
                 writer.write(line + "\n");
             }
@@ -103,10 +103,10 @@ public class RemoveMenuItemPage implements IPage {
 
             if (!found) {
                 System.out.println("Menu item not found or does not belong to your branch.");
-                tempFile.delete(); // Delete the temporary file if the item is not found or doesn't belong to the branch
+                tempFile.delete();  
             } else {
-                inputFile.delete(); // Delete the original file
-                tempFile.renameTo(inputFile); // Rename the temporary file to the original file
+                inputFile.delete();  
+                tempFile.renameTo(inputFile);  
                 System.out.println("Menu item removed successfully!");
             }
         } catch (IOException e) {

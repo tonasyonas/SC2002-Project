@@ -31,7 +31,7 @@ public class StartUpPage implements IPage {
      * It initializes the scanner and prompts the user to identify their user type upon creation.
      */
     public StartUpPage() {
-        this.scanner = new Scanner(System.in); // Initialize it once here
+        this.scanner = new Scanner(System.in); 
         System.out.println("Are you a customer or a staff member?");
     }
 
@@ -55,7 +55,7 @@ public class StartUpPage implements IPage {
                 break;
             default:
                 System.out.println("Invalid input. Please enter 'customer' or 'staff'.");
-                startPage(); // Retry if input is invalid
+                startPage();  
                 break;
         }
     }

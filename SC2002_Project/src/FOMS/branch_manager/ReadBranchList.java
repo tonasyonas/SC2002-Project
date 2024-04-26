@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReadBranchList {
     public static List<Branch> getBranchList(String filename) {
-        List<Branch> branchList = new ArrayList<>(); // ArrayList to store branches
+        List<Branch> branchList = new ArrayList<>(); 
     
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;

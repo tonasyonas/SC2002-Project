@@ -25,7 +25,7 @@ public class ConcreteTransferStaff extends AStaffTransfer {
             if (user.getRole().equals("S")) {
                 System.out.println("Enter new branchID for staff:");
                 String transferredBranch = scanner.next();
-                scanner.nextLine();  // Consume the newline
+                scanner.nextLine();  
 
                 IStaffFilter branchFilter = new BranchFilter(transferredBranch);
                 List<UserCredentials> filteredList = branchFilter.filter(credentialsList);
@@ -38,7 +38,7 @@ public class ConcreteTransferStaff extends AStaffTransfer {
                         System.out.println("2. Add Manager to transferred branch");
                         System.out.print("Enter choice: ");
                         int choice = scanner.nextInt();
-                        scanner.nextLine(); // consume newline
+                        scanner.nextLine(); 
 
                         switch (choice) {
                             case 1:

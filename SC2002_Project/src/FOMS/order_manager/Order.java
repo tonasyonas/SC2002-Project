@@ -28,7 +28,7 @@ public class Order {
     private List<OrderItem> orderItems;
     private String orderId;
     private double total;
-    private String status; // Possible values: "New", "Ready to Pickup", "Completed"
+    private String status;  
     private String orderType;
     private LocalDateTime readyTime;
     private Timer cancellationTimer;
@@ -62,7 +62,7 @@ public class Order {
     public Order(String orderId) {
         this.orderItems = new ArrayList<>();
         this.orderId = orderId;
-        this.status = "New"; // Default status
+        this.status = "New";  
     }
 
     /**
@@ -153,7 +153,7 @@ public class Order {
      */
     public void setStatus(String status) {
         if ("Ready for Pickup".equals(status) && !"Ready for Pickup".equals(this.status)) {
-            this.readyTime = LocalDateTime.now(); // Set the timestamp when order becomes ready
+            this.readyTime = LocalDateTime.now();  
         }
         this.status = status;
     }
@@ -189,7 +189,6 @@ public class Order {
                     setStatus("Cancelled");
                     System.out.println("Order " + orderId + " has been cancelled due to not being picked up on time.");
     
-                    // Now save the changes to file
         
                     ProcessOrder.saveOrderListToFile(ordersList, filename);
                 }

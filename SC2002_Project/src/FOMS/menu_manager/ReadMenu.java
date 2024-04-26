@@ -31,8 +31,8 @@ public class ReadMenu {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                line = line.trim();  // Trim the line to remove any leading or trailing whitespace
-                if (line.isEmpty()) {  // Skip empty lines
+                line = line.trim();  
+                if (line.isEmpty()) {  
                     continue;
                 }
     
@@ -65,7 +65,7 @@ public class ReadMenu {
                         }
     
                         if (item != null) {
-                            menu.put(itemName + "#" + itemBranch, item); // Composite key of name and branch
+                            menu.put(itemName + "#" + itemBranch, item);
                         }
                     } catch (NumberFormatException e) {
                         System.err.println("Error parsing item price: " + e.getMessage());

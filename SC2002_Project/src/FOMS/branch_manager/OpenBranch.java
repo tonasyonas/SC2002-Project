@@ -2,12 +2,7 @@ package FOMS.branch_manager;
 
 import java.util.List;
 import java.util.Scanner;
-// import java.io.BufferedReader;
-// import java.io.FileWriter;
-// import java.io.BufferedWriter;
-// import java.io.FileReader;
-// import java.io.IOException;
-// import java.util.ArrayList;
+
 
 public class OpenBranch extends AOpenCloseBranch {
 
@@ -24,23 +19,18 @@ public class OpenBranch extends AOpenCloseBranch {
         System.out.print("Quota: ");
         int quota = scanner.nextInt();
 
-        // Create an instance of OpenBranch to perform the operation
         OpenBranch branchManager = new OpenBranch();
         branchManager.editOpenclose(branchID, branchName, quota);
 
         System.out.println("Branch details have been saved successfully.");
     }
 
-    // Override the abstract method from AOpenCloseBranch
     public void editOpenclose(String branchID, String branchName, int quota) {
-        // Read existing branch list
         List<String> branchList = readBranchList("SC2002_Project/src/FOMS/branch_manager/branch_list.txt");
 
-        // Append the new branch entry
         String newBranchEntry = branchID + ";" + branchName + ";" + quota;
         branchList.add(newBranchEntry);
 
-        // Write the updated branch list to the text file
         writeToTextFile("SC2002_Project/src/FOMS/branch_manager/branch_list.txt", branchList);
     }
 }
