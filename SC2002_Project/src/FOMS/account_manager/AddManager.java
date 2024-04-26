@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import FOMS.FOMS_entity.*;
+import FOMS.branch_manager.*;
 /**
  * The AddManager class is responsible for adding a manager to the system.
  * It extends the ABaseAddStaff abstract class and implements the addSpecificRoleStaff method.
@@ -14,14 +15,22 @@ public class AddManager extends ABaseAddStaff {
      * The default password used for new manager accounts.
      */
     private static final String DEFAULT_PASSWORD = "password";
+    private BranchQuotaManager branchQuotaManager; 
 
     /**
      * Constructs a new AddManager object.
      * @param scanner The Scanner object used for user input.
      * @param first A boolean indicating whether this is the first manager being added.
+     * @param branchQuotaManager The BranchQuotaManager to handle branch quotas.
      */
+    public AddManager(Scanner scanner, Boolean first, BranchQuotaManager branchQuotaManager) {
+        super(scanner, first);
+        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
+    }
+
     public AddManager(Scanner scanner, Boolean first) {
         super(scanner, first);
+        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
     }
 
     /**
@@ -79,7 +88,7 @@ public class AddManager extends ABaseAddStaff {
                     break;
                 case 2:
                     credentials.put(loginID, newCredentials);
-                    AddStaff addStaff = new AddStaff(scanner, false);
+                    AddStaff addStaff = new AddStaff(scanner, false, branchQuotaManager);
                     addStaff.addSpecificRoleStaff(filename, credentials);
                     System.out.println("Manager Added Successfully");
 
@@ -88,7 +97,10 @@ public class AddManager extends ABaseAddStaff {
                     System.out.println("Invalid choice. Please enter 1 or 2.");
                     break;
             }
-
+        }
+        else if (!branchQuotaManager.canAddStaff(branch, totalStaff)) {
+            System.out.println("Cannot add manager. Branch quota exceeded.");
+            return; // Exit the method if quota is exceeded
         }
 
         else if(first == false){

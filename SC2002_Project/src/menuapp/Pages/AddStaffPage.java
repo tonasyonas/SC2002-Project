@@ -5,6 +5,7 @@ import java.util.Map;
 import FOMS.account_manager.*;
 import FOMS.Pages.IPage;
 
+import FOMS.branch_manager.*;
 /**
  * The {@code AddStaffPage} class represents a page in the application where users can add new staff members.
  * This page allows users to add staff members with different roles, such as Manager, Regular Staff, or Admin.
@@ -23,6 +24,7 @@ public class AddStaffPage implements IPage {
     private Scanner scanner;
     private Map<String, UserCredentials> credentialsMap;
     private String filename;
+    private BranchQuotaManager branchQuotaManager;
 
     /**
      * Constructs an {@code AddStaffPage} with the necessary dependencies.
@@ -96,7 +98,7 @@ public class AddStaffPage implements IPage {
      * Initiates the process to add a new manager.
      */
     private void addManager() {
-        AddManager addManager = new AddManager(scanner, true);
+        AddManager addManager = new AddManager(scanner, true, branchQuotaManager);
         addManager.addSpecificRoleStaff(filename, credentialsMap);
     }
 
@@ -104,7 +106,7 @@ public class AddStaffPage implements IPage {
      * Initiates the process to add a new regular staff member.
      */ 
     private void addRegularStaff() {
-        AddStaff addStaff = new AddStaff(scanner, true);
+        AddStaff addStaff = new AddStaff(scanner, true, branchQuotaManager);
         addStaff.addSpecificRoleStaff(filename, credentialsMap);
     }
 

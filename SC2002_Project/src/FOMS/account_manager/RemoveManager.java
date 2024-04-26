@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import FOMS.branch_manager.*;
 public class RemoveManager extends ABaseRemoveStaff {
 
+    private BranchQuotaManager branchQuotaManager;
     public RemoveManager(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
@@ -36,7 +38,7 @@ public class RemoveManager extends ABaseRemoveStaff {
                     switch (choice) {
                         case 1:
                             // Re-use the scanner instead of creating a new one
-                            AddManager addManager = new AddManager(scanner, false);
+                            AddManager addManager = new AddManager(scanner, false, branchQuotaManager);
                             addManager.addSpecificRoleStaff(filename, credentials);
                             credentials.remove(loginIDToRemove);
 

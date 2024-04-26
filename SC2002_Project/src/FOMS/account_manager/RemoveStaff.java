@@ -3,10 +3,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import FOMS.branch_manager.*;
 
 
 public class RemoveStaff extends ABaseRemoveStaff {
 
+    private BranchQuotaManager branchQuotaManager;
     public RemoveStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
@@ -34,7 +36,7 @@ public class RemoveStaff extends ABaseRemoveStaff {
 
                     switch (choice) {
                         case 1:
-                            AddStaff addStaff = new AddStaff(scanner, false);
+                            AddStaff addStaff = new AddStaff(scanner, false, branchQuotaManager);
                             addStaff.addSpecificRoleStaff(filename, credentials);
                             credentials.remove(loginIDToRemove);
                             break;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import FOMS.FOMS_entity.*;
+import FOMS.branch_manager.*;
 
 /**
  * The AddStaff class is responsible for adding a staff member to the system.
@@ -16,14 +17,23 @@ public class AddStaff extends ABaseAddStaff {
      * The default password used for new staff accounts.
      */
     private static final String DEFAULT_PASSWORD = "password";
+    private BranchQuotaManager branchQuotaManager; 
 
     /**
      * Constructs a new AddStaff object.
      * @param scanner The Scanner object used for user input.
      * @param first A boolean indicating whether this is the first staff member being added.
+     * @param branchQuotaManager The BranchQuotaManager to handle branch quotas.
      */
+    public AddStaff(Scanner scanner, Boolean first, BranchQuotaManager branchQuotaManager) {
+        super(scanner, first);
+        this.branchQuotaManager = new BranchQuotaManager(); // Initialize the BranchQuotaManager
+    }
+
     public AddStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
+        this.branchQuotaManager = new BranchQuotaManager();  // Initialize BranchQuotaManager here as well
+
     }
 
     /**
@@ -61,7 +71,6 @@ public class AddStaff extends ABaseAddStaff {
         List <UserCredentials> filteredList = filter.filter(credentialsList);
         int totalStaff = ViewFilteredStaffList.displayStaff(filteredList);
 
-
         if (first == true && (totalStaff == 5 || totalStaff == 10)) {
             System.out.println("Does not meet quota ratio! Choose an action:");
             System.out.println("1. Add Manager");
@@ -73,7 +82,7 @@ public class AddStaff extends ABaseAddStaff {
 
             switch (choice) {
                 case 1:
-                    AddManager addManager = new AddManager(new Scanner(System.in), false);
+                    AddManager addManager = new AddManager(new Scanner(System.in), false, branchQuotaManager);
                     addManager.addSpecificRoleStaff(filename, credentials);
                     credentials.put(loginID, newCredentials);
                     System.out.println("Staff added successfull");
@@ -97,9 +106,10 @@ public class AddStaff extends ABaseAddStaff {
             }
         }
 
-        //else if (first == true && totalStaff == quota)rej
-
-       
+        else if (first == true && !branchQuotaManager.canAddStaff(branch, totalStaff)) {
+            System.out.println("Cannot add staff. Branch quota exceeded.");
+            return; // Exit the method if quota is exceeded
+        }
 
         else if (first == false || first == true){
             credentials.put(loginID, newCredentials);
