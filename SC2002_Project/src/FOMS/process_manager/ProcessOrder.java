@@ -29,7 +29,6 @@ public class ProcessOrder {
      * @param orderIdToFind The ID of the order to process.
      * @param status The new status to set for the order.
      * @return A list of {@code Order} objects reflecting the updated state, or {@code null} if no matching order is found.
-     * @throws IOException if there is an issue reading or writing to the file.
      */
 
     public static List<Order> processOrderID(String orderIdToFind, String status) {
@@ -59,7 +58,6 @@ public class ProcessOrder {
      * 
      * @param ordersList A list of {@code Order} objects to save.
      * @param filename The path of the file where the orders are to be saved.
-     * @throws IOException if there is an issue writing to the file.
      */
     public static void saveOrderListToFile(List<Order> ordersList, String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {

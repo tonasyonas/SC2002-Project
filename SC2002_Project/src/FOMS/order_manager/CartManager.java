@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.text.DecimalFormat;
     /**
-     * The {@code CartManager} class manages the shopping cart in the Fast Order Management System (FOMS). It allows items to be
+     * The {@code CartManager} class manages the shopping cart in FOMS. It allows items to be
      * added, removed, or updated within the cart with or without customizations. The class also provides functionality to display
      * cart items, calculate the total cost, and manage the quantity of items.
      *

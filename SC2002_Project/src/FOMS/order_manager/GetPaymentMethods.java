@@ -40,6 +40,12 @@ public class GetPaymentMethods {
         return paymentMethods;
     }
 
+    /**
+     * Displays a specific payment method based on a numerical choice input by the user.
+     * The choice corresponds to the index of the payment method as listed in the payment methods file.
+     *
+     * @param choice The index number of the payment method to display.
+     */
     public static void displayPaymentMethod(int choice){
         // Print the payment method associated with the choice
         boolean found = false;
@@ -64,6 +70,10 @@ public class GetPaymentMethods {
         }
     }
 
+    /**
+     * Displays all available payment methods stored in the file.
+     * Each payment method is listed with an index number for easy reference and selection.
+     */
     public static void displayPaymentMethods() {
         List<String> paymentMethods = getPaymentMethods();
         for (String method : paymentMethods) {
@@ -72,10 +82,5 @@ public class GetPaymentMethods {
                 System.out.println(parts[0] + ". " + parts[1]);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.print("Selected payment method: ");
-        GetPaymentMethods.displayPaymentMethod(3);
     }
 }
