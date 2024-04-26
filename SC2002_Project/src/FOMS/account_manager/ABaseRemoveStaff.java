@@ -37,7 +37,7 @@ public abstract class ABaseRemoveStaff {
      * @param filename    The name of the file to write the updated staff details to.
      * @param credentials A map containing login IDs and corresponding UserCredentials objects.
      */
-    protected abstract void removeSpecificRoleStaff(String filename, Map<String, UserCredentials> credentials);
+    protected abstract void removeRoleStaff(String filename, Map<String, UserCredentials> credentials);
 
     /**
      * Writes the updated staff details to a file after removal.
