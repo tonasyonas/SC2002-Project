@@ -2,6 +2,8 @@ package FOMS.branch_manager;
 
 import java.util.List;
 import java.util.Scanner;
+import FOMS.account_manager.*;
+import java.util.Map; // Import the RemoveAllStaff class
 
 public class CloseBranch extends AOpenCloseBranch {
 
@@ -10,6 +12,13 @@ public class CloseBranch extends AOpenCloseBranch {
 
         System.out.print("Branch ID: ");
         String branchID = scanner.nextLine();
+
+        // Remove all staff associated with the branch
+        String filename = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
+    
+        Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials(filename);
+        RemoveAllStaff removeAllStaff = new RemoveAllStaff(scanner, false, branchID);
+        removeAllStaff.removeRoleStaff(filename, credentialsMap);
 
         // Create an instance of CloseBranch to perform the operation
         CloseBranch branchManager = new CloseBranch();
