@@ -8,11 +8,11 @@ public class OrderItem {
     private int quantity;
     private String customization;
     
-    public OrderItem(MenuItem menuItem, int quantity) {
-        this.menuItem = menuItem;
-        this.quantity = quantity;
-        this.customization = customization;
-    }
+    // public OrderItem(MenuItem menuItem, int quantity) {
+    //     this.menuItem = menuItem;
+    //     this.quantity = quantity;
+    //     this.customization = customization;
+    // }
     
     // Constructor
     public OrderItem(MenuItem menuItem, int quantity, String customization){
