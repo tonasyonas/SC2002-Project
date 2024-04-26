@@ -11,7 +11,7 @@ package FOMS.menu_manager;
  * @version 1.0
  * @since 2024-04-24
  */
-public interface BranchSelector {
+public interface IBranchSelector {
     /**
      * Selects a branch.
      *

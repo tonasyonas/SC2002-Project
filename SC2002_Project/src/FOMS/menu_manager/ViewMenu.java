@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class ViewMenu {
     private MenuDisplay menuDisplay;
-    private BranchSelector branchSelector;
+    private IBranchSelector branchSelector;
     private MenuOrganizer menuOrganizer;
 
     /**
@@ -27,7 +27,7 @@ public class ViewMenu {
      * @param branchSelector An implementation of BranchSelector used to select branches.
      * @param menuOrganizer An implementation of MenuOrganizer used to organize menus.
      */
-    public ViewMenu(MenuDisplay menuDisplay, BranchSelector branchSelector, MenuOrganizer menuOrganizer) {
+    public ViewMenu(MenuDisplay menuDisplay, IBranchSelector branchSelector, MenuOrganizer menuOrganizer) {
         this.menuDisplay = menuDisplay;
         this.branchSelector = branchSelector;
         this.menuOrganizer = menuOrganizer;

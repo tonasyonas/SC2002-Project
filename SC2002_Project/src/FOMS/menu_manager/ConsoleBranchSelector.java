@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @version 1.0
  * @since 2024-04-24
  */
-public class ConsoleBranchSelector implements BranchSelector {
+public class ConsoleBranchSelector implements IBranchSelector {
     private Scanner scanner;
     private String[] branches;
 

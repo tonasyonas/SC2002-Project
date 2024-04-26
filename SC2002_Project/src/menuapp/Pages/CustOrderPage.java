@@ -29,7 +29,7 @@ public class CustOrderPage implements IPage{
     private ViewMenu viewMenu; // handle menu display logic
     private CartManager cartManager; // handle cart operations
     private OrderManager orderManager;  // handle order operations
-    private BranchSelector branchSelector; // declare at class level
+    private IBranchSelector branchSelector; // declare at class level
     private String selectedBranch; // New member to store the selected branch
     private String orderType; // to hold the order type across different parts of the process
 
