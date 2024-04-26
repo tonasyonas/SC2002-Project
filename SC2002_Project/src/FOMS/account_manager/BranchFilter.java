@@ -7,6 +7,18 @@ package FOMS.account_manager;
 import java.util.List;
 import java.util.stream.Collectors;
 
+    /**
+     * Filters UserCredentials based on branch.
+     * 
+     * This class implements the IStaffFilter interface and provides functionality to filter a list of UserCredentials
+     * objects based on their branch. It returns a filtered list containing only the UserCredentials objects belonging
+     * to the specified branch.
+     * 
+     * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+     * @version 1.0
+     * @since 2024-04-24
+     */
+
 public class BranchFilter implements IStaffFilter {
     private String branch;
 

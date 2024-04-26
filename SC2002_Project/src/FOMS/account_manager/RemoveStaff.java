@@ -5,14 +5,33 @@ import java.util.List;
 import java.util.ArrayList;
 import FOMS.branch_manager.*;
 
-
+/**
+ * The RemoveStaff class provides functionality to remove a staff member from the system.
+ * It extends the ABaseRemoveStaff abstract class and implements the logic to remove a staff member and handle branch quota ratios.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class RemoveStaff extends ABaseRemoveStaff {
 
     private BranchQuotaManager branchQuotaManager;
+    /**
+     * Constructs a new RemoveStaff object with the specified scanner and first flag.
+     * 
+     * @param scanner The Scanner object for user input.
+     * @param first   A boolean flag indicating if it's the first operation.
+     */
     public RemoveStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
 
+    /**
+     * Removes a staff member from the system and handles branch quota ratios.
+     * 
+     * @param filename    The name of the file to write updated credentials.
+     * @param credentials A map containing the login IDs as keys and the corresponding UserCredentials objects as values.
+     */
     @Override
     public void removeRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());

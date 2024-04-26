@@ -7,10 +7,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
+/**
+ * The AOpenCloseBranch class is an abstract class that provides common methods 
+ * for reading and writing branch information to a text file.
+ * It implements the IOpenCloseBranch interface.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public abstract class AOpenCloseBranch implements IOpenCloseBranch {
 
+    /**
+     * Reads branch information from a text file.
+     * 
+     * @param filename The name of the file to read from.
+     * @return A list of strings representing branch information.
+     */
     protected List<String> readBranchList(String filename) {
         List<String> branchList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -24,6 +38,12 @@ public abstract class AOpenCloseBranch implements IOpenCloseBranch {
         return branchList;
     }
 
+    /**
+     * Writes branch information to a text file.
+     * 
+     * @param filename The name of the file to write to.
+     * @param branchList The list of strings representing branch information to write.
+     */
     protected void writeToTextFile(String filename, List<String> branchList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (String branchEntry : branchList) {

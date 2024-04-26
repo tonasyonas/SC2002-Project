@@ -11,6 +11,10 @@ import FOMS.branch_manager.*;
  * The AddStaff class is responsible for adding a staff member to the system.
  * It extends the ABaseAddStaff abstract class and implements the addSpecificRoleStaff method.
  * This class prompts the user to input staff details and adds them to the system.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
  */
 public class AddStaff extends ABaseAddStaff {
     /**
@@ -30,6 +34,12 @@ public class AddStaff extends ABaseAddStaff {
         this.branchQuotaManager = new BranchQuotaManager();  
     }
 
+     /**
+     * Constructs a new AddStaff object.
+     * 
+     * @param scanner The Scanner object used for user input.
+     * @param first A boolean indicating whether this is the first staff member being added.
+     */
     public AddStaff(Scanner scanner, Boolean first) {
         super(scanner, first);
         this.branchQuotaManager = new BranchQuotaManager();  

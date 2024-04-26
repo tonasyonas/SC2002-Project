@@ -9,6 +9,16 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The InitializationHandler class provides methods for initializing and managing staff credentials.
+ * 
+ * It includes functionality to check if the system has been initialized, set the system as initialized,
+ * initialize staff passwords, and save credentials to a file.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class InitializationHandler {
 
     private static final String INIT_FILE = "SC2002_Project/src/FOMS/account_manager/init_config.txt";
@@ -73,7 +83,7 @@ public class InitializationHandler {
                         cred.name, entry.getKey(), cred.role, cred.gender,
                         cred.age, cred.branch, cred.salt, cred.hashedPassword, cred.needsPasswordReset);
             }
-            out.flush();  
+            out.flush();
         } catch (IOException e) {
             System.err.println("Failed to save credentials: " + e.getMessage());
             return false;

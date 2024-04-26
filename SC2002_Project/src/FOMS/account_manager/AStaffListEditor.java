@@ -10,6 +10,17 @@ import java.io.IOException;
 import java.util.Map;
 import FOMS.FOMS_entity.*;
 
+    /**
+     * Base class for editing staff lists.
+     * 
+     * This abstract class implements the IStaffListEditor interface and provides a method for writing staff details to a file.
+     * Subclasses can extend this class and provide custom implementations for editing staff lists.
+     * 
+     * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+     * @version 1.0
+     * @since 2024-04-24
+     */
+
 public abstract class AStaffListEditor implements IStaffListEditor {
 
     /**

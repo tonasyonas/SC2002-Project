@@ -1,6 +1,3 @@
-/**
- * The FileIOHandler class provides static methods for reading from and writing to files.
- */
 package FOMS.account_manager;
 
 import java.io.FileWriter;
@@ -10,6 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * The FileIOHandler class provides static methods for reading from and writing to files.
+ * 
+ * It includes methods for reading all lines from a file and writing content to a file.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class FileIOHandler {
 
     /**

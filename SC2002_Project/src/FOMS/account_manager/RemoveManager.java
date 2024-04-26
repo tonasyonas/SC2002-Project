@@ -5,13 +5,34 @@ import java.util.Map;
 import java.util.Scanner;
 
 import FOMS.branch_manager.*;
+
+/**
+ * The RemoveManager class provides functionality to remove a manager from the system.
+ * It extends the ABaseRemoveStaff abstract class and implements the logic to remove a manager and handle branch quota ratios.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class RemoveManager extends ABaseRemoveStaff {
 
     private BranchQuotaManager branchQuotaManager;
+    /**
+     * Constructs a new RemoveManager object with the specified scanner and first flag.
+     * 
+     * @param scanner The Scanner object for user input.
+     * @param first   A boolean flag indicating if it's the first operation.
+     */
     public RemoveManager(Scanner scanner, Boolean first) {
         super(scanner, first);
     }
 
+    /**
+     * Removes a manager from the system and handles branch quota ratios.
+     * 
+     * @param filename    The name of the file to write updated credentials.
+     * @param credentials A map containing the login IDs as keys and the corresponding UserCredentials objects as values.
+     */
     @Override
     public void removeRoleStaff(String filename, Map<String, UserCredentials> credentials) {
         List<UserCredentials> credentialsList = new ArrayList<>(credentials.values());

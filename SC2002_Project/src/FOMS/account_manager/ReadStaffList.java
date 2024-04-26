@@ -6,7 +6,21 @@ import java.util.HashMap;
 import java.util.Map;
 import FOMS.FOMS_entity.*;
 
+/**
+ * The ReadStaffList class provides methods for reading staff credentials from a file.
+ * It offers functionality to retrieve staff credentials either with or without hashed passwords.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class ReadStaffList {
+    /**
+     * Retrieves staff credentials from a file with hashed passwords.
+     * 
+     * @param filename The name of the file to read staff credentials from.
+     * @return A map containing the login IDs as keys and the corresponding UserCredentials objects as values.
+     */
     public static Map<String, UserCredentials> getStaffCredentials(String filename) {
         Map<String, UserCredentials> credentials = new HashMap<>();
     
@@ -43,8 +57,15 @@ public class ReadStaffList {
         }
         return credentials;
     }
-        public static Map<String, UserCredentials> getRawStaffCredentials(String filename) {
-            Map<String, UserCredentials> credentials = new HashMap<>();
+        
+    /**
+     * Retrieves staff credentials from a file without hashed passwords.
+     * 
+     * @param filename The name of the file to read staff credentials from.
+     * @return A map containing the login IDs as keys and the corresponding UserCredentials objects with empty password fields.
+     */
+    public static Map<String, UserCredentials> getRawStaffCredentials(String filename) {
+        Map<String, UserCredentials> credentials = new HashMap<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                 String line;
                 while ((line = reader.readLine()) != null) {

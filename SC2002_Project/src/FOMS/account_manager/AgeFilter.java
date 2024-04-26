@@ -9,7 +9,15 @@ import java.util.stream.Collectors;
 
 public class AgeFilter implements IStaffFilter {
     /**
-     * The age to filter the staff members by.
+     * Filters staff members based on their age.
+     * 
+     * This class implements the IStaffFilter interface and provides functionality to filter a list of UserCredentials
+     * objects based on their age. It returns a filtered list containing only the UserCredentials objects with the
+     * specified age.
+     * 
+     * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+     * @version 1.0
+     * @since 2024-04-24
      */
     private int age;
 

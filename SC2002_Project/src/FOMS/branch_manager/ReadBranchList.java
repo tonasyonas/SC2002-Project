@@ -5,8 +5,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * The ReadBranchList class provides functionality to read a list of branches from a file.
+ * It reads branch information from a text file and constructs Branch objects.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class ReadBranchList {
+    /**
+     * Reads branch information from the specified file and constructs a list of Branch objects.
+     * 
+     * @param filename The name of the file containing branch information.
+     * @return A list of Branch objects.
+     */
     public static List<Branch> getBranchList(String filename) {
         List<Branch> branchList = new ArrayList<>(); 
     

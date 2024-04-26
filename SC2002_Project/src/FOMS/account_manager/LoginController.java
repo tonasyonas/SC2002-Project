@@ -1,11 +1,16 @@
-/**
- * The LoginController class manages user login and password-related operations.
- */
 package FOMS.account_manager;
 
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * The LoginController class manages user login and password-related operations.
+ * It provides methods for user authentication and password management.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class LoginController {
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
     private Map<String, UserCredentials> staffCredentials;

@@ -8,6 +8,14 @@ import java.util.HashMap;
 import FOMS.FOMS_entity.*;
 import FOMS.menu_manager.*;
 
+/**
+ * The Restaurant class represents a restaurant with branches, staff, and menu items.
+ * It reads branch, staff, and menu information from text files and constructs the restaurant objects.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 public class Restaurant {
     private static final String BRANCH_FILE = "SC2002_Project/src/FOMS/branch_manager/branch_list.txt";
     private static final String STAFF_FILE = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
@@ -16,6 +24,9 @@ public class Restaurant {
 
     ArrayList<Staff> staffList;
 
+    /**
+     * Constructs a new Restaurant object with empty branch map and staff list, and initializes branches, staff, and menu items.
+     */
     public Restaurant() {
         branches = new HashMap<String, Branch>();
         getBranches();
@@ -24,6 +35,9 @@ public class Restaurant {
         getMenuItems();
     }
 
+    /**
+     * Reads branch information from a file and populates the branches map accordingly.
+     */
     private void getBranches() {
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(BRANCH_FILE))) {
@@ -43,6 +57,9 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Reads staff information from a file and populates the staff list and respective branches with staff accordingly.
+     */
     private void getStaff() {
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(STAFF_FILE))) {
@@ -93,6 +110,9 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Reads menu item information from a file and populates the respective branches with menu items accordingly.
+     */
     private void getMenuItems() {
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(MENU_FILE))) {

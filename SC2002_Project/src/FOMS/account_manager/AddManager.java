@@ -9,7 +9,12 @@ import FOMS.branch_manager.*;
  * The AddManager class is responsible for adding a manager to the system.
  * It extends the ABaseAddStaff abstract class and implements the addSpecificRoleStaff method.
  * This class prompts the user to input manager details and adds them to the system.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
  */
+
 public class AddManager extends ABaseAddStaff {
     /**
      * The default password used for new manager accounts.
@@ -28,6 +33,12 @@ public class AddManager extends ABaseAddStaff {
         this.branchQuotaManager = new BranchQuotaManager();  
     }
 
+    /**
+     * Constructs a new AddManager object.
+     * 
+     * @param scanner The Scanner object used for user input.
+     * @param first A boolean indicating whether this is the first manager being added.
+     */
     public AddManager(Scanner scanner, Boolean first) {
         super(scanner, first);
         this.branchQuotaManager = new BranchQuotaManager();  

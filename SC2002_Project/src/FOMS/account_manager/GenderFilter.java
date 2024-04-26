@@ -1,6 +1,3 @@
-/**
- * The GenderFilter class implements the IStaffFilter interface to filter a list of UserCredentials based on gender.
- */
 package FOMS.account_manager;
 
 import java.util.List;
@@ -8,6 +5,13 @@ import java.util.stream.Collectors;
 
 import FOMS.FOMS_entity.*;
 
+/**
+ * The GenderFilter class implements the IStaffFilter interface to filter a list of UserCredentials based on gender.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24 
+ */
 public class GenderFilter implements IStaffFilter {
     private Staff.Gender gender;
 

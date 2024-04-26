@@ -6,15 +6,32 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * The ViewFilteredStaffList class provides functionality to filter and display staff members based on various criteria.
+ * It allows filtering by branch, role, gender, and age.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
+ */
 
 public class ViewFilteredStaffList {
     private Map<String, UserCredentials> credentialsMap;
 
+    /**
+     * Constructs a new ViewFilteredStaffList instance with the specified credentials map.
+     * 
+     * @param credentialsMap The map containing user credentials.
+     */
     public ViewFilteredStaffList(Map<String, UserCredentials> credentialsMap) {
         this.credentialsMap = credentialsMap;
     }
 
+    /**
+     * Filters and displays staff members based on user input criteria.
+     * 
+     * @param scanner The Scanner object for user input.
+     */
     public void filterStaff(Scanner scanner) {  
         List<UserCredentials> credentialsList = new ArrayList<>(credentialsMap.values());
         List<UserCredentials> filteredList;
@@ -56,6 +73,12 @@ public class ViewFilteredStaffList {
         displayStaff(filteredList);
     }
 
+    /**
+     * Displays the staff list with their details.
+     * 
+     * @param staffList The list of staff members to display.
+     * @return The count of staff members displayed.
+     */
     public static int displayStaff(List<UserCredentials> staffList) {
         int count = 0;
         if (staffList.isEmpty()) {
@@ -72,12 +95,5 @@ public class ViewFilteredStaffList {
             }
         }
         return count;
-    }
-
-    public static void main(String[] args) {
-        Map<String, UserCredentials> credentialsMap = ReadStaffList.getStaffCredentials("SC2002_Project/src/FOMS/account_manager/staff_list.txt");
-        ViewFilteredStaffList viewer = new ViewFilteredStaffList(credentialsMap);
-        Scanner scanner = new Scanner(System.in);
-        viewer.filterStaff(scanner);
     }
 }

@@ -6,6 +6,11 @@ import java.util.Base64;
 
 /**
  * The PasswordUtils class provides utility methods for generating and hashing passwords.
+ * It also includes a method for verifying passwords.
+ * 
+ * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+ * @version 1.0
+ * @since 2024-04-24
  */
 public class PasswordUtils {
     private static final SecureRandom RANDOM = new SecureRandom();

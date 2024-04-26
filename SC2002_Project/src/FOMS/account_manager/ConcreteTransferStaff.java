@@ -5,11 +5,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+    /**
+     * Concrete implementation for transferring staff members in the system.
+     * 
+     * This class extends the AStaffTransfer abstract class and provides a concrete implementation for transferring
+     * staff members from one branch to another. It ensures that branch quota constraints are met during the transfer process.
+     * 
+     * @author Donovan, Sailesh, Kellie, Jonas, Jo Wee
+     * @version 1.0
+     * @since 2024-04-24
+     */
 public class ConcreteTransferStaff extends AStaffTransfer {
+    /**
+     * Constructs a ConcreteTransferStaff object with the specified Scanner.
+     * 
+     * @param scanner The Scanner object used for user input.
+     */
     public ConcreteTransferStaff(Scanner scanner) {
         super(scanner);
     }
-
+    /**
+     * Transfers a staff member from one branch to another.
+     * 
+     * @param filename The name of the file to write the updated credentials to.
+     * @param credentials A map containing the current credentials in the system.
+     */
     @Override
     public void transfer(String filename, Map<String, UserCredentials> credentials) {
         boolean first = false;
