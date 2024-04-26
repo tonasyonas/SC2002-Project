@@ -32,7 +32,7 @@ public class PromoteStaff extends AStaffListEditor {
                 System.out.println("Does not meet quota ratio! Removing a manager...");
                 Scanner removeStaffScanner = new Scanner(System.in);
                 RemoveStaff removestaff = new RemoveStaff(removeStaffScanner, false);
-                    removestaff.removeSpecificRoleStaff(filename, credentials);
+                    removestaff.removeRoleStaff(filename, credentials);
                     System.out.println("Staff member promoted successfully.");
                     user.setRole("M");
                 

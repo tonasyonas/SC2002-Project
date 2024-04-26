@@ -95,7 +95,7 @@ public class RemoveStaffPage implements IPage {
      */
     private void removeManager() {
         RemoveManager removeManager = new RemoveManager(scanner, true);
-        removeManager.removeSpecificRoleStaff(filename, credentialsMap);
+        removeManager.removeRoleStaff(filename, credentialsMap);
     }
 
     /**
@@ -103,7 +103,7 @@ public class RemoveStaffPage implements IPage {
      */
     private void removeRegularStaff() {
         RemoveStaff removeStaff = new RemoveStaff(scanner, true);
-        removeStaff.removeSpecificRoleStaff(filename, credentialsMap);
+        removeStaff.removeRoleStaff(filename, credentialsMap);
     }
 
     /**
