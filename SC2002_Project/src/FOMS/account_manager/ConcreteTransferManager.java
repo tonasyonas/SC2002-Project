@@ -25,20 +25,21 @@ public class ConcreteTransferManager extends AStaffTransfer {
             if (user.getRole().equals("M")) {
                 System.out.println("Enter new branchID for manager:");
                 String transferredBranch = scanner.next();
-                scanner.nextLine();  
+                scanner.nextLine();  // Consume the newline
 
                 IStaffFilter branchFilter = new BranchFilter(transferredBranch);
                 List<UserCredentials> filteredList = branchFilter.filter(credentialsList);
                 int totalStaffInTransferredBranch = ViewFilteredStaffList.displayStaff(filteredList);
 
                 if (!user.getBranch().equals(transferredBranch)) {
-                    if (totalStaffInTransferredBranch == 5 || totalStaffInTransferredBranch == 10) {
+                    // if (total == branchquota)
+                    /*else */if (totalStaffInTransferredBranch == 5 || totalStaffInTransferredBranch == 10) {
                         System.out.println("Transferred branch does not meet quota ratio!");
                         System.out.println("1. Remove a Manager from transferred branch");
                         System.out.println("2. Add Staff to transferred branch");
                         System.out.print("Enter choice: ");
                         int choice = scanner.nextInt();
-                        scanner.nextLine();
+                        scanner.nextLine(); // consume newline
 
                         switch (choice) {
                             case 1:

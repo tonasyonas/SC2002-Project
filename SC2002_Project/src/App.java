@@ -1,5 +1,6 @@
 import FOMS.Pages.StartUpPage;
-
+// import FOMS.account_manager.LoginController;
+// import FOMS.branch_manager.Restaurant;
 
 /**
  * The {@code App} class serves as the main entry point for the FOMS.
@@ -35,7 +36,8 @@ public class App {
         System.out.println(" |_|    \\____/|_|  |_|_____/ ");        
         System.out.println("\n================== Welcome to FOMS! ==================");
 
-         StartUpPage startUpPage = new StartUpPage();
+        //Restaurant myRestaurant = new Restaurant();
+        StartUpPage startUpPage = new StartUpPage();
         startUpPage.startPage();
         
     }

@@ -20,7 +20,7 @@ import FOMS.process_manager.*;
  */
 public class OrderManager {
     private Map<String, Order> orders = new HashMap<>();
-    private static int nextOrderId = 1; 
+    private static int nextOrderId = 1; // Static variable to keep track of the next order ID
     private static final String ORDER_ID_FILE = "SC2002_Project/src/FOMS/order_manager/orderid.txt";
     private static final String ORDER_FILE = "SC2002_Project/src/FOMS/order_manager/order.txt";
     private Scanner scanner = new Scanner(System.in);
@@ -52,16 +52,18 @@ public class OrderManager {
 
         String orderId = String.valueOf(nextOrderId++);
         Order newOrder = new Order(orderId);
-        newOrder.setOrderType(orderType);  
+        newOrder.setOrderType(orderType); // Set the order type
 
 
-         for (OrderItem orderItem : cartManager.getItems().keySet()) {
-             newOrder.addItem(new OrderItem(orderItem.getMenuItem(), orderItem.getQuantity(), orderItem.getCustomization()));
+        // Adjusted to work with the new Map structure in CartManager
+        for (OrderItem orderItem : cartManager.getItems().keySet()) {
+            // You can directly add the OrderItem as it now includes both the MenuItem and customization
+            newOrder.addItem(new OrderItem(orderItem.getMenuItem(), orderItem.getQuantity(), orderItem.getCustomization()));
         }
         newOrder.setStatus(OrderStatus.NEW.toString());
         orders.put(orderId, newOrder);
         cartManager.clearCart();
-        saveNextOrderId();  
+        saveNextOrderId(); // Save the next order ID for persistence
 
         return orderId;
     }
@@ -77,7 +79,7 @@ public class OrderManager {
         if (order != null) {
             return OrderStatus.valueOf(order.getStatus().toUpperCase());
         }
-        return null; 
+        return null; // Or throw an exception or similar error handling
     }
 
 
@@ -103,7 +105,8 @@ public class OrderManager {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Order ID file not found. Starting with order ID 1.");
-   
+        // } catch (IOException e) {
+        //     System.err.println("Failed to load next order ID: " + e.getMessage());
          }
     }
 
@@ -115,12 +118,13 @@ public class OrderManager {
      * @param filename       The name of the file to save to.
      */
     public void saveOrderToFile(Order order, String SelectedBranch, String filename) {
-         String orderDetails = formatOrderDetails(order);
+        // Format the order details
+        String orderDetails = formatOrderDetails(order);
 
- 
+        // Write to file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             writer.write(orderDetails);
-            writer.newLine();  
+            writer.newLine(); // To ensure each order is on a new line.
             System.out.println("Order saved successfully to " + filename);
         } catch (IOException e) {
             System.err.println("Failed to save order to file: " + e.getMessage());
@@ -132,11 +136,13 @@ public class OrderManager {
      * Loads orders from a file for persistence and adds them to the orders map.
      */
     private void loadOrdersFromFile() {
+        // Assuming you have a method to read orders from file
         try {
             List<Order> loadedOrders = ReadOrderList.readOrdersFromFile(ORDER_FILE);
             for (Order order : loadedOrders) {
                 orders.put(order.getOrderId(), order);
             }
+            System.out.println("Loaded " + loadedOrders.size() + " orders from file.");
         } catch (IOException e) {
             System.err.println("Failed to load orders from file: " + e.getMessage());
         }
@@ -154,7 +160,7 @@ public class OrderManager {
     StringBuilder sb = new StringBuilder();
     sb.append(order.getOrderId()).append(';')
     .append(order.getStatus()).append(';')
-    .append(df.format(order.getTotal())).append(';') 
+    .append(df.format(order.getTotal())).append(';') // Format total to two decimal places
     .append(order.getOrderType()).append(';')
     .append(order.getOrderItems().get(0).getMenuItem().getBranch()).append(';');
 
@@ -164,6 +170,7 @@ public class OrderManager {
         double price = item.getMenuItem().getCost();
         String customizations = item.getCustomization();
 
+        // Append food, quantity, price, and customizations
         sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
         if (!customizations.isEmpty()) {
             sb.append(customizations);
@@ -172,6 +179,7 @@ public class OrderManager {
     }
 
 
+    // Remove the last semicolon and space from the item list
     if (!order.getOrderItems().isEmpty()) {
         sb.setLength(sb.length() - 2);
     }
@@ -186,7 +194,8 @@ public class OrderManager {
      * @return The order corresponding to the provided ID, or null if not found.
      */
     public Order getOrderById(String orderId) {
-         return orders.get(orderId);
+        // Logic to retrieve the Order object from wherever it's stored, e.g., a map or database
+        return orders.get(orderId);
     }
 
 }

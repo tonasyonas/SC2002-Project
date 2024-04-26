@@ -24,7 +24,6 @@ import FOMS.FOMS_entity.BranchManager;
 public class AddMenuItemPage implements IPage {
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/menu_manager/menu_list.txt";
     private BranchManager branchManager;
-    private Scanner scanner;
 
     /**
      * Constructs an {@code AddMenuItemPage} object with a specific {@code BranchManager}.
@@ -33,7 +32,6 @@ public class AddMenuItemPage implements IPage {
      */
     public AddMenuItemPage(BranchManager branchManager) {
         this.branchManager = branchManager;
-        this.scanner = scanner;
     }
 
     /**
@@ -80,11 +78,12 @@ public class AddMenuItemPage implements IPage {
                 System.out.print("Enter new menu item name: ");
                 String name = scanner.nextLine().trim();
     
-                 if (isItemNameUnique(name)) {
+                // Check if the item name already exists in the menu
+                if (isItemNameUnique(name)) {
                     System.out.print("Enter price: ");
                     String price = scanner.nextLine().trim();
     
-                    String branch = branchManager.getBranch();  
+                    String branch = branchManager.getBranch(); // Get the branch from the branchManager
     
                     System.out.print("Enter category: ");
                     String category = scanner.nextLine().trim();
@@ -97,19 +96,21 @@ public class AddMenuItemPage implements IPage {
                         System.out.print("Enter description (maximum 20 characters): ");
                         description = scanner.nextLine().trim();
                         if (description.length() <= 20) {
-                            break; 
+                            break; // Exit the loop if description is within 20 characters
                         } else {
                             System.out.println("Description exceeds 20 characters. Please enter a shorter description.");
                         }
                     }
     
+                    // Format the details for writing to the file
                     String newItem = name + ";" + price + ";" + branch + ";" + category + ";" + availability + ";" + description + "\n";
     
+                    // Append the new menu item to the file
                     FileWriter writer = new FileWriter(FILE_NAME, true);
                     writer.write(newItem);
                     writer.close();
                     System.out.println("New menu item added successfully!");
-                    return; 
+                    break; // Exit the loop if the item is added successfully
                 } else {
                     System.out.println("An item with the same name already exists. Please enter a unique name.");
                 }
@@ -129,7 +130,7 @@ public class AddMenuItemPage implements IPage {
     private boolean isItemNameUnique(String name) throws IOException {
         File file = new File(FILE_NAME);
         if (!file.exists()) {
-            return true;  
+            return true; // If the file doesn't exist, assume the name is unique
         }
 
         try (Scanner scanner = new Scanner(file)) {
@@ -137,12 +138,12 @@ public class AddMenuItemPage implements IPage {
                 String line = scanner.nextLine();
                 String[] details = line.split(";");
                 if (details.length > 0 && details[0].equalsIgnoreCase(name)) {
-                    return false;  
+                    return false; // If the item name already exists, return false
                 }
             }
         }
 
-        return true; 
+        return true; // If the item name doesn't exist, return true
     }
 
     /**

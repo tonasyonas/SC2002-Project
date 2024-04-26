@@ -13,15 +13,20 @@ public class PromoteStaff extends AStaffListEditor {
 
     @Override
     public void EditStaffList(String filename, Map<String, UserCredentials> credentials) {
+        // Assuming the user provides the login ID of the staff member to promote
         System.out.println("Enter login ID of the staff member to promote:");
         String loginIDToPromote = scanner.nextLine();
         
 
+        // Check if the login ID exists in the credentials map
         if (credentials.containsKey(loginIDToPromote)) {
+            // Get the user credentials
             UserCredentials user = credentials.get(loginIDToPromote);
     
             
+            // Check if the current role is 'S' (Staff)
             if (user.getRole().equals("S")) {
+                // Promote the staff member by changing their role to 'M' (Manager)
                 
     
                 System.out.println("Does not meet quota ratio! Removing a manager...");
@@ -39,6 +44,7 @@ public class PromoteStaff extends AStaffListEditor {
             System.out.println("Staff member with the provided login ID does not exist.");
         }
 
+        // Write the updated credentials back to the file
         writeToFile(filename, credentials);
 
     }

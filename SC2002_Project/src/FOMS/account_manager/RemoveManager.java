@@ -33,10 +33,11 @@ public class RemoveManager extends ABaseRemoveStaff {
                     System.out.println("2. Exit");
                     System.out.print("Enter choice: ");
                     int choice = scanner.nextInt();
-                    scanner.nextLine(); 
+                    scanner.nextLine(); // consume newline
 
                     switch (choice) {
                         case 1:
+                            // Re-use the scanner instead of creating a new one
                             AddManager addManager = new AddManager(scanner, false, branchQuotaManager);
                             addManager.addSpecificRoleStaff(filename, credentials);
                             credentials.remove(loginIDToRemove);
@@ -57,6 +58,7 @@ public class RemoveManager extends ABaseRemoveStaff {
             else {
                 System.out.println("The specified ID does not belong to a manager.");
             }
+            // Save changes to the file regardless of actions taken
             writeToFile(filename, credentials);
         } else {
             System.out.println("Staff member with the provided login ID does not exist.");

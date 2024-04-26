@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import FOMS.FOMS_entity.*;
 import FOMS.menu_manager.*;
+// import FOMS.FOMS_entity.FOMS.FOMS_entity.Admin;
 
 public class Restaurant {
     private static final String BRANCH_FILE = "SC2002_Project/src/FOMS/branch_manager/branch_list.txt";
@@ -54,12 +55,15 @@ public class Restaurant {
                     String loginID = parts[1];
                     String role = parts[2];
                     String genderStr = parts[3];
-                    Staff.Gender gender; 
+                    Staff.Gender gender; // Declare the variable to hold the converted gender
+        
+                    // Convert string representation to Staff.Gender enum
                     if ("F".equals(genderStr)) {
                         gender = Staff.Gender.F;
                     } else if ("M".equals(genderStr)) {
                         gender = Staff.Gender.M;
                     } else {
+                        // Handle invalid or unknown gender values
                         throw new IllegalArgumentException("Invalid gender value: " + genderStr);
                     }
 
@@ -67,7 +71,7 @@ public class Restaurant {
                     String branch = parts[5];
                     String salt = parts[6];
                     String hashedPassword = parts[7];
-                    boolean needsPasswordReset = Boolean.parseBoolean(parts[8]); 
+                    boolean needsPasswordReset = Boolean.parseBoolean(parts[8]); // Read needsPasswordReset from file
                     if (role.equals("A")) {
                         staffList.add(new Admin(name, loginID, gender, age, salt, hashedPassword, needsPasswordReset));
                         System.out.println("Added " + name + " to staffList");

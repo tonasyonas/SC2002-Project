@@ -26,12 +26,12 @@ import FOMS.process_manager.DisplayOrder;
 
 public class CustOrderPage implements IPage{
     private Scanner scanner;
-    private ViewMenu viewMenu;  
-    private CartManager cartManager;  
-    private OrderManager orderManager;   
-    private IBranchSelector branchSelector;  
-    private String selectedBranch;  
-    private String orderType; 
+    private ViewMenu viewMenu; // handle menu display logic
+    private CartManager cartManager; // handle cart operations
+    private OrderManager orderManager;  // handle order operations
+    private IBranchSelector branchSelector; // declare at class level
+    private String selectedBranch; // New member to store the selected branch
+    private String orderType; // to hold the order type across different parts of the process
 
     /**
      * Constructor for {@code CustOrderPage}. Initializes components used for managing orders and user interaction.
@@ -110,7 +110,8 @@ public class CustOrderPage implements IPage{
      * Refreshes the menu items from the data source to ensure the menu is up-to-date before display.
      */
     private void refreshMenu() {
-         MenuOrganizer menuOrganizer = new MenuOrganizer(getMenuMap());
+        // Reload the menu items from the file every time the menu needs to be displayed
+        MenuOrganizer menuOrganizer = new MenuOrganizer(getMenuMap());
         this.viewMenu = new ViewMenu(new ConsoleMenuDisplay(), branchSelector, menuOrganizer);
     }
 
@@ -124,11 +125,11 @@ public class CustOrderPage implements IPage{
         do {
             showOptions();
             String input = scanner.nextLine().trim();
-            Integer choice = tryParseInt(input);   
+            Integer choice = tryParseInt(input);  // improved to handle non-integer input
             if (choice == null) {
                 System.out.println("Invalid input. Please enter a number.");
                 System.out.print("Your choice: ");
-                continue;  
+                continue; // Skip the rest of the loop iteration
             }
             switch (choice) {
                 case 1:
@@ -143,8 +144,8 @@ public class CustOrderPage implements IPage{
                     modifyCart();
                     break;
                 case 3:
-                    if (checkoutCart()) { 
-                        finalizeOrder(this.orderType);  
+                    if (checkoutCart()) { // This will now also set the orderType
+                        finalizeOrder(this.orderType); // Pass the order type stored in the instance variable
                     }
                     break;
                 case 4:
@@ -225,7 +226,7 @@ public class CustOrderPage implements IPage{
                 String boolCustomisation = scanner.nextLine().trim();
                 if (boolCustomisation.equalsIgnoreCase("yes")) {
                     System.out.println("Entering customization loop...");
-                    scanner.nextLine();  
+                    scanner.nextLine(); // Consume newline character
                     for (int i = 0; i < quantity; i++) {
                         System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedItem.getItem(), i+1);
                         String customization = scanner.nextLine().trim();
@@ -237,7 +238,7 @@ public class CustOrderPage implements IPage{
                     System.out.println("Exiting customization loop...");
                 }
                 else {
-                    MenuItem item = new MenuItem(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch());  
+                    MenuItem item = new MenuItem(selectedItem.getItem(), selectedItem.getCost(), selectedItem.getBranch()); //need change 
                     String customization = "";
                     cartManager.addItem(item, quantity, customization);
                     System.out.println("Item added to cart with no customizations.");
@@ -260,20 +261,23 @@ public class CustOrderPage implements IPage{
     private void modifyCart() {
         while (true) {
             int itemNumber = 1;
-             System.out.println("Cart Items:");
+            // Display cart items with item numbers and customizations
+            System.out.println("Cart Items:");
             for (Map.Entry<OrderItem, Integer> entry : cartManager.getItems().entrySet()) {
                 OrderItem orderItem = entry.getKey();
                 MenuItem item = orderItem.getMenuItem();
                 int quantity = entry.getValue();
-                String customizations = orderItem.getCustomization();  
+                String customizations = orderItem.getCustomization(); // Customization is now part of OrderItem
                 String displayCustomization = customizations.isEmpty() ? "No customization" : customizations;
                 System.out.println(itemNumber + ". " + item.getItem() + " - Quantity: " + quantity + " - Customization: " + displayCustomization);
-                itemNumber++;  
+                itemNumber++; // Increment item number
             }     
-             System.out.println("\nEnter the item number to update, 'clear' to empty the cart, or 'back' to return:");
+            // Prompt user for action
+            System.out.println("\nEnter the item number to update, 'clear' to empty the cart, or 'back' to return:");
             String input = scanner.nextLine().trim().toLowerCase();
     
-             switch (input) {
+            // Perform actions based on user input
+            switch (input) {
                 case "clear":
                     cartManager.clearCart();
                     return;
@@ -283,12 +287,14 @@ public class CustOrderPage implements IPage{
                     try {
                         int selectedNumber = Integer.parseInt(input);
                         if (selectedNumber >= 1 && selectedNumber <= cartManager.getItems().size()) {
-                             OrderItem[] orderItemsArray = cartManager.getItems().keySet().toArray(new OrderItem[0]);
+                            // Get the selected item based on item number
+                            OrderItem[] orderItemsArray = cartManager.getItems().keySet().toArray(new OrderItem[0]);
                             OrderItem selectedOrderItem = orderItemsArray[selectedNumber - 1];
                             MenuItem selectedMenuItem = selectedOrderItem.getMenuItem();
 
     
-                             System.out.print("Enter new quantity (0 to remove): ");
+                            // Prompt for new quantity
+                            System.out.print("Enter new quantity (0 to remove): ");
                             int quantity = Integer.parseInt(scanner.nextLine());
                             cartManager.removeItem(selectedMenuItem, selectedOrderItem.getCustomization());
                             if (quantity > 0) {
@@ -296,7 +302,7 @@ public class CustOrderPage implements IPage{
                                 String boolCustomisation = scanner.nextLine().trim();
                                 if (boolCustomisation.equals("yes")) {
                                     System.out.println("Entering customization loop...");
-                                    scanner.nextLine(); 
+                                    scanner.nextLine(); // Consume newline character
                                     for (int i = 0; i < quantity; i++) {
                                         System.out.printf("Customisation for %s %d, e.g. 'no onions', press enter if none: ", selectedMenuItem.getItem(), i+1);
                                         String customization = scanner.nextLine().trim();
@@ -308,7 +314,7 @@ public class CustOrderPage implements IPage{
                                     System.out.println("Exiting customization loop...");
                                 }
                                 else {
-                                    MenuItem item = new MenuItem(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); 
+                                    MenuItem item = new MenuItem(selectedMenuItem.getItem(), selectedMenuItem.getCost(), selectedMenuItem.getBranch()); //need change 
                                     String customization = "";
                                     cartManager.addItem(item, quantity, customization);
                                     System.out.println("Item added to cart with no customizations.");
@@ -339,12 +345,14 @@ public class CustOrderPage implements IPage{
             System.out.println("Your cart is empty. Please add items before checkout.");
             return false;
         }
-         this.orderType = getOrderTypeFromUser();  
+        // Prompt for order type before initiating payment
+        this.orderType = getOrderTypeFromUser(); // Store order type in the instance variable
         cartManager.displayItems();
         double total = cartManager.calculateTotal();
         System.out.printf("Total: $%.2f\n", total);
         
-         boolean paymentSuccessful = handlePayment(total);
+        // Handle payment
+        boolean paymentSuccessful = handlePayment(total);
         return paymentSuccessful;
     }
 
@@ -360,7 +368,7 @@ public class CustOrderPage implements IPage{
         GetPaymentMethods.displayPaymentMethods();
         System.out.print("Choose your payment method: ");
         int paymentChoice = scanner.nextInt();
-        scanner.nextLine();  
+        scanner.nextLine(); // consume newline
         System.out.print("Selected payment method: ");
         GetPaymentMethods.displayPaymentMethod(paymentChoice);
         System.out.print("Payment successful using ");
@@ -409,7 +417,7 @@ public class CustOrderPage implements IPage{
             return (choice == 1) ? "Takeaway" : "Dine-in";
         } else {
             System.out.println("Invalid input. Please enter 1 for Takeaway or 2 for Dine-in.");
-            return getOrderTypeFromUser();  
+            return getOrderTypeFromUser();  // Recursive call to re-prompt the user
         }
     }
     /**

@@ -22,7 +22,7 @@ public abstract class AStaffListEditor implements IStaffListEditor {
             for (Map.Entry<String, UserCredentials> entry : credentials.entrySet()) {
                 UserCredentials userCredentials = entry.getValue();
                 String line = userCredentials.getName() + ";" +
-                        entry.getKey() + ";" + 
+                        entry.getKey() + ";" + // Login ID
                         userCredentials.getRole() + ";" +
                         (userCredentials.getGender() == Staff.Gender.F ? "F" : "M") + ";" +
                         userCredentials.getAge() + ";" +

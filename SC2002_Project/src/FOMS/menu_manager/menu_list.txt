@@ -6,8 +6,12 @@ COLE SLAW;2.7;JE;side;true
 chicken nugget;6.9;JP;side;true
 chicken nugget;6.6;NTU;side;true
 pepsi;2.1;JE;drink;true
+<<<<<<< HEAD
 
 onion ring;3.50;JE;side;true;yummy stuff
 onion rings;3.50;JE;side;true;yummy stuff
 omom;3.50;JE;side;true;asd
 asdasd;3.50;JE;side;true;asd
+=======
+asd;124;NTU;drink;true;iaobnqiebgweg
+>>>>>>> parent of 343e978 (//)

@@ -34,6 +34,8 @@ public class StatusOrderFilter implements IOrderFilter {
      */
     @Override
     public boolean matches(Order order) {
-         return order.getStatus().equalsIgnoreCase(statusToFilter.toString());
+        // Assuming order.getStatus() returns a String, we convert statusToFilter to string
+        // Alternatively, if order.getStatus() returns an OrderStatus, compare the enums directly
+        return order.getStatus().equalsIgnoreCase(statusToFilter.toString());
     }
 }

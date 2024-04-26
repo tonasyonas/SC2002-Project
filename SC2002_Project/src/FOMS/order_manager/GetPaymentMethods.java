@@ -47,7 +47,8 @@ public class GetPaymentMethods {
      * @param choice The index number of the payment method to display.
      */
     public static void displayPaymentMethod(int choice){
-         boolean found = false;
+        // Print the payment method associated with the choice
+        boolean found = false;
         try (BufferedReader reader = new BufferedReader(new FileReader(PAYMENT_METHODS_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {

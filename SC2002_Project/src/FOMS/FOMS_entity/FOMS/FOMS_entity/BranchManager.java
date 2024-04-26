@@ -13,6 +13,7 @@ public class BranchManager extends Staff {
         return branch;
     }
 
+    // Setter method for branch
     public void setBranch(String branch) {
         this.branch = branch;
     }

@@ -36,14 +36,18 @@ public class CollectOrderPage {
      * This method handles various scenarios: when the order is ready for pickup, already collected, cancelled, or not ready.
      */
     public void startPage() {
-         System.out.println("Enter the orderID you want to collect:");
+        // Ask the user to input the order they want to collect
+        System.out.println("Enter the orderID you want to collect:");
         String orderID = scanner.nextLine();
         
-         Order orderToCollect = orderManager.getOrderById(orderID);
+        // Process the order (you may need to implement this)
+        Order orderToCollect = orderManager.getOrderById(orderID);
         if (orderToCollect != null) {
-             String status = orderToCollect.getStatus();
+            // Check the status of the order
+            String status = orderToCollect.getStatus();
             if ("Ready for Pickup".equals(status)) {
-                 ProcessOrder.processOrderID(orderID, "Completed");
+                // Process the order (you may need to implement this)
+                ProcessOrder.processOrderID(orderID, "Completed");
                 System.out.println("Order collected successfully.");
             } else if ("Completed".equals(status)) {
                 System.out.println("Order has already been collected.");

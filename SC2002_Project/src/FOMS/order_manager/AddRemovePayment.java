@@ -24,12 +24,13 @@ public class AddRemovePayment {
      * @param scanner A {@code Scanner} object for reading input from the console.
      */
     public static void addRemovePayment(Scanner scanner) {
+        // Do not create a new Scanner here; use the one passed as an argument
         System.out.println("Choose an option:");
         System.out.println("0. Exit");
         System.out.println("1. Add Payment Method");
         System.out.println("2. Remove Payment Method");
         int choice = scanner.nextInt();
-        scanner.nextLine(); 
+        scanner.nextLine(); // Consume the newline
         System.out.print("Enter Payment Method: ");
         String paymentmethod = scanner.nextLine();
 

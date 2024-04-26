@@ -74,7 +74,8 @@ public class ManagerOptionsPage implements IPage {
             }
             switch (choiceint) {
                 case 1:
-                     AddMenuItemPage addMenuItemPage = new AddMenuItemPage(branchmanager);
+                    // Create an instance of AddMenuItemPage and start it
+                    AddMenuItemPage addMenuItemPage = new AddMenuItemPage(branchmanager);
                     addMenuItemPage.startPage();
                     break;
                 case 2:
@@ -115,7 +116,8 @@ public class ManagerOptionsPage implements IPage {
     public String getInput() {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim().toLowerCase();
-         return userInput;
+        // scanner.close(); // Do not close the scanner here to avoid closing System.in stream prematurely.
+        return userInput;
     }
 
 }

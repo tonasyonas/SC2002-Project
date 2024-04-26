@@ -26,6 +26,7 @@ public class UserCredentials {
         this.needsPasswordReset = needsPasswordReset;
     }
 
+    // Getters
     public String getName() {
         return name;
     }
@@ -58,6 +59,7 @@ public class UserCredentials {
         return needsPasswordReset;
     }
 
+    // Setters
     public void setName(String name) {
         this.name = name;
     }

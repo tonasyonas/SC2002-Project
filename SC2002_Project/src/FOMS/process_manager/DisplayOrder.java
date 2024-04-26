@@ -23,7 +23,7 @@ public abstract class DisplayOrder {
      */
 
     public static void displayOrders() {
-        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt";  
+        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt"; // Replace this with the actual file path
     
         try {
             List<Order> orders = ReadOrderList.readOrdersFromFile(filename);
@@ -43,12 +43,13 @@ public abstract class DisplayOrder {
      */
 
     public static void displayOrders(String branch) {
-        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt"; 
+        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt"; // Replace this with the actual file path
     
         try {
             List<Order> orders = ReadOrderList.readOrdersFromFile(filename);
             for (Order order : orders) {
-                 if (!order.getOrderItems().isEmpty() && order.getOrderItems().get(0).getMenuItem().getBranch().equals(branch)) {
+                // Check if the order's branch matches the staff's branch
+                if (!order.getOrderItems().isEmpty() && order.getOrderItems().get(0).getMenuItem().getBranch().equals(branch)) {
                     System.out.println("Order ID: " + order.getOrderId());
                     System.out.println("Status: " + order.getStatus());
                     System.out.println("Order Type: " + order.getOrderType());
@@ -79,7 +80,7 @@ public abstract class DisplayOrder {
      * @param orderId The ID of the order to display.
      */
     public static void viewOrderDetails(String orderId) {
-        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt";
+        String filename = "SC2002_Project/src/FOMS/order_manager/order.txt"; // Replace this with the actual file path
 
         try {
             List<Order> orders = ReadOrderList.readOrdersFromFile(filename);
@@ -103,7 +104,7 @@ public abstract class DisplayOrder {
                     }
                     System.out.println("Total: $" + String.format("%.2f", order.getTotal()));
                     System.out.println("---------------------------");
-                    break; 
+                    break; // Exit the loop once the order is found
                 }
             }
 

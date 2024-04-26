@@ -13,7 +13,7 @@ public class InitializationHandler {
 
     private static final String INIT_FILE = "SC2002_Project/src/FOMS/account_manager/init_config.txt";
     private static final String FILE_NAME = "SC2002_Project/src/FOMS/account_manager/staff_list.txt";
-    private Map<String, UserCredentials> staffCredentials; 
+    private Map<String, UserCredentials> staffCredentials; // Declare staffCredentials field
 
     /**
      * Checks if the system has been initialized.
@@ -73,7 +73,7 @@ public class InitializationHandler {
                         cred.name, entry.getKey(), cred.role, cred.gender,
                         cred.age, cred.branch, cred.salt, cred.hashedPassword, cred.needsPasswordReset);
             }
-            out.flush();  
+            out.flush();  // Ensuring data is written to the file
         } catch (IOException e) {
             System.err.println("Failed to save credentials: " + e.getMessage());
             return false;

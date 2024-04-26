@@ -39,18 +39,18 @@ public class ProcessOrder {
                 if (order.getOrderId().equals(orderIdToFind)) {
                     order.setStatus(status);
                     if ("Ready for Pickup".equals(status)) {
-                        order.startCancellationTimer(ordersList, filename);  
+                        order.startCancellationTimer(ordersList, filename);  // Start the timer when the order is ready
                     } else {
-                        order.cancelTimer(); 
+                        order.cancelTimer();  // Cancel the timer if the order status changes
                     }
-                    saveOrderListToFile(ordersList, filename);
-                    return ordersList; 
+                    saveOrderListToFile(ordersList, filename); // Save the updated order list to file
+                    return ordersList; // Found the order with the specified ID
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace(); // Handle or log the exception as needed
         }
-        return null;
+        return null; // Order with the specified ID not found
     }
 
     /**
@@ -64,7 +64,7 @@ public class ProcessOrder {
             for (Order order : ordersList) {
                 String orderDetails = formatOrderDetails(order);
                 writer.write(orderDetails);
-                writer.newLine();  
+                writer.newLine(); // To ensure each order is on a new line.
             }
             System.out.println("Order list saved successfully to " + filename);
         } catch (IOException e) {
@@ -97,13 +97,15 @@ public class ProcessOrder {
             double price = item.getMenuItem().getCost();
             String customizations = item.getCustomization();
 
+            // Append food, quantity, price, and customizations
             sb.append(food).append(", ").append(quantity).append(", ").append(df.format(price)).append(", ");
-            if (customizations != null && !customizations.isEmpty()) {  
+            if (customizations != null && !customizations.isEmpty()) { // Check if customizations is not null
                 sb.append(customizations);
             }
             sb.append("; ");
         }
 
+        // Remove the last semicolon and space from the item list
         if (!order.getOrderItems().isEmpty()) {
             sb.setLength(sb.length() - 2);
         }

@@ -12,8 +12,10 @@ public class ViewStaffList {
     }
 
     public void displayAllStaff() {
+        // Convert the map values to a list for easier iteration
         List<UserCredentials> allStaff = new ArrayList<>(credentialsMap.values());
 
+        // Display all staff details
         if (allStaff.isEmpty()) {
             System.out.println("No staff members are currently registered.");
         } else {

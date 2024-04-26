@@ -39,7 +39,8 @@ public class StaffLoginPage implements IPage {
             handler.initializeStaffPasswords();
             InitializationHandler.setInitialized();
         }
-         this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
+        // Now that initialization is done, retrieve the staff credentials
+        this.staffCredentials = ReadStaffList.getStaffCredentials(FILE_NAME);
         this.loginController = new LoginController(new SimplePasswordManager());
     }
 
@@ -55,7 +56,8 @@ public class StaffLoginPage implements IPage {
 
         Scanner scanner = new Scanner(System.in);
         if (credentials != null) {
-             String password;
+            // Prompt staff members to log in
+            String password;
             do {
                 System.out.print("Enter your password: ");
                 password = scanner.nextLine();
@@ -66,24 +68,26 @@ public class StaffLoginPage implements IPage {
                         if ("yes".equalsIgnoreCase(response)) {
                             loginController.promptPasswordChange(scanner, loginID); 
                         }
-                    break;  
+                    break; // Exit the loop after successful login
                 } else {
                     System.out.println("Login failed. Incorrect login ID or password.");
                 }
-            } while (true);
+            } while (true); // Infinite loop until successful login
 
+            // Switch case to create objects based on role after successful login
             switch (credentials.getRole()) {
                 case "A":
                     AdminPage adminpage = new AdminPage();
                     adminpage.startPage();
                     break;
                 case "S":
-                    BranchStaffPage.startBranchStaffPage(credentials.getBranch()); 
+                    BranchStaffPage.startBranchStaffPage(credentials.getBranch()); // Modified call
                     break;
                 case "M":
                     BranchManager bmanagement = new BranchManager(credentials.getName(), loginID, credentials.getGender(), credentials.getAge(), credentials.getBranch(), credentials.getSalt(), credentials.getHashedPassword(), credentials.getNeedsPasswordReset());
                     BranchManagerOptionsPage bmoptionspage = new BranchManagerOptionsPage(bmanagement);
                     bmoptionspage.startPage();
+                    // Proceed with branch manager actions
                     break;
                 default:
                     System.out.println("Invalid role.");
