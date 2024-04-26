@@ -1,4 +1,2 @@
 1;CreditCard
-2;PayPal
-3;PayLah!
-4;GooglePay
+2;Online
