@@ -50,6 +50,7 @@ public class RemoveStaff extends ABaseRemoveStaff {
                 }
             
             } else {
+                credentials.remove(loginIDToRemove);
                 System.out.println("Staff member removed successfully.");
             }
             writeToFile(filename, credentials);
