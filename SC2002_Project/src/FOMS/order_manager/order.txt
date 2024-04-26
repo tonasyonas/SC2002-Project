@@ -1,6 +1,1 @@
-1;Ready for Pickup;13.80;Takeaway;JP;chicken nugget, 2, 6.90, 
-7;Completed;19.40;Takeaway;JP;chicken nugget, 1, 6.90,            no fish; chicken nugget, 1, 6.90,            no onion; CAJUN FISH, 1, 5.60, 
-9;Ready for Pickup;3.20;Takeaway;NTU;FRIES, 1, 3.20,           ketchup
-11;Ready for Pickup;13.80;Dine-in;JP;chicken nugget, 2, 6.90, 
-12;Ready for Pickup;13.80;Dine-in;JP;chicken nugget, 2, 6.90, 
-13;Cancelled;13.80;Dine-in;JP;chicken nugget, 2, 6.90, 
+1;New;9.60;Takeaway;NTU;FRIES, 2, 3.20, ; FRIES, 1, 3.20, ketchup
