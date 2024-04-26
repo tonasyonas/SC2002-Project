@@ -56,6 +56,10 @@ public class ConcreteTransferStaff extends AStaffTransfer {
                                 break;
                         }
                     } 
+                    else {
+                        first = true;
+                    }
+        
 
                     if (first == true) {
                         System.out.printf("%s does not hit quota ratio\n", originalBranch);
